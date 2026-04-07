@@ -2,7 +2,7 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       
-      {/* 1. NAVBAR - Jatah Sakti */}
+      {/* 1. NAVBAR - Jatah Fadhil */}
       <nav className="flex items-center justify-between bg-white px-8 py-4 shadow-sm">
         <div className="text-2xl font-bold text-violet-700">SAP</div>
         <div className="hidden space-x-6 md:flex">
@@ -16,7 +16,7 @@ function LandingPage() {
         </button>
       </nav>
 
-      {/* 2. HERO SECTION - Jatah Sakti */}
+      {/* 2. HERO SECTION - Jatah Fadhil */}
       <section className="flex flex-col-reverse items-center justify-between px-8 py-16 md:flex-row bg-violet-50">
         <div className="w-full md:w-1/2">
           <h1 className="mb-4 text-4xl font-extrabold leading-tight text-violet-900 md:text-5xl">
@@ -30,7 +30,7 @@ function LandingPage() {
              <button className="rounded-md border border-violet-600 px-6 py-3 font-semibold text-violet-600 hover:bg-violet-50">Konsultasi Gratis</button>
           </div>
         </div>
-        {/* Tempat gambar Jatah Sakti (Golet asset dewe sing apik) */}
+        {/* Tempat gambar Jatah Fadhil (Golet asset dewe sing apik) */}
         <div className="mb-8 w-full md:mb-0 md:w-1/2 flex justify-center">
             <div className="h-64 w-full max-w-md rounded-xl bg-slate-200 flex items-center justify-center text-slate-400">
                 [Gambar Laptop Mockup Disini]
@@ -38,12 +38,12 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* 3. MODUL SECTION - Jatah Fadhil */}
+      {/* 3. MODUL SECTION - Jatah Sakti */}
       <section className="px-8 py-16 text-center">
         <h2 className="mb-2 text-sm font-bold uppercase text-violet-600">Fitur Utama</h2>
         <h3 className="mb-10 text-3xl font-bold text-slate-800">3 Modul Inti SAP</h3>
         
-        {/* Grid buat 3 modul bae, de teruske Fadhil */}
+        {/* Grid buat 3 modul bae, de teruske Sakti */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
            {/* Modul 1 */}
           <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
@@ -51,7 +51,7 @@ function LandingPage() {
             <h4 className="font-bold text-slate-800">Manajemen Siswa</h4>
             <p className="text-sm text-slate-500 mt-2">Kelola data induk dan akademik siswa dengan mudah.</p>
           </div>
-          {/* Fadhil lanjutke Modul Keuangan karo Modul Kelas nang ngene */}
+          {/* Sakti lanjutke Modul Keuangan karo Modul Kelas nang ngene */}
         </div>
       </section>
 
