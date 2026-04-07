@@ -8,6 +8,8 @@ function Navbar() {
     { name: "Tentang", target: "tentang" },
     { name: "Modul", target: "modul" },
     { name: "Harga", target: "harga" },
+    { name: "Kerjasama", target: "kerjasama" },
+    { name: "Dokumentasi", target: "dokumentasi" },
     { name: "Kontak", target: "kontak" },
   ];
 

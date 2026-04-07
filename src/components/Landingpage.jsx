@@ -1,9 +1,12 @@
+// Jatahe fadhil
 import Navbar from './Navbar';
 import Hero from './Hero';
 // import WhyChooseUs from './Whychooseus';
 // import Modul from './Modul';
-// import Workflow from './Workflow';
 // import Pricing from './Pricing';
+
+// Jatahe sakti
+// import Workflow from './Workflow';
 // import Gallery from './Gallery';
 // import CallToAction from './Calltoaction';
 // import ContactForm from './Contactform';
@@ -16,13 +19,13 @@ function LandingPage() {
       <Hero />
       {/* <WhyChooseUs />
       <Modul />
-      <Workflow /> */}
+      <Pricing /> */}
       
-      {/* <Pricing /> */}
-      {/* <Gallery /> */}
-      {/* <CallToAction /> */}
-      {/* <ContactForm /> */}
-      {/* <Footer /> */}
+      {/* <Workflow />
+      <Gallery />
+      <CallToAction />
+      <ContactForm />
+      <Footer /> */}
     </div>
   );
 }
