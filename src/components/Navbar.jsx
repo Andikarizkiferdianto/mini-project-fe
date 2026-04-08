@@ -13,6 +13,16 @@ function Navbar() {
     { name: "Kontak", target: "kontak" },
   ];
 
+  const scrollToSection = (targetId) => {
+  if (targetId === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+};
   useEffect(() => {
     const handleScroll = () => {
       let current = "Beranda";
@@ -45,10 +55,8 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between bg-white px-8 py-4 shadow-sm">
       
-      {/* LOGO */}
       <div className="text-2xl font-bold text-violet-700">SAP</div>
 
-      {/* MENU */}
       <ul className="hidden md:flex space-x-6">
         {menus.map((menu) => (
           <li
@@ -75,7 +83,6 @@ function Navbar() {
               {menu.name}
             </span>
 
-            {/* UNDERLINE */}
             <span
               className={`absolute left-0 -bottom-1 h-[2px] bg-violet-600 transition-all duration-300
               ${active === menu.name ? "w-full" : "w-0 group-hover:w-full"}`}
@@ -84,12 +91,17 @@ function Navbar() {
         ))}
       </ul>
 
-      {/* BUTTON */}
-      <button className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 font-bold rounded-md bg-violet-600 px-6 py-2 text-white hover:bg-violet-700 transition">
+      <button 
+      onClick={() => {
+        const el = document.getElementById("kontak");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }}
+      className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 font-bold rounded-md bg-violet-600 px-6 py-2 text-white hover:bg-violet-700"
+      >
         Ajukan Demo
-      </button>
-    </nav>
-  );
-}
+        </button>
+        </nav>
+        );
+      }
 
 export default Navbar;
