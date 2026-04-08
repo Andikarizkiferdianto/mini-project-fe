@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import LogoSAP from '../assets/LogoSAP.png'
+
 
 function Navbar() {
   const [active, setActive] = useState("Beranda");
@@ -44,9 +46,12 @@ function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between bg-white px-8 py-4 shadow-sm">
-      
+
       {/* LOGO */}
-      <div className="text-2xl font-bold text-violet-700">SAP</div>
+      <div className="flex items-center gap-2 text-2xl font-bold text-violet-700">
+        <img src={LogoSAP} alt="logo" className="h-10 w-auto" />
+        <span>SAP</span>
+      </div>
 
       {/* MENU */}
       <ul className="hidden md:flex space-x-6">
