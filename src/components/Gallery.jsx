@@ -1,33 +1,35 @@
 import React from 'react';
-import Img1 from "../assets/gallery1.png";
+import Presentasi from '../assets/Presentasi.jpg'
+import DemoFitur from '../assets/DemoFitur.jpg'
+import PelatihAdmin from '../assets/PelatihAdmin.jpg'
+import GoLive from '../assets/GoLive.jpg'
 
 function Gallery() {
   const images = [
     {
-      src: Img1,
+      src: Presentasi,
       title: "Presentasi Sistem SAP",
       description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
     },
     {
-      src: Img1,
-      title: "Demo Fitur Akademik",
-      description: "Demonstrasi modul absensi, nilai, dan manajemen guru menggunakan platform SAP.",
+      src: DemoFitur,
+      title: "Presentasi Sistem SAP",
+      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
     },
     {
-      src: Img1,
-      title: "Pelatihan Admin Sekolah",
-      description: "Pendampingan teknis bagi staf admin untuk pengoperasian database sekolah yang terintegrasi.",
+      src: PelatihAdmin,
+      title: "Presentasi Sistem SAP",
+      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
     },
     {
-      src: Img1,
-      title: "Go-Live Implementasi",
-      description: "Peresmian penggunaan SAP secara menyeluruh untuk digitalisasi ekosistem pendidikan.",
+      src: GoLive,
+      title: "Presentasi Sistem SAP",
+      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
     },
   ];
 
   return (
     <section id="dokumentasi" className="bg-white">
-      {/* SEKSI DOKUMENTASI & KEGIATAN */}
       <div className="px-8 py-28 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-extrabold text-violet-900">
@@ -38,7 +40,6 @@ function Gallery() {
           </p>
         </div>
 
-        {/* GRID GALERI */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mx-auto">
           {images.map((item, index) => (
             <div key={index} className="flex flex-col group h-full">
@@ -51,7 +52,6 @@ function Gallery() {
                 />
               </div>
 
-              {/* Teks Deskripsi */}
               <div className="space-y-2 flex-grow">
                 <h3 className="text-xl font-bold text-violet-900 group-hover:text-violet-600 transition">
                   {item.title}
@@ -65,7 +65,6 @@ function Gallery() {
         </div>
       </div>
 
-      {/* --- SEKSI SIAP TRANSFORMASI --- */}
       <div className="bg-[#0f172a] py-24 px-8 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
