@@ -1,9 +1,9 @@
 // Jatahe fadhil
 import Navbar from './Navbar';
 import Hero from './Hero';
-// import WhyChooseUs from './Whychooseus';
-// import Modul from './Modul';
-// import Pricing from './Pricing';
+import WhyChooseUs from './Whychooseus';
+import Modul from './Modul';
+import Pricing from './Pricing';
 
 // Jatahe sakti
 import Workflow from './Workflow';
@@ -17,9 +17,9 @@ function LandingPage() {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       <Navbar />
       <Hero />
-      {/* <WhyChooseUs />
+      <WhyChooseUs />
       <Modul />
-      <Pricing /> */}
+      <Pricing />
       
       <Workflow />
       <Gallery />

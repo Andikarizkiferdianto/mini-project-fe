@@ -29,7 +29,7 @@ function Hero() {
             Lihat Paket
           </button>
 
-          <button className="font-bold transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md border border-violet-600 px-8 py-4 text-violet-600 hover:bg-violet-600 hover:text-white">
+          <button className="font-bold transitiyon delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md border border-violet-600 px-8 py-4 text-violet-600 hover:bg-violet-600 hover:text-white">
             Konsultasi Gratis
           </button>
         </div>
@@ -38,7 +38,7 @@ function Hero() {
         <div className="grid grid-cols-3 gap-6 mt-12 text-center md:text-left">
           <div>
             <h2 className="text-4xl font-bold text-violet-600">969</h2>
-            <p className="text-gray-500 font-medium">Citer</p>
+            <p className="text-gray-500 font-medium">Pengguna</p>
           </div>
           <div>
             <h2 className="text-4xl font-bold text-violet-600">120</h2>
@@ -52,10 +52,10 @@ function Hero() {
       </div>
 
       <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-12 md:mb-0">
-        <img 
-            src={LogoHero} 
-            alt="Hero Sistem Akademik Pintar" 
-            className="w-full max-w-lg lg:max-w-2xl animate-float-slow drop-shadow-2xl rounded-3xl" 
+        <img
+          src={LogoHero}
+          alt="Hero Sistem Akademik Pintar"
+          className="w-full max-w-lg lg:max-w-2xl animate-float-slow drop-shadow-2xl rounded-3xl"
         />
       </div>
 
