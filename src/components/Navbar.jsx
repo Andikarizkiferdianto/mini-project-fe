@@ -62,9 +62,6 @@ function Navbar() {
         <img src={LogoSAP} alt="logo" className="h-10 w-auto" />
         <span>SAP</span>
       </div>
-      
-      <div className="text-2xl font-bold text-violet-700">SAP</div>
-
 
       <ul className="hidden md:flex space-x-6">
         {menus.map((menu) => (
