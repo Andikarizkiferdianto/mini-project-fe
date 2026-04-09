@@ -1,10 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Presentasi from '../assets/Presentasi.jpg'
 import DemoFitur from '../assets/DemoFitur.jpg'
 import PelatihAdmin from '../assets/PelatihAdmin.jpg'
 import GoLive from '../assets/GoLive.jpg'
 
 function Gallery() {
+  const scrollToSection = (targetId) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const images = [
     {
       src: Presentasi,
@@ -13,18 +21,18 @@ function Gallery() {
     },
     {
       src: DemoFitur,
-      title: "Presentasi Sistem SAP",
-      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
+      title: "Demo Fitur Unggulan",
+      description: "Simulasi penggunaan modul akademik dan absensi real-time di hadapan jajaran pengurus sekolah.",
     },
     {
       src: PelatihAdmin,
-      title: "Presentasi Sistem SAP",
-      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
+      title: "Pelatihan Admin Sekolah",
+      description: "Pendampingan intensif bagi staf administrasi untuk penguasaan dashboard manajemen SAP.",
     },
     {
       src: GoLive,
-      title: "Presentasi Sistem SAP",
-      description: "Pemaparan keunggulan Sistem Akademik Pintar (SAP) untuk efisiensi administrasi sekolah.",
+      title: "Implementasi Go-Live",
+      description: "Peresmian penggunaan sistem secara penuh untuk mendukung operasional harian sekolah.",
     },
   ];
 
@@ -43,7 +51,6 @@ function Gallery() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mx-auto">
           {images.map((item, index) => (
             <div key={index} className="flex flex-col group h-full">
-              {/* Wadah Gambar */}
               <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video mb-6">
                 <img
                   src={item.src}
@@ -83,12 +90,18 @@ function Gallery() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-4 px-10 rounded-2xl transition duration-300 shadow-xl shadow-violet-500/20 w-full sm:w-auto text-lg">
+            <button 
+              onClick={() => scrollToSection("kontak")}
+              className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-4 px-10 rounded-2xl transition duration-300 shadow-xl shadow-violet-500/20 w-full sm:w-auto text-lg transform hover:-translate-y-1"
+            >
               Mulai Sekarang
             </button>
-            <button className="bg-white hover:bg-slate-100 text-slate-900 font-bold py-4 px-10 rounded-2xl transition duration-300 w-full sm:w-auto text-lg">
+            <Link 
+            to="/login"
+            className="bg-white hover:bg-slate-100 text-slate-900 font-bold py-4 px-10 rounded-2xl transition duration-300 w-full sm:w-auto text-lg transform hover:-translate-y-1 block text-center"
+            >
               Lihat Demo
-            </button>
+            </Link>
           </div>
         </div>
       </div>
