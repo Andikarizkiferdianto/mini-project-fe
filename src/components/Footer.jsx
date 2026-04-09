@@ -49,13 +49,16 @@ function Footer() {
   </div>
 
   <div className="group cursor-default">
-    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center transition-all duration-300 group-hover:bg-violet-600 group-hover:-translate-y-1 pointer-events-none">
-      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"></path>
-        <polygon fill="white" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-      </svg>
-    </div>
+  <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center transition-all duration-300 group-hover:bg-violet-600 group-hover:-translate-y-1">
+    <svg 
+      className="w-5 h-5 text-white" 
+      fill="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+    </svg>
   </div>
+</div>
 
   <div className="group cursor-default">
     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center transition-all duration-300 group-hover:bg-violet-600 group-hover:-translate-y-1 pointer-events-none">
