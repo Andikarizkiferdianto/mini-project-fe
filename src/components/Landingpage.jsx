@@ -23,8 +23,18 @@ function LandingPage() {
       
       <Workflow />
       <Gallery />
-      <section id="kontak" className="py-20">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <section id="kontak" className="py-20 text">
+        <div className='text-center'>
+        <div className="mb-4">
+                        <span className="text-xs font-semibold tracking-wider uppercase text-violet-600 bg-violet-100 px-4 py-2 rounded-full">
+                            Kontak kami
+                        </span>
+                    </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-violet-900">
+            Diskusikan kebutuhan anda
+          </h2>
+          </div>
+        <div className="container mx-auto px-4 max-w-6xl pt-16">
           <div className="flex flex-col lg:flex-row shadow-2xl rounded-3xl overflow-hidden border border-slate-100 bg-white">
             <div className="lg:w-2/3 order-2 lg:order-1">
               <ContactForm />

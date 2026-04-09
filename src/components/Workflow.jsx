@@ -18,10 +18,24 @@ function Workflow() {
     },
   ];
 
+  const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  } else {
+    console.warn(`Elemen dengan id "${id}" tidak ditemukan!`);
+  }
+};
+
   return (
     <section id="kerjasama" className="py-20 bg-violet-50">
       
       <div className="text-center mb-20">
+        <div className="mb-4">
+                        <span className="text-xs font-semibold tracking-wider uppercase text-violet-600 bg-violet-100 px-4 py-2 rounded-full">
+                            Kerja sama
+                        </span>
+                    </div>
         <h2 className="text-4xl md:text-5xl font-extrabold text-violet-900">
           Alur Kerjasama SAP
         </h2>
@@ -55,9 +69,12 @@ function Workflow() {
       </div>
 
       <div className="text-center mt-16">
-        <button className="bg-violet-600 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-violet-700 transition hover:scale-105 shadow-md">
-          Ajukan Kerjasama
-        </button>
+        <button 
+  onClick={() => scrollToSection("kontak")}
+  className="relative z-10 bg-violet-600 hover:bg-violet-700 text-white font-bold py-4 px-10 rounded-2xl transition duration-300 shadow-xl shadow-violet-500/20 w-full sm:w-auto text-lg transform hover:-translate-y-1"
+>
+  Ajukan kerjasama
+</button>
       </div>
     </section>
   );

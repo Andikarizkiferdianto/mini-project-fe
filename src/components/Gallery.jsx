@@ -40,6 +40,11 @@ function Gallery() {
     <section id="dokumentasi" className="bg-white">
       <div className="px-8 py-28 max-w-7xl mx-auto">
         <div className="text-center mb-20">
+          <div className="mb-4">
+                        <span className="text-xs font-semibold tracking-wider uppercase text-violet-600 bg-violet-100 px-4 py-2 rounded-full">
+                            Dokumen
+                        </span>
+                    </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-violet-900">
             Kegiatan Implementasi
           </h2>
