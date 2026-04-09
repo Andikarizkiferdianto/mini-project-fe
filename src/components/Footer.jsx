@@ -1,6 +1,15 @@
 import React from 'react';
 import LogoSap from '../assets/LogoSap.png'
 
+const scrollToSection = (targetId) => {
+  const el = document.getElementById(targetId);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  } else if (targetId === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
 function Footer() {
   return (
     <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-8">
@@ -29,7 +38,7 @@ function Footer() {
                     </div>
                     </div>
 
-  <div className="group cursor-default">
+<div className="group cursor-default">
     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center transition-all duration-300 group-hover:bg-violet-600 group-hover:-translate-y-1 pointer-events-none">
       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -61,35 +70,34 @@ function Footer() {
           <div>
             <h3 className="text-white font-bold mb-8 text-xl border-b-2 border-violet-600 w-fit pb-1">Menu</h3>
             <ul className="space-y-4 text-lg font-semibold">
-              <li><a href="#" className="hover:text-violet-400 transition">Beranda</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Tentang</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Modul</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Harga</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Dokumentasi</a></li>
-            </ul>
+              <li><button onClick={() => scrollToSection("top")} className="hover:text-violet-400 transition">Beranda</button></li>
+              <li><button onClick={() => scrollToSection("tentang")} className="hover:text-violet-400 transition">Tentang</button></li>
+              <li><button onClick={() => scrollToSection("modul")} className="hover:text-violet-400 transition">Modul</button></li>
+              <li><button onClick={() => scrollToSection("harga")} className="hover:text-violet-400 transition">Harga</button></li>
+              <li><button onClick={() => scrollToSection("dokumentasi")} className="hover:text-violet-400 transition">Dokumentasi</button></li>
+              </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-8 text-xl border-b-2 border-violet-600 w-fit pb-1">Paket Harga</h3>
             <ul className="space-y-4 text-lg font-semibold">
-              <li><a href="#" className="hover:text-violet-400 transition">Paket Standar</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Paket Absensi</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Add-on RFID</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Konsultasi Gratis</a></li>
-            </ul>
+              <li><button onClick={() => scrollToSection("harga")} className="hover:text-violet-400 transition">Paket Standar</button></li>
+              <li><button onClick={() => scrollToSection("harga")} className="hover:text-violet-400 transition">Paket Absensi</button></li>
+              <li><button onClick={() => scrollToSection("harga")} className="hover:text-violet-400 transition">Add-on RFID</button></li>
+              <li><button onClick={() => scrollToSection("kontak")} className="hover:text-violet-400 transition text-left">Konsultasi Gratis</button></li>
+              </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-8 text-xl border-b-2 border-violet-600 w-fit pb-1">Legal</h3>
-            <ul className="space-y-4 text-lg font-semibold">
-              <li><a href="#" className="hover:text-violet-400 transition">Kebijakan Privasi</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Syarat & Ketentuan</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">FAQ</a></li>
-              <li><a href="#" className="hover:text-violet-400 transition">Support</a></li>
-            </ul>
-          </div>
-
-        </div>
+            <ul className="space-y-4 text-lg font-semibold text-slate-400">
+              <li><span>Kebijakan Privasi</span></li>
+              <li><span>Syarat & Ketentuan</span></li>
+              <li><span>FAQ</span></li>
+              <li><span>Support</span></li>
+              </ul>
+              </div>
+              </div>
 
         <div className="border-t border-slate-800/50 pt-8 flex flex-col items-center gap-2">
           <p className="text-base font-medium text-slate-400">
