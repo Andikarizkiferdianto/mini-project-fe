@@ -16,7 +16,7 @@ function Hero() {
         `}
       </style>
       <div className="w-full md:w-1/2">
-        <h1 className="mb-4 text-4xl font-extrabold leading-tight text-violet-900 md:text-5xl lg:text-6xl">
+        <h1 className="mb-4 mt-10 text-4xl font-extrabold leading-tight text-violet-900 md:text-5xl lg:text-6xl">
           Solusi Cerdas Kelola Akademik dengan SAP
         </h1>
 
@@ -24,7 +24,7 @@ function Hero() {
           Sistem Akademik Pintar (SAP) bikin semua urusan administrasi sekolah jadi lebih cepat, rapi, dan terintegrasi.
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex mt-10 gap-4">
           <button className="font-bold transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md bg-violet-600 px-8 py-4 text-white hover:bg-violet-700">
             Lihat Paket
           </button>
@@ -51,7 +51,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-12 md:mb-0">
+      <div className="w-full md:w-1/2 flex justify-center md:justify-end mb-12 mt-10 md:mb-0">
         <img
           src={LogoHero}
           alt="Hero Sistem Akademik Pintar"
