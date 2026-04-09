@@ -6,17 +6,24 @@ function Modul() {
         <div>
             <section id="modul" className="py-16 bg-gray-50">
                 <div className="max-w-6xl mx-auto px-4 text-center">
-                    
-                    <h2 className="text-3xl font-bold text-violet-600 mt-2">
+
+
+                    <div className="mb-4">
+                        <span className="text-xs font-semibold tracking-wider uppercase text-violet-600 bg-violet-100 px-4 py-2 rounded-full">
+                            Tentang Kami
+                        </span>
+                    </div>
+
+                    <h2 className="text-4xl font-bold text-violet-600 mt-2">
                         Fitur Lengkap
                     </h2>
 
                     {/* <!-- Grid --> */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-15">
                         {/* <!-- Card --> */}
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-user-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-user-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Manajemen Siswa
@@ -26,9 +33,9 @@ function Modul() {
                             </p>
                         </div>
 
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-group-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-group-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Manajemen Guru
@@ -38,9 +45,9 @@ function Modul() {
                             </p>
                         </div>
 
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-wallet-3-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-wallet-3-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Manajemen Keuangan
@@ -50,9 +57,9 @@ function Modul() {
                             </p>
                         </div>
 
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-book-open-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-book-open-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Perpustakaan Digital
@@ -62,9 +69,9 @@ function Modul() {
                             </p>
                         </div>
 
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-computer-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-computer-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Manajemen Aplikasi
@@ -74,9 +81,9 @@ function Modul() {
                             </p>
                         </div>
 
-                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-6 shadow-sm hover:shadow-md cursor-pointer">
-                            <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
-                                <i className="ri-school-fill"></i>
+                        <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-102 rounded-lg border border-slate-200 hover:border-violet-400 active:border-violet-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 bg-white p-13 shadow-sm hover:shadow-md cursor-pointer">
+                            <div className="w-16 h-16 mx-auto flex items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white mb-4">
+                                <i className="ri-school-fill text-3xl"></i>
                             </div>
                             <h3 className="font-semibold text-gray-800">
                                 Manajemen Akademik
