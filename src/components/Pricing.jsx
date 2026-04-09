@@ -65,7 +65,7 @@ function Pricing() {
                         {/* CARD 3 */}
                         <div className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-103 bg-white p-10 h-120 w-90 rounded-xl shadow-sm flex flex-col justify-between">
                             <div>
-                                <h4 className="font-bold text-2xl">Paket Dasar</h4>
+                                <h4 className="font-bold text-2xl">Add-on RFID</h4>
                                 <p className="text-4xl font-bold mt-4 my-4">Rp 20.000</p>
 
                                 <ul className="text-left mt-15 text-slate-500 space-y-2 mb-6">

@@ -42,7 +42,7 @@ function Gallery() {
         <div className="text-center mb-20">
           <div className="mb-4">
                         <span className="text-xs font-semibold tracking-wider uppercase text-violet-600 bg-violet-100 px-4 py-2 rounded-full">
-                            Dokumen
+                            Dokumentasi
                         </span>
                     </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-violet-900">
