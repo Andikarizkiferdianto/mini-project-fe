@@ -28,7 +28,7 @@ function Login() {
       Swal.fire({
         title: 'Berhasil!',
         text: res.data.message,
-        icon: 'success',
+        icon: 'berhasil',
         timer: 1500,
         showConfirmButton: false
       }).then(() => {
