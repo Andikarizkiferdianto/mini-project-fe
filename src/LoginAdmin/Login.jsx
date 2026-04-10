@@ -1,48 +1,41 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // <-- PENTING: Pastiin udah npm install axios
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import LogoSap from '../assets/LogoSap.png'; 
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   
-  // --- 1. STATE BARU BUAT API INTEGRATION ---
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // --- 2. FUNGSI HANDLE LOGIN (Nembak Backend) ---
   const handleLogin = async (e) => {
-    e.preventDefault(); // Mencegah halaman reload pas tombol di-klik
+    e.preventDefault();
     setErrorMsg('');
     setIsLoading(true);
 
     try {
-      // Nembak ke backend Python bos Dika
-      const res = await axios.post('http://localhost:8000/api/admin/login', {
+      const res = await axios.post('http://localhost:8000/api/login', {
         email: email,
         password: password
       });
-
-      // Kalau sukses (Status 200 OK)
-      const token = res.data.token;
-      localStorage.setItem('sap_token', token); // Simpan token di browser
+      
+      localStorage.setItem('sap_token', token); 
       Swal.fire({
         title: 'Berhasil!',
         text: res.data.message,
-        icon: 'success',
+        icon: 'berhasil',
         timer: 1500,
         showConfirmButton: false
       }).then(() => {
-        window.location.href = '#'
-      })
-      
-      // Nanti aktifin baris ini buat pindah ke dashboard kalau routing udah jalan
-      // window.location.href = '/dashboard'; 
+        navigate('/dashboard-admin'); 
+      });
 
     } catch (err) {
-      // Kalau gagal (Email/Password salah atau Server mati)
       if (err.response && err.response.data) {
         Swal.fire({
           title: 'Login Gagal!',
@@ -61,7 +54,6 @@ function Login() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row text-slate-900 font-sans">
       
-      {/* --- SEKSI KIRI: BRANDING & LOGO --- */}
       <div className="w-full lg:w-1/2 bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center p-12 lg:p-16">
         <div className="text-center text-white flex flex-col items-center">
           <div className="bg-white/10 p-4 rounded-3xl mb-8 lg:mb-12 shadow-inner border border-white/10 animate-[float_3s_ease-in-out_infinite]">
@@ -83,7 +75,6 @@ function Login() {
         </div>
       </div>
       
-      {/* --- SEKSI KANAN: FORM LOGIN --- */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
         <div className="w-full max-w-[440px]">
           
@@ -93,14 +84,12 @@ function Login() {
             </h2>
           </div>
 
-          {/* Munculin pesan error kalau ada */}
           {errorMsg && (
             <div className="mb-4 p-3 rounded bg-red-100 border border-red-400 text-red-700 text-sm text-center font-semibold">
               {errorMsg}
             </div>
           )}
 
-          {/* 3. TAMBAHIN onSubmit DI FORM */}
           <form className="space-y-5" onSubmit={handleLogin}>
             <div>
               <label className="block text-[13px] font-bold text-slate-700 mb-2">Email</label>
@@ -156,7 +145,7 @@ function Login() {
               
               <button 
                 type="submit"
-                disabled={isLoading} // Disable tombol pas lagi loading
+                disabled={isLoading}
                 className={`text-white font-bold py-2.5 px-8 rounded-md text-sm transition-all shadow-md ${isLoading ? 'bg-violet-400 cursor-not-allowed' : 'bg-[#5c3cfc] hover:bg-[#4a2ed9]'}`}
               >
                 {isLoading ? 'Loading...' : 'Sign In'}
