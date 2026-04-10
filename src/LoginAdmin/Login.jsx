@@ -19,16 +19,18 @@ function Login() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:8000/api/login', {
+      const res = await axios.post('http://localhost:8000/api/admin/login', {
         email: email,
         password: password
       });
       
+      const token = res.data.token; 
       localStorage.setItem('sap_token', token); 
+      
       Swal.fire({
         title: 'Berhasil!',
         text: res.data.message,
-        icon: 'berhasil',
+        icon: 'success',
         timer: 1500,
         showConfirmButton: false
       }).then(() => {
@@ -56,17 +58,25 @@ function Login() {
       
       <div className="w-full lg:w-1/2 bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center p-12 lg:p-16">
         <div className="text-center text-white flex flex-col items-center">
-          <div className="bg-white/10 p-4 rounded-3xl mb-8 lg:mb-12 shadow-inner border border-white/10 animate-[float_3s_ease-in-out_infinite]">
+          <div className="mb-8 lg:mb-12 animate-[breathe_4s_ease-in-out_infinite]"> 
             <style>{`
-              @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
+              @keyframes breathe {
+                0%, 100% { 
+                  transform: scale(1); 
+                  opacity: 1; 
+                  filter: drop-shadow(0px 0px 0px rgba(255,255,255,0));
+                }
+                50% { 
+                  transform: scale(1.08); 
+                  opacity: 0.9; 
+                  filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.6));
+                }
               }
             `}</style>
             <img 
               src={LogoSap} 
               alt="logo" 
-              className="h-24 lg:h-32 w-auto invert brightness-0"
+              className="h-32 lg:h-40 w-auto invert brightness-0 transition-all"
             />
           </div>
           <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tighter leading-tight mb-3 lg:mb-4">
@@ -96,7 +106,7 @@ function Login() {
               <input 
                 type="email" 
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} // Nangkep ketikan email
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Masukkan email" 
                 className="w-full px-4 py-2.5 rounded-md border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-violet-500 text-sm"
@@ -113,7 +123,7 @@ function Login() {
                 <input 
                   type={showPassword ? "text" : "password"}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Nangkep ketikan password
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="Masukkan password" 
                   className="w-full px-4 py-2.5 rounded-md border border-slate-200 bg-white focus:outline-none focus:ring-1 focus:ring-violet-500 text-sm"
