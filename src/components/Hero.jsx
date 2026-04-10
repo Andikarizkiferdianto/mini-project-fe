@@ -1,5 +1,19 @@
 import LogoHero from '../assets/LogoHero.png'
 
+
+
+const scrollToSection = (targetId) => {
+  if (targetId === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+};
+
+
 function Hero() {
   return (
     <section id="top" className="flex flex-col-reverse items-center justify-between px-8 pb-30 md:flex-row bg-violet-50 min-h-screen">
@@ -25,11 +39,18 @@ function Hero() {
         </p>
 
         <div className="flex mt-10 gap-4">
-          <button className="font-bold transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md bg-violet-600 px-8 py-4 text-white hover:bg-violet-700">
+          <button
+            onClick={() => {
+              const el = document.getElementById("harga");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="font-bold transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md bg-violet-600 px-8 py-4 text-white hover:bg-violet-700">
             Lihat Paket
           </button>
 
-          <button className="font-bold transitiyon delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md border border-violet-600 px-8 py-4 text-violet-600 hover:bg-violet-600 hover:text-white">
+          <button
+            onClick={() => scrollToSection("kontak")}
+            className="font-bold transitiyon delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 rounded-md border border-violet-600 px-8 py-4 text-violet-600 hover:bg-violet-600 hover:text-white">
             Konsultasi Gratis
           </button>
         </div>

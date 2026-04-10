@@ -16,15 +16,15 @@ function Navbar() {
   ];
 
   const scrollToSection = (targetId) => {
-  if (targetId === "top") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    const el = document.getElementById(targetId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (targetId === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }
-};
+  };
   useEffect(() => {
     const handleScroll = () => {
       let current = "Beranda";
@@ -97,17 +97,17 @@ function Navbar() {
         ))}
       </ul>
 
-      <button 
-      onClick={() => {
-        const el = document.getElementById("kontak");
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }}
-      className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 font-bold rounded-md bg-violet-600 px-6 py-2 text-white hover:bg-violet-700"
+      <button
+        onClick={() => {
+          const el = document.getElementById("kontak");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }}
+        className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 font-bold rounded-md bg-violet-600 px-6 py-2 text-white hover:bg-violet-700"
       >
         Ajukan Demo
-        </button>
-        </nav>
-        );
-      }
+      </button>
+    </nav>
+  );
+}
 
 export default Navbar;
