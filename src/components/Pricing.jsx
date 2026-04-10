@@ -1,3 +1,16 @@
+
+
+const scrollToSection = (targetId) => {
+    if (targetId === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        const el = document.getElementById(targetId);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+};
+
 function Pricing() {
     return (
         <div>
@@ -33,7 +46,12 @@ function Pricing() {
                                     <li>✔ Dashboard monitoring siswa</li>
                                 </ul>
                             </div>
-                            <button className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-violet-600 text-white rounded-lg">
+                            <button
+                                onClick={() => {
+                                    const el = document.getElementById("kontak");
+                                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                                }}
+                                className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-violet-600 text-white rounded-lg">
                                 Info Lengkap
                             </button>
                         </div>
@@ -57,7 +75,9 @@ function Pricing() {
                                     <li>✔ Update fitur berkala</li>
                                 </ul>
                             </div>
-                            <button className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-white text-violet-600 rounded-lg font-semibold">
+                            <button
+                                onClick={() => scrollToSection("kontak")}
+                                className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-white text-violet-600 rounded-lg font-semibold">
                                 Pilih Paket Ini
                             </button>
                         </div>
@@ -76,7 +96,9 @@ function Pricing() {
                                 </ul>
                             </div>
 
-                            <button className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-violet-600 text-white rounded-lg">
+                            <button
+                                onClick={() => scrollToSection("kontak")}
+                                className="transition duration-200 ease-out hover:-translate-y-1 hover:scale-105 px-4 py-2 bg-violet-600 text-white rounded-lg">
                                 Pesan Add-on
                             </button>
                         </div>
