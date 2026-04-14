@@ -11,7 +11,7 @@ const DashboardAdmin = () => {
   const navigate = useNavigate();
 
   const menus = [
-    { title: "Manajemen Siswa", icon: <Users size={40} /> },
+    { title: "Manajemen Siswa", icon: <Users size={40} />, path: '/manajemen-siswa' },
     { title: "Manajemen Guru", icon: <GraduationCap size={40} /> },
     { title: "Keuangan", icon: <Wallet size={40} /> },
     { title: "Perpustakaan", icon: <BookOpen size={40} /> },
@@ -51,7 +51,7 @@ const DashboardAdmin = () => {
             <img 
               src={LogoSap} 
               alt="Profile Logo" 
-              className="w-10 h-10 object-contain invert brightness-0" // Dibuat putih bersih agar kontras
+              className="w-10 h-10 object-contain invert brightness-0" 
             />
           </motion.div>
         </div>
@@ -62,6 +62,7 @@ const DashboardAdmin = () => {
           {menus.map((menu, index) => (
             <motion.div 
               key={index} 
+              onClick={() => menu.path && navigate(menu.path)} 
               className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200/60 hover:shadow-2xl hover:shadow-violet-200 transition-all duration-500 flex flex-col items-center justify-center gap-5 cursor-pointer group"
               whileHover={{ y: -10 }}
             >
