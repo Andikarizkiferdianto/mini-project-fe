@@ -10,7 +10,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        
         <Route path="/cc" element={<Sidebar />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
