@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
     setErrorMsg('');
     setIsLoading(true);
-
+    
     try {
       const res = await axios.post('http://localhost:8000/api/admin/login', {
         email: email,
@@ -27,16 +27,26 @@ function Login() {
       const token = res.data.token; 
       localStorage.setItem('sap_token', token); 
       
+      const adminData = res.data.data;
+      localStorage.setItem('sap_user', JSON.stringify(adminData));
+      
       Swal.fire({
         title: 'Berhasil!',
-        text: res.data.message,
+        text: `Selamat datang kembali, ${res.data.data.name}!`,
         icon: 'success',
-        timer: 1500,
-        showConfirmButton: false
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
       }).then(() => {
         navigate('/dashboard-admin'); 
       });
-
+    
     } catch (err) {
       if (err.response && err.response.data) {
         Swal.fire({
