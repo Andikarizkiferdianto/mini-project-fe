@@ -4,6 +4,8 @@ import LandingPage from './components/Landingpage';
 import Login from './LoginAdmin/Login';
 import DashboardAdmin from './Pages/DashboardAdmin';
 import ManajemenSiswa from './Pages/ManajemenSiswa';
+import DataSiswa from './Pages/DataSiswa';
+import DataKelas from './Pages/DataKelas';
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-        <Route path="/manajemen-siswa" element={<ManajemenSiswa />} />
+        <Route path="/manajemen-siswa=dashboard" element={<ManajemenSiswa />} />
+        <Route path="/manajemen-siswa=data-siswa" element={<DataSiswa />} />
+        <Route path="/manajemen-siswa=data-kelas" element={<DataKelas />} />
       </Routes>
     </Router>
   );

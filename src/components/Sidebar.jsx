@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "remixicon/fonts/remixicon.css";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import LogoSAP from '../assets/LogoSAP.png'
-
-
+import LogoSAP from "../assets/LogoSAP.png";
 
 function Sidebar() {
     const [openMenu, setOpenMenu] = useState(null);
@@ -14,29 +12,17 @@ function Sidebar() {
     const handleLogout = (e) => {
         e.preventDefault();
         Swal.fire({
-            title: "Yakin ingin logout?",
-            text: "Kamu akan kembali ke halaman login.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Ya, Logout",
-            cancelButtonText: "Batal",
-            confirmButtonColor: "#1e3a8a",
-            cancelButtonColor: "#dc2626",
-        }).then((r) => {
-            if (r.isConfirmed) {
-                Swal.fire({
-                    title: "Berhasil Logout!",
-                    icon: "success",
-                    timer: 1200,
-                    showConfirmButton: false,
-                });
-                setTimeout(() => nav("/login"), 1200);
-            }
+            title: "Berhasil Kembali",
+            icon: "success",
+            timer: 1200,
+            showConfirmButton: false,
         });
+
+        setTimeout(() => nav("/dashboard-admin"), 1200);
     };
 
     const menuItems = [
-        { path: "/", icon: "ri-home-9-fill", label: "Dashboard" },
+        { path: "/manajemen-siswa=dashboard", icon: "ri-home-9-fill", label: "Dashboard" },
 
         { isSection: true, label: "MENU" },
 
@@ -44,42 +30,41 @@ function Sidebar() {
             icon: "ri-team-fill",
             label: "Kesiswaan",
             children: [
-                { path: "/", label: "Data Siswa" },
-                { path: "/", label: "Kenaikan Kelas" },
-                { path: "/", label: "Data Kelas" },
-                { path: "/", label: "Data Jurusan" },
-                { path: "/", label: "Tahun Ajaran" },
-                { path: "/", label: "Wali Kelas" },
+                { path: "/manajemen-siswa=data-siswa", label: "Data Siswa" },
+                { path: "/manajemen-siswa=data-kelas", label: "Data Kelas" },
             ],
         },
         {
             icon: "ri-list-check-2",
             label: "Kegiatan",
             children: [
-                { path: "/", label: "Ekstrakurikuler" },
+                { path: "/ekskul", label: "Ekstrakurikuler" },
             ],
         },
-
         {
             icon: "ri-file-text-fill",
             label: "E-Raport",
             children: [
-                { path: "/", label: "Data Raport" },
-                { path: "/", label: "Aspek Penilaian" },
-                { path: "/", label: "Semester" },
-                { path: "/", label: "Jis Semester" },
+                { path: "/raport", label: "Data Raport" },
             ],
         },
         {
             icon: "ri-user-follow-fill",
             label: "Absensi",
             children: [
-                { path: "/", label: "Absensi Harian" },
-                { path: "/", label: "Rekap Absensi" },
-                { path: "/", label: "Absensi Mapel" },
+                { path: "/absensi", label: "Absensi Harian" },
             ],
         },
     ];
+
+    // auto buka parent kalau ada child aktif
+    useEffect(() => {
+        menuItems.forEach((item, index) => {
+            if (item.children?.some(child => child.path === location.pathname)) {
+                setOpenMenu(index);
+            }
+        });
+    }, [location.pathname]);
 
     return (
         <div className="w-60 min-h-screen">
@@ -92,8 +77,12 @@ function Sidebar() {
                 </div>
 
                 <nav className="flex-1 px-3 text-sm">
-                    {menuItems.map((item, index) =>
-                        item.isSection ? (
+                    {menuItems.map((item, index) => {
+                        const isActiveParent = item.children?.some(
+                            (child) => child.path === location.pathname
+                        );
+
+                        return item.isSection ? (
                             <p
                                 key={index}
                                 className="mt-4 mb-2 text-xs uppercase tracking-wide text-indigo-300 font-semibold"
@@ -106,7 +95,11 @@ function Sidebar() {
                                     onClick={() =>
                                         setOpenMenu(openMenu === index ? null : index)
                                     }
-                                    className="flex items-center justify-between w-full py-2 px-3 rounded-md hover:bg-violet-700 transition"
+                                    className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition ${
+                                        isActiveParent
+                                            ? "bg-violet-600 font-semibold"
+                                            : "hover:bg-violet-700"
+                                    }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <i className={`${item.icon} text-lg`}></i>
@@ -114,23 +107,29 @@ function Sidebar() {
                                     </div>
 
                                     <i
-                                        className={`ri-arrow-down-s-line transition-transform duration-300 ${openMenu === index ? "rotate-180" : ""
-                                            }`}
+                                        className={`ri-arrow-down-s-line transition-transform duration-300 ${
+                                            openMenu === index ? "rotate-180" : ""
+                                        }`}
                                     ></i>
                                 </button>
 
-
-                                {/* submenu */}
+                                {/* SUBMENU */}
                                 <div
-                                    className={`ml-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${openMenu === index
-                                        ? "max-h-96 opacity-100"
-                                        : "max-h-0 opacity-0"
-                                        }`}>
+                                    className={`ml-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
+                                        openMenu === index
+                                            ? "max-h-96 opacity-100"
+                                            : "max-h-0 opacity-0"
+                                    }`}
+                                >
                                     {item.children.map((child, i) => (
                                         <Link
                                             key={i}
                                             to={child.path}
-                                            className="block py-3 px-3 rounded-md text-sm hover:bg-violet-600 transition"
+                                            className={`block py-2 px-3 rounded-md text-sm transition ${
+                                                location.pathname === child.path
+                                                    ? "bg-violet-500 font-semibold"
+                                                    : "hover:bg-violet-600"
+                                            }`}
                                         >
                                             {child.label}
                                         </Link>
@@ -141,13 +140,17 @@ function Sidebar() {
                             <Link
                                 key={index}
                                 to={item.path}
-                                className="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-violet-700 transition"
+                                className={`flex items-center gap-3 py-2 px-3 rounded-md transition ${
+                                    location.pathname === item.path
+                                        ? "bg-violet-600 font-semibold"
+                                        : "hover:bg-violet-700"
+                                }`}
                             >
                                 <i className={`${item.icon} text-lg`}></i>
                                 {item.label}
                             </Link>
-                        )
-                    )}
+                        );
+                    })}
                 </nav>
 
                 {/* LOGOUT */}
@@ -157,7 +160,7 @@ function Sidebar() {
                         className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r from-red-500 to-red-600 hover:opacity-90 font-bold transition"
                     >
                         <i className="ri-logout-box-line"></i>
-                        Logout
+                        Kembali
                     </button>
                 </div>
             </div>
