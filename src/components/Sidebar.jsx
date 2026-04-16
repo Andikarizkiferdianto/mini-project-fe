@@ -67,7 +67,22 @@ function Sidebar() {
     }, [location.pathname]);
 
     return (
-        <div className="w-60 min-h-screen">
+        <div className="w-60 min-h-screen pt-16">
+
+            {/* TOPBAR */}
+            <div className="fixed top-0 left-60 right-0 h-16 bg-gray-100 flex items-center justify-between px-6 shadow z-40">
+
+                {/* Kiri */}
+                <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
+                    <i className="ri-folder-3-fill"></i>
+                    Manajemen Siswa
+                </button>
+
+                {/* Kanan */}
+                <div className="flex items-center gap-2 text-blue-600 font-medium">
+                    <i className="ri-user-3-line"></i>
+                    SAP                </div>
+            </div>
             <div className="fixed overflow-y-auto top-0 left-0 h-full w-60 bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 text-white shadow-lg flex flex-col">
 
                 {/* LOGO */}
@@ -95,11 +110,10 @@ function Sidebar() {
                                     onClick={() =>
                                         setOpenMenu(openMenu === index ? null : index)
                                     }
-                                    className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition ${
-                                        isActiveParent
-                                            ? "bg-violet-600 font-semibold"
-                                            : "hover:bg-violet-700"
-                                    }`}
+                                    className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition ${isActiveParent
+                                        ? "bg-violet-600 font-semibold"
+                                        : "hover:bg-violet-700"
+                                        }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <i className={`${item.icon} text-lg`}></i>
@@ -107,29 +121,26 @@ function Sidebar() {
                                     </div>
 
                                     <i
-                                        className={`ri-arrow-down-s-line transition-transform duration-300 ${
-                                            openMenu === index ? "rotate-180" : ""
-                                        }`}
+                                        className={`ri-arrow-down-s-line transition-transform duration-300 ${openMenu === index ? "rotate-180" : ""
+                                            }`}
                                     ></i>
                                 </button>
 
                                 {/* SUBMENU */}
                                 <div
-                                    className={`ml-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                                        openMenu === index
-                                            ? "max-h-96 opacity-100"
-                                            : "max-h-0 opacity-0"
-                                    }`}
+                                    className={`ml-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${openMenu === index
+                                        ? "max-h-96 opacity-100"
+                                        : "max-h-0 opacity-0"
+                                        }`}
                                 >
                                     {item.children.map((child, i) => (
                                         <Link
                                             key={i}
                                             to={child.path}
-                                            className={`block py-2 px-3 rounded-md text-sm transition ${
-                                                location.pathname === child.path
-                                                    ? "bg-violet-500 font-semibold"
-                                                    : "hover:bg-violet-600"
-                                            }`}
+                                            className={`block py-2 px-3 rounded-md text-sm transition ${location.pathname === child.path
+                                                ? "bg-violet-500 font-semibold"
+                                                : "hover:bg-violet-600"
+                                                }`}
                                         >
                                             {child.label}
                                         </Link>
@@ -140,11 +151,10 @@ function Sidebar() {
                             <Link
                                 key={index}
                                 to={item.path}
-                                className={`flex items-center gap-3 py-2 px-3 rounded-md transition ${
-                                    location.pathname === item.path
-                                        ? "bg-violet-600 font-semibold"
-                                        : "hover:bg-violet-700"
-                                }`}
+                                className={`flex items-center gap-3 py-2 px-3 rounded-md transition ${location.pathname === item.path
+                                    ? "bg-violet-600 font-semibold"
+                                    : "hover:bg-violet-700"
+                                    }`}
                             >
                                 <i className={`${item.icon} text-lg`}></i>
                                 {item.label}
