@@ -79,7 +79,7 @@ function Sidebar() {
                 </button>
 
                 {/* Kanan */}
-                <div className="flex items-center gap-2 text-blue-600 font-medium">
+                <div className="flex items-center gap-2 text-violet-600 font-medium">
                     <i className="ri-user-3-line"></i>
                     SAP                </div>
             </div>
