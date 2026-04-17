@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Swal from "sweetalert2";
 
@@ -6,7 +7,7 @@ const DataSiswa = () => {
     const [siswa, setSiswa] = useState([]);
     const [kelas, setKelas] = useState([]);
     const [selectedKelas, setSelectedKelas] = useState("");
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8000/api/siswa") // sesuaikan endpoint kamu
@@ -21,6 +22,10 @@ const DataSiswa = () => {
             .then(data => setKelas(data.data))
             .catch(err => console.error(err));
     }, []);
+
+    const handleDetail = (id) => {
+        Swal.fire("Info", "Detail belum dibuat", "info");
+    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -94,7 +99,9 @@ const DataSiswa = () => {
                             <button className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-sm font-semibold">
                                 Upload
                             </button>
-                            <button className="bg-violet-600 hover:bg-violet-700 text-white px-3 py-1 rounded text-sm font-semibold">
+                            <button 
+                            onClick={() => navigate("/manajemen-siswa=tambah-siswa")}
+                            className="bg-violet-600 hover:bg-violet-700 text-white px-3 py-1 rounded text-sm font-semibold">
                                 + Tambah
                             </button>
                         </div>
@@ -117,8 +124,9 @@ const DataSiswa = () => {
                             </thead>
 
                             <tbody>
-                                {siswa.map((s, index) => (
-                                    <tr
+                                {siswa
+                                    .filter(s => !selectedKelas || s.kelas === selectedKelas)
+                                    .map((s, index) => (<tr
                                         key={s.id}
                                         className="text-center border-t hover:bg-gray-50 transition"
                                     >
@@ -127,7 +135,7 @@ const DataSiswa = () => {
                                         <td className="p-3 text-left font-medium text-gray-700">
                                             {s.nama}
                                         </td>
-                                        <td className="p-3">{s.Tanggal || "-"}</td>
+                                        <td className="p-3">{s.tgl_lahir || "-"}</td>
                                         <td className="p-3 text-left">
                                             {s.alamat || "-"}
                                         </td>
@@ -169,7 +177,7 @@ const DataSiswa = () => {
                                             </div>
                                         </td>
                                     </tr>
-                                ))}
+                                    ))}
                             </tbody>
                         </table>
                     </div>

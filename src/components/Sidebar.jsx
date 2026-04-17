@@ -32,6 +32,7 @@ function Sidebar() {
             children: [
                 { path: "/manajemen-siswa=data-siswa", label: "Data Siswa" },
                 { path: "/manajemen-siswa=data-kelas", label: "Data Kelas" },
+                { path: "/manajemen-siswa=kenaikan-kelas", label: "Kenaikan Kelas" },
             ],
         },
         {

@@ -5,6 +5,79 @@ import Sidebar from "../components/Sidebar";
 const DataKelas = () => {
     const [kelas, setKelas] = useState([]);
     const [search, setSearch] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [jurusanList, setJurusanList] = useState([]);
+    const [tahunList, setTahunList] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/jurusan")
+            .then(res => res.json())
+            .then(data => setJurusanList(data.data));
+
+        fetch("http://localhost:8000/api/tahun-ajaran")
+            .then(res => res.json())
+            .then(data => setTahunList(data.data));
+    }, []);
+    const [form, setForm] = useState({
+        kode_kelas: "",
+        nama_kelas: "",
+        id_jurusan: "",
+        id_tahun_ajaran: "",
+        wali_kelas_name: ""
+    });
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!form.kode_kelas || !form.nama_kelas) {
+            Swal.fire("Warning", "Kode & Nama wajib!", "warning");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:8000/api/kelas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    kode_kelas: form.kode_kelas,
+                    nama_kelas: form.nama_kelas,
+                    id_jurusan: 1,          // 🔥 default biar gak error
+                    id_tahun_ajaran: 1,     // 🔥 default
+                    wali_kelas_name: form.wali_kelas_name || "-"
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                Swal.fire("Error", data.message, "error");
+                return;
+            }
+
+            Swal.fire("Berhasil!", data.message, "success");
+
+            setShowModal(false);
+            setForm({
+                kode_kelas: "",
+                nama_kelas: "",
+                wali_kelas_name: ""
+            });
+
+            fetchKelas();
+
+        } catch (err) {
+            Swal.fire("Error", "Gagal tambah data", "error");
+        }
+    };
 
     const fetchKelas = async () => {
         try {
@@ -48,6 +121,75 @@ const DataKelas = () => {
             <Sidebar />
 
             <div className="flex-1 p-6 bg-gray-100 min-h-screen">
+                {showModal && (
+                    <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
+
+                        <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
+
+                            {/* HEADER */}
+                            <div className="bg-blue-600 text-white flex justify-between items-center px-4 py-3">
+                                <h2 className="font-semibold text-lg">+ Tambah Kelas</h2>
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    className="text-white text-xl"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+
+                            <div className="p-5 space-y-4">
+                                <div>
+                                    <label className="block text-sm mb-1">Kode Kelas</label>
+                                    <input
+                                        type="text"
+                                        name="kode_kelas"
+                                        value={form.kode_kelas}
+                                        onChange={handleChange}
+                                        className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm mb-1">Nama Kelas</label>
+                                    <input
+                                        type="text"
+                                        name="nama_kelas"
+                                        value={form.nama_kelas}
+                                        onChange={handleChange}
+                                        className="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm mb-1">Nama Kelas</label>
+                                    <input
+                                        type="text"
+                                        name="wali_kelas_name"
+                                        placeholder="Wali Kelas"
+                                        value={form.wali_kelas_name}
+                                        onChange={handleChange}
+                                        className="w-full border px-3 py-2 rounded"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2 px-5 pb-4">
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    className="bg-gray-500 text-white px-4 py-2 rounded"
+                                >
+                                    ✖ Batal
+                                </button>
+
+                                <button
+                                    onClick={handleSubmit}
+                                    className="bg-green-600 text-white px-4 py-2 rounded"
+                                >
+                                    💾 Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-school-fill"></i>
@@ -60,7 +202,10 @@ const DataKelas = () => {
                     <div className="flex justify-between items-center mb-4">
                         <h2 className="text-lg font-semibold">Daftar Kelas</h2>
 
-                        <button className="text-white px-4 py-2 rounded bg-violet-600 hover:bg-violet-700">
+                        <button
+                            onClick={() => setShowModal(true)}
+                            className="text-white px-4 py-2 rounded bg-violet-600 hover:bg-violet-700"
+                        >
                             + Tambah
                         </button>
                     </div>
