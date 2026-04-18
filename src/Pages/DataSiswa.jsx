@@ -99,9 +99,9 @@ const DataSiswa = () => {
                             <button className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded text-sm font-semibold">
                                 Upload
                             </button>
-                            <button 
-                            onClick={() => navigate("/manajemen-siswa=tambah-siswa")}
-                            className="bg-violet-600 hover:bg-violet-700 text-white px-3 py-1 rounded text-sm font-semibold">
+                            <button
+                                onClick={() => navigate("/manajemen-siswa=tambah-siswa")}
+                                className="bg-violet-600 hover:bg-violet-700 text-white px-3 py-1 rounded text-sm font-semibold">
                                 + Tambah
                             </button>
                         </div>
@@ -154,7 +154,7 @@ const DataSiswa = () => {
                                             <div className="flex justify-center gap-2">
 
                                                 <button
-                                                    onClick={() => navigate(`/edit/${s.id}`)}
+                                                    onClick={() => navigate(`/manajemen-siswa=edit-siswa/${s.id}`)}
                                                     className="p-2 bg-sky-100 text-sky-600 hover:bg-sky-200 rounded-md transition"
                                                 >
                                                     <i className="ri-edit-2-line"></i>

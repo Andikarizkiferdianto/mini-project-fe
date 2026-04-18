@@ -8,6 +8,7 @@ import DataSiswa from './Pages/DataSiswa';
 import DataKelas from './Pages/DataKelas';
 import KenaikanKelas from './Pages/KenaikanKelas';
 import TambahDataSiswa from './Pages/TambahDataSiswa';
+import EditDataSiswa from './Pages/EditDataSiswa';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/manajemen-siswa=dashboard" element={<ManajemenSiswa />} />
         <Route path="/manajemen-siswa=data-siswa" element={<DataSiswa />} />
         <Route path="/manajemen-siswa=tambah-siswa" element={<TambahDataSiswa />} />
+        <Route path="/manajemen-siswa=edit-siswa/:id" element={<EditDataSiswa />} />
         <Route path="/manajemen-siswa=data-kelas" element={<DataKelas />} />
         <Route path="/manajemen-siswa=kenaikan-kelas" element={<KenaikanKelas />} />
       </Routes>
