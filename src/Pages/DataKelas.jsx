@@ -126,8 +126,8 @@ const DataKelas = () => {
 
                         <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
 
-                            {/* HEADER */}
-                            <div className="bg-blue-600 text-white flex justify-between items-center px-4 py-3">
+                         
+                            <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">+ Tambah Kelas</h2>
                                 <button
                                     onClick={() => setShowModal(false)}

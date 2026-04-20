@@ -2,21 +2,25 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Swal from "sweetalert2";
+import DetailSiswa from "./DetailSiswa";
+
 
 const DataSiswa = () => {
     const [siswa, setSiswa] = useState([]);
     const [kelas, setKelas] = useState([]);
     const [selectedKelas, setSelectedKelas] = useState("");
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [selectedSiswa, setSelectedSiswa] = useState(null);
+
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/siswa") // sesuaikan endpoint kamu
+        fetch("http://localhost:8000/api/siswa")
             .then(res => res.json())
             .then(data => {
-                setSiswa(data.data); // ambil array data siswa
+                setSiswa(data.data);
             })
             .catch(err => console.error(err));
-        // kelas
         fetch("http://localhost:8000/api/kelas")
             .then(res => res.json())
             .then(data => setKelas(data.data))
@@ -24,8 +28,11 @@ const DataSiswa = () => {
     }, []);
 
     const handleDetail = (id) => {
-        Swal.fire("Info", "Detail belum dibuat", "info");
-    };
+    const data = siswa.find(s => s.id === id);
+    console.log(data); // 🔥 cek di console
+    setSelectedSiswa(data);
+    setShowModal(true);
+};
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -51,7 +58,11 @@ const DataSiswa = () => {
     return (
         <div className="flex bg-gray-100 min-h-screen">
             <Sidebar />
-
+            <DetailSiswa
+                isOpen={showModal}
+                data={selectedSiswa}
+                onClose={() => setShowModal(false)}
+            />
             <div className="flex-1 p-6 mb-80">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
