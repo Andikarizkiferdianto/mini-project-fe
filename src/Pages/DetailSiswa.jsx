@@ -16,8 +16,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
 
             <div className="bg-white w-[950px] rounded-lg shadow-lg overflow-hidden">
 
-                {/* HEADER */}
-                <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
+                 <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
                     <h2 className="font-semibold flex items-center gap-2">
                         <i className="ri-file-user-line"></i>
                         Detail Lengkap Siswa
@@ -25,8 +24,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
                     <button onClick={onClose}>✕</button>
                 </div>
 
-                {/* CONTENT */}
-                <div className="p-5 max-h-[75vh] overflow-y-auto">
+                 <div className="p-5 max-h-[75vh] overflow-y-auto">
 
                     <div className="flex gap-6">
 
@@ -38,21 +36,20 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
                             </span>
                         </div>
 
-                        {/* DATA */}
-                        <div className="flex-1">
+                         <div className="flex-1">
                             <h3 className="text-blue-600 font-semibold border-b pb-1 mb-2">
                                 Data Pribadi
                             </h3>
 
                             <Item label="NIS" value={data.nis} />
                             <Item label="NISN" value={data.nisn} />
-<Item 
-  label="Tempat, Tgl Lahir" 
-  value={`${data.tempat_lahir || "-"}, ${data.tgl_lahir || "-"}`} 
-/>                            <Item 
-  label="Jenis Kelamin" 
-  value={data.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"} 
-/>
+                            <Item
+                                label="Tempat, Tgl Lahir"
+                                value={`${data.tempat_lahir || "-"}, ${data.tgl_lahir || "-"}`}
+                            />                            <Item
+                                label="Jenis Kelamin"
+                                value={data.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}
+                            />
                             <Item label="Alamat" value={data.alamat} />
                             <Item label="Agama" value={data.agama} />
                             <Item label="Golongan Darah" value={data.golongan_darah} />
@@ -66,8 +63,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
 
                     </div>
 
-                    {/* ORTU */}
-                    <div className="flex justify-center mt-6 grid grid-cols-3 gap-6 text-sm">
+                     <div className="flex justify-center mt-6 grid grid-cols-3 gap-6 text-sm">
 
                         <div>
                             <h3 className="text-blue-600 font-semibold border-b pb-1 mb-2">
@@ -91,8 +87,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
 
                 </div>
 
-                {/* FOOTER */}
-                <div className="flex justify-end gap-2 p-4 border-t">
+                 <div className="flex justify-end gap-2 p-4 border-t">
                     <button className="bg-gray-500 text-white px-3 py-1 rounded">
                         Cetak
                     </button>
