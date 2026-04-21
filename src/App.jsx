@@ -9,6 +9,10 @@ import DataKelas from './Pages/DataKelas';
 import KenaikanKelas from './Pages/KenaikanKelas';
 import TambahDataSiswa from './Pages/TambahDataSiswa';
 import EditDataSiswa from './Pages/EditDataSiswa';
+import DataJurusan from './Pages/DataJurusan';
+import Ekstrakurikuler from './Pages/Ekstrakurikuler';
+
+
 
 
 function App() {
@@ -18,12 +22,14 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-        <Route path="/manajemen-siswa=dashboard" element={<ManajemenSiswa />} />
-        <Route path="/manajemen-siswa=data-siswa" element={<DataSiswa />} />
-        <Route path="/manajemen-siswa=tambah-siswa" element={<TambahDataSiswa />} />
-        <Route path="/manajemen-siswa=edit-siswa/:id" element={<EditDataSiswa />} />
-        <Route path="/manajemen-siswa=data-kelas" element={<DataKelas />} />
-        <Route path="/manajemen-siswa=kenaikan-kelas" element={<KenaikanKelas />} />
+        <Route path="/manajemen-siswa/dashboard" element={<ManajemenSiswa />} />
+        <Route path="/manajemen-siswa/data-siswa" element={<DataSiswa />} />
+        <Route path="/manajemen-siswa/tambah-siswa" element={<TambahDataSiswa />} />
+        <Route path="/manajemen-siswa/edit-siswa/:id" element={<EditDataSiswa />} />
+        <Route path="/manajemen-siswa/data-kelas" element={<DataKelas />} />
+        <Route path="/manajemen-siswa/kenaikan-kelas" element={<KenaikanKelas />} />
+        <Route path="/manajemen-siswa/data-jurusan" element={<DataJurusan />} />
+        <Route path="/manajemen-siswa/page-ekstrakurikuler" element={<Ekstrakurikuler />} />
       </Routes>
     </Router>
   );

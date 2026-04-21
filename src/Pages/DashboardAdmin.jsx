@@ -11,7 +11,7 @@ const DashboardAdmin = () => {
   const navigate = useNavigate();
   const nav = useNavigate();
   const menus = [
-    { title: "Manajemen Siswa", icon: <Users size={40} />, path: "/manajemen-siswa=dashboard" },
+    { title: "Manajemen Siswa", icon: <Users size={40} />, path: "/manajemen-siswa/dashboard" },
     { title: "Manajemen Guru", icon: <GraduationCap size={40} /> },
     { title: "Keuangan", icon: <Wallet size={40} /> },
     { title: "Perpustakaan", icon: <BookOpen size={40} /> },

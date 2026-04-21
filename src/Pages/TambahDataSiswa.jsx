@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const TambahDataSiswa = () => {
     const navigate = useNavigate();
-
+    const [jurusan, setJurusan] = useState([]);
     const [kelas, setKelas] = useState([]);
     const [form, setForm] = useState({
         nis: "",
@@ -28,13 +28,17 @@ const TambahDataSiswa = () => {
         pekerjaan_ibu: "",
         no_hp_ibu: "",
         id_kelas: "",
-        id_jurusan: 1 // default biar aman
+        id_jurusan: ""
     });
 
     useEffect(() => {
         fetch("http://localhost:8000/api/kelas")
             .then(res => res.json())
             .then(data => setKelas(data.data));
+
+        fetch("http://localhost:8000/api/jurusan")
+            .then(res => res.json())
+            .then(data => setJurusan(data.data));
     }, []);
 
     const handleChange = (e) => {
@@ -42,57 +46,64 @@ const TambahDataSiswa = () => {
 
         setForm({
             ...form,
-            [name]: name === "id_kelas" ? Number(value) : value
+            [name]: (name === "id_kelas" || name === "id_jurusan")
+                ? Number(value)
+                : value
         });
     };
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const requiredFields = [
-        "nis",
-        "nama",
-        "tgl_lahir",
-        "jenis_kelamin",
-        "alamat",
-        "id_kelas"
-    ];
+        const requiredFields = [
+            "nis",
+            "nama",
+            "tgl_lahir",
+            "jenis_kelamin",
+            "alamat",
+            "id_kelas",
+            "id_jurusan"
+        ];
 
-    const isEmpty = requiredFields.some(
-        (field) =>
-            form[field] === "" ||
-            form[field] === null ||
-            form[field] === undefined
-    );
+        const isEmpty = requiredFields.some(
+            (field) =>
+                !form[field]
+        );
 
-    if (isEmpty) {
-        Swal.fire("Warning", "Semua data wajib harus diisi!", "warning");
-        return;
-    }
-
-    try {
-        const res = await fetch("http://localhost:8000/api/siswa", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(form)
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-            Swal.fire("Error", data.message, "error");
+        if (isEmpty) {
+            Swal.fire("Warning", "Semua data wajib harus diisi!", "warning");
             return;
         }
 
-        Swal.fire("Berhasil!", data.message, "success");
-        navigate("/manajemen-siswa=data-siswa");
+        try {
+            const res = await fetch("http://localhost:8000/api/siswa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ...form,
+                    id_kelas: Number(form.id_kelas),
+                    id_jurusan: Number(form.id_jurusan)
+                })
+            });
 
-    } catch (err) {
-        Swal.fire("Error", "Terjadi kesalahan server", "error");
-    }
-};
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.log("ERROR BACKEND:", data);
+                Swal.fire("Error", data.message, "error");
+                return;
+            }
+
+            Swal.fire("Berhasil!", data.message, "success");
+            navigate("/manajemen-siswa/data-siswa");
+
+        } catch (err) {
+            console.log(err);
+            Swal.fire("Error", "Terjadi kesalahan server", "error");
+        }
+    };
 
 
 
@@ -142,7 +153,14 @@ const TambahDataSiswa = () => {
 
                             <input name="sekolah_asal" placeholder="Sekolah Asal" onChange={handleChange} className="border p-2 rounded" />
                             <input name="no_hp" placeholder="No HP / WA" onChange={handleChange} className="border p-2 rounded" />
-
+                            <select name="id_jurusan" onChange={handleChange} className="border p-2 rounded">
+                                <option value="">Pilih Jurusan</option>
+                                {jurusan.map(j => (
+                                    <option key={j.id} value={j.id}>
+                                        {j.nama_jurusan}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         <h2 className="font-semibold mt-6 mb-3 text-gray-700">Data Orang Tua</h2>
@@ -162,7 +180,7 @@ const TambahDataSiswa = () => {
 
                         <div className="flex justify-between mt-6">
                             <button
-                                onClick={() => navigate("/manajemen-siswa=data-siswa")}
+                                onClick={() => navigate("/manajemen-siswa/data-siswa")}
                                 className="bg-gray-400 text-white px-4 py-2 rounded"
                             >
                                 ← Kembali
