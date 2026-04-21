@@ -30,16 +30,17 @@ function Sidebar() {
             icon: "ri-team-fill",
             label: "Kesiswaan",
             children: [
-                { path: "/manajemen-siswa=data-siswa", label: "Data Siswa" },
-                { path: "/manajemen-siswa=data-kelas", label: "Data Kelas" },
-                { path: "/manajemen-siswa=kenaikan-kelas", label: "Kenaikan Kelas" },
+                { path: "/manajemen-siswa/data-siswa", label: "Data Siswa" },
+                { path: "/manajemen-siswa/data-kelas", label: "Data Kelas" },
+                { path: "/manajemen-siswa/kenaikan-kelas", label: "Kenaikan Kelas" },
+                { path: "/manajemen-siswa/data-jurusan", label: "Data Jurusan" },
             ],
         },
         {
             icon: "ri-list-check-2",
             label: "Kegiatan",
             children: [
-                { path: "/ekskul", label: "Ekstrakurikuler" },
+                { path: "/manajemen-siswa/page-ekstrakurikuler", label: "Ekstrakurikuler" },
             ],
         },
         {
@@ -82,7 +83,8 @@ function Sidebar() {
                 {/* Kanan */}
                 <div className="flex items-center gap-2 text-violet-600 font-medium">
                     <i className="ri-user-3-line"></i>
-                    SAP                </div>
+                    SAP
+                </div>
             </div>
             <div className="fixed overflow-y-auto top-0 left-0 h-full w-60 bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 text-white shadow-lg flex flex-col">
 
@@ -170,7 +172,7 @@ function Sidebar() {
                         onClick={handleLogout}
                         className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r from-red-500 to-red-600 hover:opacity-90 font-bold transition"
                     >
-                        <i className="ri-logout-box-line"></i>
+                        <i className="ri-arrow-left-line"></i>
                         Kembali
                     </button>
                 </div>

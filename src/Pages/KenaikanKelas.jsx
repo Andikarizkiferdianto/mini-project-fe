@@ -4,13 +4,13 @@ import Swal from "sweetalert2";
 
 const KenaikanKelas = () => {
     const [tahunAjaran, setTahunAjaran] = useState("");
-const [kelas, setKelas] = useState("");
-const [kelasTujuan, setKelasTujuan] = useState("");
+    const [kelas, setKelas] = useState("");
+    const [kelasTujuan, setKelasTujuan] = useState("");
 
-const [listKelas, setListKelas] = useState([]);
-const [siswaAsal, setSiswaAsal] = useState([]);
-const [selectedSiswa, setSelectedSiswa] = useState([]);
-const [kelasBaru, setKelasBaru] = useState([]);
+    const [listKelas, setListKelas] = useState([]);
+    const [siswaAsal, setSiswaAsal] = useState([]);
+    const [selectedSiswa, setSelectedSiswa] = useState([]);
+    const [kelasBaru, setKelasBaru] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:8000/api/kelas")
@@ -36,7 +36,7 @@ const [kelasBaru, setKelasBaru] = useState([]);
             });
     };
 
-   
+
     const handleTambah = () => {
         if (selectedSiswa.length === 0) {
             Swal.fire("Warning", "Pilih siswa dulu!", "warning");
@@ -54,17 +54,20 @@ const [kelasBaru, setKelasBaru] = useState([]);
         setSelectedSiswa([]);
     };
 
-    
-   
+
+
 
     return (
         <div className="flex bg-gray-100 min-h-screen">
             <Sidebar />
 
-            <div className="flex-1 p-6">
-                <h1 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    ⬆️ Kenaikan Kelas
-                </h1>
+            <div className="flex-1 p-6 mt-15">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
+                        <i className="ri-arrow-up-long-line"></i>
+                        Kenaikan Kelas
+                    </h1>
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
 
@@ -139,7 +142,7 @@ const [kelasBaru, setKelasBaru] = useState([]);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                 
+
                                 </tbody>
                             </table>
 

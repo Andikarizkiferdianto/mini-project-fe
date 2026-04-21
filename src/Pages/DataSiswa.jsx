@@ -28,11 +28,11 @@ const DataSiswa = () => {
     }, []);
 
     const handleDetail = (id) => {
-    const data = siswa.find(s => s.id === id);
-    console.log(data); // 🔥 cek di console
-    setSelectedSiswa(data);
-    setShowModal(true);
-};
+        const data = siswa.find(s => s.id === id);
+        console.log(data); // 🔥 cek di console
+        setSelectedSiswa(data);
+        setShowModal(true);
+    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -63,7 +63,7 @@ const DataSiswa = () => {
                 data={selectedSiswa}
                 onClose={() => setShowModal(false)}
             />
-            <div className="flex-1 p-6 mb-80">
+            <div className="flex-1 p-6 mb-80 mt-12">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-team-fill"></i>
@@ -111,7 +111,7 @@ const DataSiswa = () => {
                                 Upload
                             </button>
                             <button
-                                onClick={() => navigate("/manajemen-siswa=tambah-siswa")}
+                                onClick={() => navigate("/manajemen-siswa/tambah-siswa")}
                                 className="bg-violet-600 hover:bg-violet-700 text-white px-3 py-1 rounded text-sm font-semibold">
                                 + Tambah
                             </button>
@@ -165,7 +165,7 @@ const DataSiswa = () => {
                                             <div className="flex justify-center gap-2">
 
                                                 <button
-                                                    onClick={() => navigate(`/manajemen-siswa=edit-siswa/${s.id}`)}
+                                                    onClick={() => navigate(`/manajemen-siswa/edit-siswa/${s.id}`)}
                                                     className="p-2 bg-sky-100 text-sky-600 hover:bg-sky-200 rounded-md transition"
                                                 >
                                                     <i className="ri-edit-2-line"></i>

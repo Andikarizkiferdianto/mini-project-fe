@@ -2,83 +2,52 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Sidebar from "../components/Sidebar";
 
-const DataKelas = () => {
-    const [kelas, setKelas] = useState([]);
-    const [search, setSearch] = useState("");
+const DataJurusan = () => {
+    const [jurusan, setJurusan] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [jurusanList, setJurusanList] = useState([]);
-    const [tahunList, setTahunList] = useState([]);
+    const [form, setForm] = useState({
+        kode_jurusan: "",
+        nama_jurusan: ""
+    });
+
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
-    const [form, setForm] = useState({
-        kode_kelas: "",
-        nama_kelas: "",
-        id_jurusan: "",
-        id_tahun_ajaran: "",
-        wali_kelas_name: ""
-    });
-
-
-    const fetchKelas = async () => {
+    // ================= FETCH DATA =================
+    const fetchJurusan = async () => {
         try {
-            const res = await fetch("http://localhost:8000/api/kelas");
+            const res = await fetch("http://localhost:8000/api/jurusan");
             const data = await res.json();
-            setKelas(data.data);
+            setJurusan(data.data);
         } catch (err) {
             console.error(err);
         }
     };
 
     useEffect(() => {
-        fetchKelas();
+        fetchJurusan();
     }, []);
 
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    };
-
+    // ================= TAMBAH =================
     const openTambah = () => {
+        setForm({
+            kode_jurusan: "",
+            nama_jurusan: ""
+        });
         setIsEdit(false);
-        setSelectedId(null);
-        setForm({
-            kode_kelas: "",
-            nama_kelas: "",
-            id_jurusan: "",
-            id_tahun_ajaran: "",
-            wali_kelas_name: ""
-        });
         setShowModal(true);
     };
 
-    const handleEdit = (k) => {
-        setIsEdit(true);
-        setSelectedId(k.id);
-
-        setForm({
-            kode_kelas: k.kode_kelas,
-            nama_kelas: k.nama_kelas,
-            wali_kelas_name: k.wali_kelas || ""
-        });
-
-        setShowModal(true);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (!form.kode_kelas || !form.nama_kelas) {
-            Swal.fire("Warning", "Kode & Nama wajib!", "warning");
+    const handleSubmit = async () => {
+        if (!form.kode_jurusan || !form.nama_jurusan) {
+            Swal.fire("Error", "Field tidak boleh kosong!", "error");
             return;
         }
 
         try {
             const url = isEdit
-                ? `http://localhost:8000/api/kelas/${selectedId}`
-                : "http://localhost:8000/api/kelas";
+                ? `http://localhost:8000/api/jurusan/${selectedId}`
+                : "http://localhost:8000/api/jurusan";
 
             const method = isEdit ? "PUT" : "POST";
 
@@ -87,56 +56,60 @@ const DataKelas = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    kode_kelas: form.kode_kelas,
-                    nama_kelas: form.nama_kelas,
-                    id_jurusan: 1,
-                    id_tahun_ajaran: 1,
-                    wali_kelas_name: form.wali_kelas_name || "-"
-                })
+                body: JSON.stringify(form)
             });
 
-            const data = await res.json();
+            const result = await res.json();
 
             if (!res.ok) {
-                Swal.fire("Error", data.message, "error");
+                Swal.fire("Error", result.message, "error");
                 return;
             }
 
-            Swal.fire("Berhasil!", data.message, "success");
+            Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
             setIsEdit(false);
             setSelectedId(null);
 
-            fetchKelas();
+            fetchJurusan();
 
         } catch (err) {
-            Swal.fire("Error", "Gagal proses data", "error");
+            console.error(err);
         }
     };
-
+    // ================= DELETE =================
     const handleDelete = (id, nama) => {
         Swal.fire({
-            title: `Hapus ${nama}?`,
-            text: "Data tidak bisa dikembalikan!",
+            title: "Yakin hapus?",
+            text: `Jurusan ${nama} akan dihapus`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Ya, hapus!",
+            confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await fetch(`http://localhost:8000/api/kelas/${id}`, {
-                    method: "DELETE",
+                const res = await fetch(`http://localhost:8000/api/jurusan/${id}`, {
+                    method: "DELETE"
                 });
-                Swal.fire("Berhasil!", "Data dihapus", "success");
-                fetchKelas();
+
+                const data = await res.json();
+
+                Swal.fire("Sukses", data.message, "success");
+                fetchJurusan();
             }
         });
     };
 
-    const filtered = kelas.filter((k) =>
-        k.nama_kelas.toLowerCase().includes(search.toLowerCase())
-    );
+    const handleEdit = (data) => {
+        setForm({
+            kode_jurusan: data.kode_jurusan,
+            nama_jurusan: data.nama_jurusan
+        });
+
+        setSelectedId(data.id);
+        setIsEdit(true);
+        setShowModal(true);
+    };
 
     return (
         <div className="flex">
@@ -145,8 +118,8 @@ const DataKelas = () => {
             <div className="flex-1 p-6 bg-gray-100 min-h-screen pt-20">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
-                        <i className="ri-school-fill"></i>
-                        Data Kelas
+                        <i className="ri-building-4-fill"></i>
+                        Data Jurusan
                     </h1>
 
                     <button
@@ -157,53 +130,42 @@ const DataKelas = () => {
                     </button>
                 </div>
 
-                {/* tambahdatakelas */}
                 {showModal && (
                     <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
                         <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">
-                                    {isEdit ? "✏️ Edit Kelas" : "+ Tambah Kelas"}
+                                    {isEdit ? "✏️ Edit Jurusan" : "+ Tambah Jurusan"}
                                 </h2>
                                 <button
-                                    onClick={() => {
-                                        setShowModal(false);
-                                        setIsEdit(false);
-                                        setSelectedId(null);
-                                    }}
+                                    onClick={() => setShowModal(false)}
                                     className="text-white text-xl"
                                 >
                                     ✕
                                 </button>
                             </div>
 
+                            {/* Tambah data jurusan */}
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    name="kode_kelas"
-                                    placeholder="Kode Kelas"
-                                    value={form.kode_kelas}
-                                    onChange={handleChange}
-                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="Kode Jurusan"
+                                    value={form.kode_jurusan}
+                                    onChange={(e) =>
+                                        setForm({ ...form, kode_jurusan: e.target.value })
+                                    }
+                                    className="w-full border p-2 rounded"
                                 />
 
                                 <input
                                     type="text"
-                                    name="nama_kelas"
-                                    placeholder="Nama Kelas"
-                                    value={form.nama_kelas}
-                                    onChange={handleChange}
-                                    className="w-full border px-3 py-2 rounded"
-                                />
-
-                                <input
-                                    type="text"
-                                    name="wali_kelas_name"
-                                    placeholder="Wali Kelas"
-                                    value={form.wali_kelas_name}
-                                    onChange={handleChange}
-                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="Nama Jurusan"
+                                    value={form.nama_jurusan}
+                                    onChange={(e) =>
+                                        setForm({ ...form, nama_jurusan: e.target.value })
+                                    }
+                                    className="w-full border p-2 rounded"
                                 />
                             </div>
 
@@ -225,7 +187,6 @@ const DataKelas = () => {
                         </div>
                     </div>
                 )}
-
                 {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
                     <div className="overflow-x-auto">
@@ -233,28 +194,27 @@ const DataKelas = () => {
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
-                                    <th className="p-2">Kode Kelas</th>
-                                    <th className="p-2">Nama Kelas</th>
+                                    <th className="p-2">Kode Jurusan</th>
+                                    <th className="p-2">Nama Jurusan</th>
                                     <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {filtered.map((k, index) => (
-                                    <tr key={k.id} className="border-t text-center hover:bg-gray-50">
-                                        <td className="p-2">{index + 1}</td>
-                                        <td className="p-2">{k.kode_kelas}</td>
-                                        <td className="p-2">{k.nama_kelas}</td>
+                                {jurusan.map((j, i) => (
+                                    <tr key={j.id} className="text-center border-t">
+                                        <td className="p-2">{i + 1}</td>
+                                        <td className="p-2">{j.kode_jurusan}</td>
+                                        <td className="p-2">{j.nama_jurusan}</td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
-                                                onClick={() => handleEdit(k)}
+                                                onClick={() => handleEdit(j)}
                                                 className="p-2 bg-sky-100 text-sky-600 hover:bg-sky-200 rounded-md transition"                                            >
                                                 <i className="ri-edit-2-line"></i>
                                             </button>
 
                                             <button
-                                                onClick={() => handleDelete(k.id, k.nama_kelas)}
-                                                className="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md transition"
-                                            >
+                                                onClick={() => handleDelete(j.id, j.nama_jurusan)}
+                                                className="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md transition"                                            >
                                                 <i className="ri-delete-bin-6-line"></i>
                                             </button>
                                         </td>
@@ -270,4 +230,4 @@ const DataKelas = () => {
     );
 };
 
-export default DataKelas;
+export default DataJurusan;
