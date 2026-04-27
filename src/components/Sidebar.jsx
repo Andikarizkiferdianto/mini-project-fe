@@ -31,9 +31,11 @@ function Sidebar() {
             label: "Kesiswaan",
             children: [
                 { path: "/manajemen-siswa/data-siswa", label: "Data Siswa" },
-                { path: "/manajemen-siswa/data-kelas", label: "Data Kelas" },
                 { path: "/manajemen-siswa/kenaikan-kelas", label: "Kenaikan Kelas" },
+                { path: "/manajemen-siswa/data-kelas", label: "Data Kelas" },
                 { path: "/manajemen-siswa/data-jurusan", label: "Data Jurusan" },
+                { path: "/manajemen-siswa/tahun-ajaran", label: "Tahun Ajaran" },
+                { path: "/manajemen-siswa/wali-kelas", label: "Wali Kelas" },
             ],
         },
         {
@@ -47,14 +49,19 @@ function Sidebar() {
             icon: "ri-file-text-fill",
             label: "E-Raport",
             children: [
-                { path: "/raport", label: "Data Raport" },
+                { path: "/manajemen-siswa/data-raport", label: "Data Raport" },
+                { path: "/manajemen-siswa/aspek-penilaian", label: "Aspek Penilaian" },
+                { path: "/manajemen-siswa/semester", label: "Semester" },
+                { path: "/manajemen-siswa/jenis-semester", label: "Jenis Semester" },
             ],
         },
         {
             icon: "ri-user-follow-fill",
             label: "Absensi",
             children: [
-                { path: "/absensi", label: "Absensi Harian" },
+                { path: "/manajemen-siswa/absensi-harian", label: "Absensi Harian" },
+                { path: "/manajemen-siswa/rekap-absensi", label: "Rekap Absensi" },
+                { path: "/manajemen-siswa/absensi-mapel", label: "Absensi Mapel" },
             ],
         },
     ];
