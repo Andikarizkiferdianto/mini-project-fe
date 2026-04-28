@@ -10,19 +10,11 @@ function Sidebar() {
     const location = useLocation();
 
     const handleLogout = (e) => {
-        e.preventDefault();
-        Swal.fire({
-            title: "Berhasil Kembali",
-            icon: "success",
-            timer: 1200,
-            showConfirmButton: false,
-        });
-
-        setTimeout(() => nav("/dashboard-admin"), 1200);
+        setTimeout(() => nav("/dashboard-admin"), 100);
     };
 
     const menuItems = [
-        { path: "/manajemen-siswa=dashboard", icon: "ri-home-9-fill", label: "Dashboard" },
+        { path: "/manajemen-siswa/dashboard", icon: "ri-home-9-fill", label: "Dashboard" },
 
         { isSection: true, label: "MENU" },
 
@@ -177,7 +169,7 @@ function Sidebar() {
                 <div className="p-3 border-t border-indigo-700">
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r from-red-500 to-red-600 hover:opacity-90 font-bold transition"
+                        className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r hover:bg-violet-600 font-bold transition"
                     >
                         <i className="ri-arrow-left-line"></i>
                         Kembali

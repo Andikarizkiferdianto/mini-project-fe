@@ -2,20 +2,24 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Sidebar from "../components/Sidebar";
 
+
+const API = "http://localhost:8000/api/tahun-ajaran"; 
+
+
 const TahunAjaran = () => {
     const [TahunAjaran, setTahunAjaran] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        tahun_ajaran: "",
-        tahun: ""
+        tahun: "",
+        nama: "",
+        is_active: false
     });
-
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
         try {
-            const res = await fetch("");
+            const res = await fetch(API);
             const data = await res.json();
             setTahunAjaran(data.data);
         } catch (err) {
@@ -29,23 +33,31 @@ const TahunAjaran = () => {
 
     const openTambah = () => {
         setForm({
-            tahun_ajaran: "",
-            tahun: ""
+            nama: "",
+            tahun: "",
+            is_active: false
+        });
+        console.log("KIRIM:", {
+            nama: form.nama,
+            tahun: form.tahun,
+            is_active: form.is_active
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.tahun_ajaran || !form.tahun) {
+        if (!form.tahun?.trim() || !form.nama?.trim()) {
             Swal.fire("Error", "Semua field wajib diisi!", "error");
             return;
         }
 
         try {
+            const API = "http://localhost:8000/api/tahun-ajaran";
+
             const url = isEdit
-                ? ``
-                : "";
+                ? `${API}/${selectedId}`
+                : API;
 
             const method = isEdit ? "PUT" : "POST";
 
@@ -54,20 +66,32 @@ const TahunAjaran = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify({
+                    nama: form.nama?.trim(),
+                    tahun: form.tahun.toString(),
+                    is_active: form.is_active ?? false
+                })
             });
-
-            const result = await res.json();
+            let result = {};
+            try {
+                result = await res.json();
+            } catch {
+                result = { message: "Server tidak kirim response" };
+            }
 
             if (!res.ok) {
-                Swal.fire("Error", result.message, "error");
+                Swal.fire("Error", result.message || "Gagal", "error");
                 return;
             }
 
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
-            setForm({ tahun_ajaran: "", tahun: "" });
+            setForm({
+                nama: "",
+                tahun: "",
+                is_active: false
+            });
             setIsEdit(false);
             setSelectedId(null);
 
@@ -87,7 +111,7 @@ const TahunAjaran = () => {
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(``, {
+                const res = await fetch(`${API}/${id}`, {
                     method: "DELETE"
                 });
 
@@ -97,16 +121,34 @@ const TahunAjaran = () => {
             }
         });
     };
+
     const handleEdit = (data) => {
         setForm({
-            tahun_ajaran: data.tahun_ajaran,
-            tahun: data.tahun
+            nama: data.nama,
+            tahun: data.tahun,
+            is_active: data.is_active
         });
 
         setSelectedId(data.id);
         setIsEdit(true);
         setShowModal(true);
     };
+
+
+    const handleToggle = async (id, currentStatus) => {
+        await fetch(`${API}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                is_active: !currentStatus
+            })
+        });
+
+        fetchData();
+    };
+
     return (
         <div className="flex">
             <Sidebar />
@@ -147,14 +189,14 @@ const TahunAjaran = () => {
                                 <input
                                     type="text"
                                     placeholder="2024/2025"
-                                    value={form.tahun_ajaran}
-                                    onChange={(e) => setForm({ ...form, tahun_ajaran: e.target.value })}
+                                    value={form.nama}
+                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
 
                                 <input
                                     type="number"
-                                    placeholder=""
+                                    placeholder="2024"
                                     value={form.tahun}
                                     onChange={(e) => setForm({ ...form, tahun: e.target.value })}
                                     className="w-full border p-2 rounded"
@@ -198,14 +240,21 @@ const TahunAjaran = () => {
                                 {TahunAjaran.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
                                         <td className="p-2">{i + 1}</td>
-                                        <td>{w.tahun_ajaran}</td>
+                                        <td>{w.nama}</td>
                                         <td>{w.tahun}</td>
                                         <td>
-                                            <input
-                                                type="checkbox"
-                                                checked={w.status === "aktif"}
-                                                readOnly
-                                            />
+                                            <label className="inline-flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={w.is_active}
+                                                    onChange={() => handleToggle(w.id, w.is_active)}
+                                                    className="sr-only peer"
+                                                />
+                                                <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 relative transition-all duration-300">
+                                                    <div className="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5">
+                                                    </div>
+                                                </div>
+                                            </label>
                                         </td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
