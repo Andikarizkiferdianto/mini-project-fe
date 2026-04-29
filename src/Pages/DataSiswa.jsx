@@ -153,12 +153,16 @@ const DataSiswa = () => {
                                         <td className="p-3">{s.kelas}</td>
                                         <td className="p-3">
                                             <span
-                                                className={`px-3 py-1 rounded-full text-white text-xs font-semibold ${s.status_aktif
+                                                className={`px-3 py-1 rounded-full text-white text-xs font-semibold ${s.status_aktif === "Aktif"
                                                     ? "bg-green-500"
-                                                    : "bg-red-500"
+                                                    : s.status_aktif === "Nonaktif"
+                                                        ? "bg-red-500"
+                                                        : s.status_aktif === "Alumni"
+                                                            ? "bg-gray-500"
+                                                            : "bg-yellow-500"
                                                     }`}
                                             >
-                                                {s.status_aktif ? "Aktif" : "Nonaktif"}
+                                                {s.status_aktif}
                                             </span>
                                         </td>
                                         <td className="p-3">

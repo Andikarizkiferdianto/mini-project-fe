@@ -169,6 +169,19 @@ const EditDataSiswa = () => {
                             <input name="sekolah_asal" value={form.sekolah_asal} onChange={handleChange} placeholder="Sekolah Asal" className="border p-2 rounded" />
                             <input name="no_hp" value={form.no_hp} onChange={handleChange} placeholder="No HP / WA" className="border p-2 rounded" />
 
+                            <select
+                                name="status_aktif"
+                                value={form.status_aktif || ""}
+                                onChange={handleChange}
+                                className="border p-2 rounded"
+                            >
+                                <option value="">Pilih Status</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Nonaktif">Nonaktif</option>
+                                <option value="Alumni">Alumni</option>
+                                <option value="Pindah">Pindah</option>
+                            </select>
+
                         </div>
 
                         <h2 className="font-semibold mt-6 mb-3 text-gray-700">Data Orang Tua</h2>

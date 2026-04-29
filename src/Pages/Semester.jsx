@@ -3,11 +3,14 @@ import Swal from "sweetalert2";
 import Sidebar from "../components/Sidebar";
 
 const Semester = () => {
+    const [tahunAjaranList, setTahunAjaranList] = useState([]);
+    const [jenisSemesterList, setJenisSemesterList] = useState([]);
     const [Semester, setSemester] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        tahun_ajaran: "",
-        tahun: ""
+        id_tahun_ajaran: "",
+        jenis_semester: "",
+        nama_semester: ""
     });
 
     const [isEdit, setIsEdit] = useState(false);
@@ -15,7 +18,7 @@ const Semester = () => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch("");
+            const res = await fetch("http://localhost:8000/api/semester");
             const data = await res.json();
             setSemester(data.data);
         } catch (err) {
@@ -25,27 +28,42 @@ const Semester = () => {
 
     useEffect(() => {
         fetchData();
+
+        fetch("http://localhost:8000/api/tahun-ajaran/active")
+            .then(res => res.json())
+            .then(data => {
+                // LANGSUNG set data, jangan di-filter lagi 
+                // karena backend sudah memfilter is_active = True
+                setTahunAjaranList(data.data || []);
+            })
+            .catch(err => console.error("Gagal load tahun ajaran:", err));
+
+        fetch("http://localhost:8000/api/jenis-semester")
+            .then(res => res.json())
+            .then(data => setJenisSemesterList(data.data || []));
+
     }, []);
 
     const openTambah = () => {
         setForm({
-            tahun_ajaran: "",
-            tahun: ""
+            id_tahun_ajaran: "",
+            jenis_semester: "",
+            nama_semester: ""
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.tahun_ajaran || !form.tahun) {
+        if (!form.id_tahun_ajaran || !form.jenis_semester || !form.nama_semester) {
             Swal.fire("Error", "Semua field wajib diisi!", "error");
             return;
         }
 
         try {
             const url = isEdit
-                ? ``
-                : "";
+                ? `http://localhost:8000/api/semester/${selectedId}`
+                : "http://localhost:8000/api/semester";
 
             const method = isEdit ? "PUT" : "POST";
 
@@ -59,18 +77,9 @@ const Semester = () => {
 
             const result = await res.json();
 
-            if (!res.ok) {
-                Swal.fire("Error", result.message, "error");
-                return;
-            }
-
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
-            setForm({ tahun_ajaran: "", tahun: "" });
-            setIsEdit(false);
-            setSelectedId(null);
-
             fetchData();
 
         } catch (err) {
@@ -78,29 +87,21 @@ const Semester = () => {
         }
     };
 
-    const handleDelete = (id, nama) => {
-        Swal.fire({
-            title: "Yakin hapus?",
-            text: `Data tahun ajaran akan dihapus`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Ya, hapus!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const res = await fetch(``, {
-                    method: "DELETE"
-                });
-
-                const data = await res.json();
-                Swal.fire("Sukses", data.message, "success");
-                fetchData();
-            }
+    const handleDelete = async (id) => {
+        const res = await fetch(`http://localhost:8000/api/semester/${id}`, {
+            method: "DELETE"
         });
+
+        const data = await res.json();
+        Swal.fire("Sukses", data.message, "success");
+        fetchData();
     };
+
     const handleEdit = (data) => {
         setForm({
-            tahun_ajaran: data.tahun_ajaran,
-            tahun: data.tahun
+            id_tahun_ajaran: data.id_tahun_ajaran || "",
+            jenis_semester: data.jenis_semester || "",
+            nama_semester: data.nama_semester || ""
         });
 
         setSelectedId(data.id);
@@ -115,7 +116,7 @@ const Semester = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                       Daftar Semester
+                        Daftar Semester
                     </h1>
 
                     <button
@@ -143,27 +144,39 @@ const Semester = () => {
                                 </button>
                             </div>
 
+                            {/* tambah data */}
                             <div className="p-5 space-y-4">
-                                <input
-                                    type="text"
-                                    placeholder=" "
-                                    value={form.semester}
-                                    onChange={(e) => setForm({ ...form, semester: e.target.value })}
+                                <select
+                                    value={form.id_tahun_ajaran || ""}
+                                    onChange={(e) => setForm({ ...form, id_tahun_ajaran: e.target.value })}
                                     className="w-full border p-2 rounded"
-                                />
+                                >
+                                    <option value="">-- Pilih Tahun Ajaran --</option>
+                                    {tahunAjaranList.map((ta) => (
+                                        <option key={ta.id} value={ta.id}>
+                                            {/* Tampilkan ta.nama saja karena isinya sudah mencakup tahun (misal: 2024/2025) */}
+                                            {ta.nama}
+                                        </option>
+                                    ))}
+                                </select>
 
-                                <input
-                                    type="text"
-                                    placeholder=""
-                                    value={form.keterangan}
-                                    onChange={(e) => setForm({ ...form, keterangan: e.target.value })}
+                                <select
+                                    value={form.jenis_semester || ""}
+                                    onChange={(e) => setForm({ ...form, jenis_semester: e.target.value })}
                                     className="w-full border p-2 rounded"
-                                />
+                                >
+                                    <option value="">-- Pilih Jenis Semester --</option>
+                                    {jenisSemesterList.map((js) => (
+                                        <option key={js.id} value={js.nama}>
+                                            {js.nama}
+                                        </option>
+                                    ))}
+                                </select>
                                 <input
                                     type="text"
-                                    placeholder=""
-                                    value={form.keterangan}
-                                    onChange={(e) => setForm({ ...form, keterangan: e.target.value })}
+                                    placeholder="Nama Semester (contoh: Semester 1)"
+                                    value={form.nama_semester || ""}
+                                    onChange={(e) => setForm({ ...form, nama_semester: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -204,10 +217,10 @@ const Semester = () => {
                             <tbody>
                                 {Semester.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{i + 1}</td>
+                                        <td>{w.tahun_ajaran}</td>
+                                        <td>{w.jenis_semester}</td>
+                                        <td>{w.nama_semester}</td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
                                                 onClick={() => handleEdit(w)}
