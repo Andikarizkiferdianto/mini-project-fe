@@ -6,16 +6,14 @@ const JenisSemester = () => {
     const [JenisSemester, setJenisSemester] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        tahun_ajaran: "",
-        tahun: ""
+        nama: ""
     });
-
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
         try {
-            const res = await fetch("");
+            const res = await fetch("http://localhost:8000/api/jenis-semester");
             const data = await res.json();
             setJenisSemester(data.data);
         } catch (err) {
@@ -37,15 +35,15 @@ const JenisSemester = () => {
     };
 
     const handleSubmit = async () => {
-        if (!form.tahun_ajaran || !form.tahun) {
-            Swal.fire("Error", "Semua field wajib diisi!", "error");
+        if (!form.nama) {
+            Swal.fire("Error", "Nama semester wajib diisi!", "error");
             return;
         }
 
         try {
             const url = isEdit
-                ? ``
-                : "";
+                ? `http://localhost:8000/api/jenis-semester/${selectedId}`
+                : "http://localhost:8000/api/jenis-semester";
 
             const method = isEdit ? "PUT" : "POST";
 
@@ -60,14 +58,14 @@ const JenisSemester = () => {
             const result = await res.json();
 
             if (!res.ok) {
-                Swal.fire("Error", result.message, "error");
+                Swal.fire("Error", result.message || result.error, "error");
                 return;
             }
 
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
-            setForm({ tahun_ajaran: "", tahun: "" });
+            setForm({ nama: "" });
             setIsEdit(false);
             setSelectedId(null);
 
@@ -77,17 +75,16 @@ const JenisSemester = () => {
             console.error(err);
         }
     };
-
-    const handleDelete = (id, nama) => {
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Yakin hapus?",
-            text: `Data tahun ajaran akan dihapus`,
+            text: "Data jenis semester akan dihapus",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(``, {
+                const res = await fetch(`http://localhost:8000/api/jenis-semester/${id}`, {
                     method: "DELETE"
                 });
 
@@ -97,16 +94,17 @@ const JenisSemester = () => {
             }
         });
     };
+
     const handleEdit = (data) => {
         setForm({
-            tahun_ajaran: data.tahun_ajaran,
-            tahun: data.tahun
+            nama: data.nama
         });
 
         setSelectedId(data.id);
         setIsEdit(true);
         setShowModal(true);
     };
+
     return (
         <div className="flex">
             <Sidebar />
@@ -115,7 +113,7 @@ const JenisSemester = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                     Daftar Jenis Semester
+                        Daftar Jenis Semester
                     </h1>
 
                     <button
@@ -146,9 +144,9 @@ const JenisSemester = () => {
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    placeholder=" "
-                                    value={form.nama_aspek}
-                                    onChange={(e) => setForm({ ...form, nama_aspek: e.target.value })}
+                                    placeholder="Nama Semester"
+                                    value={form.nama}
+                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -187,8 +185,8 @@ const JenisSemester = () => {
                             <tbody>
                                 {JenisSemester.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
-                                        <td></td>
-                                        <td></td>
+                                        <td>{i + 1}</td>
+                                        <td>{w.nama}</td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
                                                 onClick={() => handleEdit(w)}

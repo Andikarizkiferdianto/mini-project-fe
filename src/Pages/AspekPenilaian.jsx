@@ -6,16 +6,15 @@ const AspekPenilaian = () => {
     const [AspekPenilaian, setAspekPenilaian] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        tahun_ajaran: "",
-        tahun: ""
+        nama_aspek: "",
+        keterangan: ""
     });
-
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
         try {
-            const res = await fetch("");
+            const res = await fetch("http://localhost:8000/api/aspek-penilaian");
             const data = await res.json();
             setAspekPenilaian(data.data);
         } catch (err) {
@@ -29,65 +28,65 @@ const AspekPenilaian = () => {
 
     const openTambah = () => {
         setForm({
-            tahun_ajaran: "",
-            tahun: ""
+            nama_aspek: "",
+            keterangan: ""
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
-    const handleSubmit = async () => {
-        if (!form.tahun_ajaran || !form.tahun) {
-            Swal.fire("Error", "Semua field wajib diisi!", "error");
+const handleSubmit = async () => {
+    if (!form.nama_aspek) {
+        Swal.fire("Error", "Nama aspek wajib diisi!", "error");
+        return;
+    }
+
+    try {
+        const url = isEdit
+            ? `http://localhost:8000/api/aspek-penilaian/${selectedId}`
+            : "http://localhost:8000/api/aspek-penilaian";
+
+        const method = isEdit ? "PUT" : "POST";
+
+        const res = await fetch(url, {
+            method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            Swal.fire("Error", result.message, "error");
             return;
         }
 
-        try {
-            const url = isEdit
-                ? ``
-                : "";
+        Swal.fire("Sukses", result.message, "success");
 
-            const method = isEdit ? "PUT" : "POST";
+        setShowModal(false);
+        setForm({ nama_aspek: "", keterangan: "" });
+        setIsEdit(false);
+        setSelectedId(null);
 
-            const res = await fetch(url, {
-                method,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(form)
-            });
+        fetchData();
 
-            const result = await res.json();
+    } catch (err) {
+        console.error(err);
+    }
+};
 
-            if (!res.ok) {
-                Swal.fire("Error", result.message, "error");
-                return;
-            }
-
-            Swal.fire("Sukses", result.message, "success");
-
-            setShowModal(false);
-            setForm({ tahun_ajaran: "", tahun: "" });
-            setIsEdit(false);
-            setSelectedId(null);
-
-            fetchData();
-
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    const handleDelete = (id, nama) => {
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Yakin hapus?",
-            text: `Data tahun ajaran akan dihapus`,
+            text: "Data aspek akan dihapus",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(``, {
+                const res = await fetch(`http://localhost:8000/api/aspek-penilaian/${id}`, {
                     method: "DELETE"
                 });
 
@@ -97,16 +96,18 @@ const AspekPenilaian = () => {
             }
         });
     };
-    const handleEdit = (data) => {
-        setForm({
-            tahun_ajaran: data.tahun_ajaran,
-            tahun: data.tahun
-        });
 
-        setSelectedId(data.id);
-        setIsEdit(true);
-        setShowModal(true);
-    };
+   const handleEdit = (data) => {
+    setForm({
+        nama_aspek: data.nama_aspek || "",
+        keterangan: data.keterangan || ""
+    });
+
+    setSelectedId(data.id);
+    setIsEdit(true);
+    setShowModal(true);
+};
+
     return (
         <div className="flex">
             <Sidebar />
@@ -115,7 +116,7 @@ const AspekPenilaian = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                       Daftar Aspek Penilaian
+                        Daftar Aspek Penilaian
                     </h1>
 
                     <button
@@ -146,7 +147,7 @@ const AspekPenilaian = () => {
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    placeholder=" "
+                                    placeholder="Nama Aspek"
                                     value={form.nama_aspek}
                                     onChange={(e) => setForm({ ...form, nama_aspek: e.target.value })}
                                     className="w-full border p-2 rounded"
@@ -154,7 +155,7 @@ const AspekPenilaian = () => {
 
                                 <input
                                     type="text"
-                                    placeholder=""
+                                    placeholder="Keterangan"
                                     value={form.keterangan}
                                     onChange={(e) => setForm({ ...form, keterangan: e.target.value })}
                                     className="w-full border p-2 rounded"
@@ -189,30 +190,32 @@ const AspekPenilaian = () => {
                                     <th className="p-2">No</th>
                                     <th className="p-2">Nama Aspek</th>
                                     <th className="p-2">Keterangan</th>
-                                     <th className="p-2">Aksi</th>
+                                    <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 {AspekPenilaian.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{i + 1}</td>
+                                        <td>{w.nama_aspek}</td>
+                                        <td>{w.keterangan}</td>
                                         <td className="p-2 flex justify-center gap-2">
+
                                             <button
                                                 onClick={() => handleEdit(w)}
                                                 className="p-2 bg-sky-100 text-sky-600 rounded"
                                             >
-                                                <i className="ri-edit-2-line"></i>
+                                                ✏️
                                             </button>
 
                                             <button
                                                 onClick={() => handleDelete(w.id)}
                                                 className="p-2 bg-red-100 text-red-600 rounded"
                                             >
-                                                <i className="ri-delete-bin-6-line"></i>
+                                                🗑️
                                             </button>
+
                                         </td>
                                     </tr>
                                 ))}
