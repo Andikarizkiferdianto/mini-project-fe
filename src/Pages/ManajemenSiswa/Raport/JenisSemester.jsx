@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
-
-const AspekPenilaian = () => {
-    const [AspekPenilaian, setAspekPenilaian] = useState([]);
+import Sidebar from "../../../components/Sidebar";
+const JenisSemester = () => {
+    const [JenisSemester, setJenisSemester] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        nama_aspek: "",
-        keterangan: ""
+        nama: ""
     });
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
         try {
-            const res = await fetch("http://localhost:8000/api/aspek-penilaian");
+            const res = await fetch("http://localhost:8000/api/jenis-semester");
             const data = await res.json();
-            setAspekPenilaian(data.data);
+            setJenisSemester(data.data);
         } catch (err) {
             console.error(err);
         }
@@ -28,65 +26,64 @@ const AspekPenilaian = () => {
 
     const openTambah = () => {
         setForm({
-            nama_aspek: "",
-            keterangan: ""
+            tahun_ajaran: "",
+            tahun: ""
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
-const handleSubmit = async () => {
-    if (!form.nama_aspek) {
-        Swal.fire("Error", "Nama aspek wajib diisi!", "error");
-        return;
-    }
-
-    try {
-        const url = isEdit
-            ? `http://localhost:8000/api/aspek-penilaian/${selectedId}`
-            : "http://localhost:8000/api/aspek-penilaian";
-
-        const method = isEdit ? "PUT" : "POST";
-
-        const res = await fetch(url, {
-            method,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(form)
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) {
-            Swal.fire("Error", result.message, "error");
+    const handleSubmit = async () => {
+        if (!form.nama) {
+            Swal.fire("Error", "Nama semester wajib diisi!", "error");
             return;
         }
 
-        Swal.fire("Sukses", result.message, "success");
+        try {
+            const url = isEdit
+                ? `http://localhost:8000/api/jenis-semester/${selectedId}`
+                : "http://localhost:8000/api/jenis-semester";
 
-        setShowModal(false);
-        setForm({ nama_aspek: "", keterangan: "" });
-        setIsEdit(false);
-        setSelectedId(null);
+            const method = isEdit ? "PUT" : "POST";
 
-        fetchData();
+            const res = await fetch(url, {
+                method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(form)
+            });
 
-    } catch (err) {
-        console.error(err);
-    }
-};
+            const result = await res.json();
 
+            if (!res.ok) {
+                Swal.fire("Error", result.message || result.error, "error");
+                return;
+            }
+
+            Swal.fire("Sukses", result.message, "success");
+
+            setShowModal(false);
+            setForm({ nama: "" });
+            setIsEdit(false);
+            setSelectedId(null);
+
+            fetchData();
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
     const handleDelete = (id) => {
         Swal.fire({
             title: "Yakin hapus?",
-            text: "Data aspek akan dihapus",
+            text: "Data jenis semester akan dihapus",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(`http://localhost:8000/api/aspek-penilaian/${id}`, {
+                const res = await fetch(`http://localhost:8000/api/jenis-semester/${id}`, {
                     method: "DELETE"
                 });
 
@@ -97,16 +94,15 @@ const handleSubmit = async () => {
         });
     };
 
-   const handleEdit = (data) => {
-    setForm({
-        nama_aspek: data.nama_aspek || "",
-        keterangan: data.keterangan || ""
-    });
+    const handleEdit = (data) => {
+        setForm({
+            nama: data.nama
+        });
 
-    setSelectedId(data.id);
-    setIsEdit(true);
-    setShowModal(true);
-};
+        setSelectedId(data.id);
+        setIsEdit(true);
+        setShowModal(true);
+    };
 
     return (
         <div className="flex">
@@ -116,7 +112,7 @@ const handleSubmit = async () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Daftar Aspek Penilaian
+                        Daftar Jenis Semester
                     </h1>
 
                     <button
@@ -134,7 +130,7 @@ const handleSubmit = async () => {
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">
-                                    {isEdit ? "✏️ Edit Aspek" : "+ Tambah Aspek"}
+                                    {isEdit ? "✏️ Edit Jenis Semester" : "+ Tambah Jenis Semester"}
                                 </h2>
                                 <button
                                     onClick={() => setShowModal(false)}
@@ -147,17 +143,9 @@ const handleSubmit = async () => {
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    placeholder="Nama Aspek"
-                                    value={form.nama_aspek}
-                                    onChange={(e) => setForm({ ...form, nama_aspek: e.target.value })}
-                                    className="w-full border p-2 rounded"
-                                />
-
-                                <input
-                                    type="text"
-                                    placeholder="Keterangan"
-                                    value={form.keterangan}
-                                    onChange={(e) => setForm({ ...form, keterangan: e.target.value })}
+                                    placeholder="Nama Semester"
+                                    value={form.nama}
+                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -188,34 +176,30 @@ const handleSubmit = async () => {
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
-                                    <th className="p-2">Nama Aspek</th>
-                                    <th className="p-2">Keterangan</th>
+                                    <th className="p-2">Nama Semester</th>
                                     <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {AspekPenilaian.map((w, i) => (
+                                {JenisSemester.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
                                         <td>{i + 1}</td>
-                                        <td>{w.nama_aspek}</td>
-                                        <td>{w.keterangan}</td>
+                                        <td>{w.nama}</td>
                                         <td className="p-2 flex justify-center gap-2">
-
                                             <button
                                                 onClick={() => handleEdit(w)}
                                                 className="p-2 bg-sky-100 text-sky-600 rounded"
                                             >
-                                                ✏️
+                                                <i className="ri-edit-2-line"></i>
                                             </button>
 
                                             <button
                                                 onClick={() => handleDelete(w.id)}
                                                 className="p-2 bg-red-100 text-red-600 rounded"
                                             >
-                                                🗑️
+                                                <i className="ri-delete-bin-6-line"></i>
                                             </button>
-
                                         </td>
                                     </tr>
                                 ))}
@@ -229,4 +213,4 @@ const handleSubmit = async () => {
     );
 };
 
-export default AspekPenilaian;
+export default JenisSemester;

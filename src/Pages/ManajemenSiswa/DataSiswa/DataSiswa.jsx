@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import Swal from "sweetalert2";
 import DetailSiswa from "./DetailSiswa";
 

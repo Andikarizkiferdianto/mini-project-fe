@@ -1,114 +1,151 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
-const DataJurusan = () => {
-    const [jurusan, setJurusan] = useState([]);
+const API = "http://localhost:8000/api/tahun-ajaran"; 
+
+
+const TahunAjaran = () => {
+    const [TahunAjaran, setTahunAjaran] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        kode_jurusan: "",
-        nama_jurusan: ""
+        tahun: "",
+        nama: "",
+        is_active: false
     });
-
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
-    // ================= FETCH DATA =================
-    const fetchJurusan = async () => {
+    const fetchData = async () => {
         try {
-            const res = await fetch("http://localhost:8000/api/jurusan");
+            const res = await fetch(API);
             const data = await res.json();
-            setJurusan(data.data);
+            setTahunAjaran(data.data);
         } catch (err) {
             console.error(err);
         }
     };
 
     useEffect(() => {
-        fetchJurusan();
+        fetchData();
     }, []);
 
-    // ================= TAMBAH =================
     const openTambah = () => {
         setForm({
-            kode_jurusan: "",
-            nama_jurusan: ""
+            nama: "",
+            tahun: "",
+            is_active: false
+        });
+        console.log("KIRIM:", {
+            nama: form.nama,
+            tahun: form.tahun,
+            is_active: form.is_active
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.kode_jurusan || !form.nama_jurusan) {
-            Swal.fire("Error", "Field tidak boleh kosong!", "error");
+        if (!form.tahun?.trim() || !form.nama?.trim()) {
+            Swal.fire("Error", "Semua field wajib diisi!", "error");
             return;
         }
 
         try {
+            const API = "http://localhost:8000/api/tahun-ajaran";
+
             const url = isEdit
-                ? `http://localhost:8000/api/jurusan/${selectedId}`
-                : "http://localhost:8000/api/jurusan";
+                ? `${API}/${selectedId}`
+                : API;
 
             const method = isEdit ? "PUT" : "POST";
 
             const res = await fetch(url, {
-                method: method,
+                method,
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify({
+                    nama: form.nama?.trim(),
+                    tahun: form.tahun.toString(),
+                    is_active: form.is_active ?? false
+                })
             });
-
-            const result = await res.json();
+            let result = {};
+            try {
+                result = await res.json();
+            } catch {
+                result = { message: "Server tidak kirim response" };
+            }
 
             if (!res.ok) {
-                Swal.fire("Error", result.message, "error");
+                Swal.fire("Error", result.message || "Gagal", "error");
                 return;
             }
 
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
+            setForm({
+                nama: "",
+                tahun: "",
+                is_active: false
+            });
             setIsEdit(false);
             setSelectedId(null);
 
-            fetchJurusan();
+            fetchData();
 
         } catch (err) {
             console.error(err);
         }
     };
-    // ================= DELETE =================
+
     const handleDelete = (id, nama) => {
         Swal.fire({
             title: "Yakin hapus?",
-            text: `Jurusan ${nama} akan dihapus`,
+            text: `Data tahun ajaran akan dihapus`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(`http://localhost:8000/api/jurusan/${id}`, {
+                const res = await fetch(`${API}/${id}`, {
                     method: "DELETE"
                 });
 
                 const data = await res.json();
-
                 Swal.fire("Sukses", data.message, "success");
-                fetchJurusan();
+                fetchData();
             }
         });
     };
 
     const handleEdit = (data) => {
         setForm({
-            kode_jurusan: data.kode_jurusan,
-            nama_jurusan: data.nama_jurusan
+            nama: data.nama,
+            tahun: data.tahun,
+            is_active: data.is_active
         });
 
         setSelectedId(data.id);
         setIsEdit(true);
         setShowModal(true);
+    };
+
+
+    const handleToggle = async (id, currentStatus) => {
+        await fetch(`${API}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                is_active: !currentStatus
+            })
+        });
+
+        fetchData();
     };
 
     return (
@@ -119,7 +156,7 @@ const DataJurusan = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Data Jurusan
+                        Tahun Ajaran
                     </h1>
 
                     <button
@@ -130,13 +167,14 @@ const DataJurusan = () => {
                     </button>
                 </div>
 
+                {/* tambah data tahun ajaran */}
                 {showModal && (
                     <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
                         <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">
-                                    {isEdit ? "✏️ Edit Jurusan" : "+ Tambah Jurusan"}
+                                    {isEdit ? "✏️ Edit Tahun Ajaran" : "+ Tambah Tahun Ajaran"}
                                 </h2>
                                 <button
                                     onClick={() => setShowModal(false)}
@@ -146,25 +184,20 @@ const DataJurusan = () => {
                                 </button>
                             </div>
 
-                            {/* Tambah data jurusan */}
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    placeholder="Kode Jurusan"
-                                    value={form.kode_jurusan}
-                                    onChange={(e) =>
-                                        setForm({ ...form, kode_jurusan: e.target.value })
-                                    }
+                                    placeholder="2024/2025"
+                                    value={form.nama}
+                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
 
                                 <input
-                                    type="text"
-                                    placeholder="Nama Jurusan"
-                                    value={form.nama_jurusan}
-                                    onChange={(e) =>
-                                        setForm({ ...form, nama_jurusan: e.target.value })
-                                    }
+                                    type="number"
+                                    placeholder="2024"
+                                    value={form.tahun}
+                                    onChange={(e) => setForm({ ...form, tahun: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -187,6 +220,7 @@ const DataJurusan = () => {
                         </div>
                     </div>
                 )}
+
                 {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
                     <div className="overflow-x-auto">
@@ -194,27 +228,45 @@ const DataJurusan = () => {
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
-                                    <th className="p-2">Kode Jurusan</th>
-                                    <th className="p-2">Nama Jurusan</th>
+                                    <th className="p-2">Tahun Ajaran</th>
+                                    <th className="p-2">Tahun</th>
+                                    <th className="p-2">Status</th>
                                     <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                {jurusan.map((j, i) => (
-                                    <tr key={j.id} className="text-center border-t">
+                                {TahunAjaran.map((w, i) => (
+                                    <tr key={w.id} className="text-center border-t">
                                         <td className="p-2">{i + 1}</td>
-                                        <td className="p-2">{j.kode_jurusan}</td>
-                                        <td className="p-2">{j.nama_jurusan}</td>
+                                        <td>{w.nama}</td>
+                                        <td>{w.tahun}</td>
+                                        <td>
+                                            <label className="inline-flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={w.is_active}
+                                                    onChange={() => handleToggle(w.id, w.is_active)}
+                                                    className="sr-only peer"
+                                                />
+                                                <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 relative transition-all duration-300">
+                                                    <div className="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5">
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
-                                                onClick={() => handleEdit(j)}
-                                                className="p-2 bg-sky-100 text-sky-600 hover:bg-sky-200 rounded-md transition"                                            >
+                                                onClick={() => handleEdit(w)}
+                                                className="p-2 bg-sky-100 text-sky-600 rounded"
+                                            >
                                                 <i className="ri-edit-2-line"></i>
                                             </button>
 
                                             <button
-                                                onClick={() => handleDelete(j.id, j.nama_jurusan)}
-                                                className="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md transition"                                            >
+                                                onClick={() => handleDelete(w.id)}
+                                                className="p-2 bg-red-100 text-red-600 rounded"
+                                            >
                                                 <i className="ri-delete-bin-6-line"></i>
                                             </button>
                                         </td>
@@ -230,4 +282,4 @@ const DataJurusan = () => {
     );
 };
 
-export default DataJurusan;
+export default TahunAjaran;

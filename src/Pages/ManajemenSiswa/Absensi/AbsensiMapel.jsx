@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
-const AbsensiHarian = () => {
-    const [AbsensiHarian, setAbsensiHarian] = useState([]);
+const AbsensiMapel = () => {
+    const [AbsensiMapel, setAbsensiMapel] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
         tahun_ajaran: "",
         tahun: ""
     });
-
     const [filter, setFilter] = useState({
         kelas: "",
         tanggal_awal: "",
         tanggal_akhir: ""
     });
-
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
@@ -23,7 +21,7 @@ const AbsensiHarian = () => {
         try {
             const res = await fetch("");
             const data = await res.json();
-            setAbsensiHarian(data.data);
+            setAbsensiMapel(data.data);
         } catch (err) {
             console.error(err);
         }
@@ -121,10 +119,11 @@ const AbsensiHarian = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Absensi Harian
+                        Absensi Mapel
                     </h1>
                 </div>
 
+                {/* filter */}
                 <div className="bg-white rounded-lg shadow p-4 mb-4">
                     <div className="flex items-center gap-2 mb-3 font-semibold text-gray-700">
                         <i className="ri-filter-3-line"></i>
@@ -135,7 +134,7 @@ const AbsensiHarian = () => {
 
                         {/* Kelas */}
                         <div>
-                            <label className="text-sm">Kelas</label>
+                            <label className="text-sm">Filter Kelas</label>
                             <select
                                 className="w-full border p-2 rounded mt-1"
                                 value={filter.kelas}
@@ -173,12 +172,7 @@ const AbsensiHarian = () => {
                             />
                         </div>
 
-                        {/* Button */}
                         <div className="flex items-end gap-2">
-                            <button className="bg-violet-500 text-white px-4 py-2 rounded">
-                                <i className="ri-filter-3-line"></i>
-                                Filter
-                            </button>
                             <button className="bg-gray-400 text-white px-4 py-2 rounded">
                                 Reset
                             </button>
@@ -189,26 +183,67 @@ const AbsensiHarian = () => {
 
                 {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
+                    <div>Statistik Total Sesi Mengajar per Siswa</div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
-                                    <th>Tanggal</th>
                                     <th className="p-2">NIS</th>
-                                    <th className="p-2">Nama</th>
-                                    <th className="p-2">Kelas</th>
-                                    <th className="p-2">Jam Masuk</th>
-                                    <th className="p-2">Status Masuk</th>
-                                    <th className="p-2">Jam Pulang</th>
-                                    <th className="p-2">Status Pulang</th>
-                                    <th className="p-2">Keterangan</th>
-                                    <th className="p-2">Aksi</th>
+                                    <th className="p-2">Nama Siswa</th>
+                                    <th className="p-2">Total Sesi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {AbsensiHarian.map((w, i) => (
+                                {AbsensiMapel.map((w, i) => (
+                                    <tr key={w.id} className="text-center border-t">
+                                        <td></td>
+                                        <td></td>
+                                        <td className="p-2 flex justify-center gap-2">
+                                            <button
+                                                onClick={() => handleEdit(w)}
+                                                className="p-2 bg-sky-100 text-sky-600 rounded"
+                                            >
+                                                <i className="ri-edit-2-line"></i>
+                                            </button>
+
+                                            <button
+                                                onClick={() => handleDelete(w.id)}
+                                                className="p-2 bg-red-100 text-red-600 rounded"
+                                            >
+                                                <i className="ri-delete-bin-6-line"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                {/* tabel */}
+                <div className="bg-white rounded-lg shadow p-4 mt-10">
+                    <div>Riwayat Kehadiran Mengajar Tahun Ajaran: 2024/2025</div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+                            <thead className="bg-violet-600 text-white text-center">
+                                <tr>
+                                    <th className="p-2">No</th>
+                                    <th className="p-2">Tanggal</th>
+                                    <th className="p-2">Jam ke-</th>
+                                    <th className="p-2">Mapel</th>
+                                    <th className="p-2">Guru</th>
+                                    <th className="p-2">Siswa</th>
+                                    <th className="p-2">Status</th>
+                                    <th className="p-2">Keterangan</th>
+                                    <th className="p-2">Waktu Absen</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {AbsensiMapel.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
                                         <td></td>
                                         <td></td>
@@ -239,4 +274,4 @@ const AbsensiHarian = () => {
     );
 };
 
-export default AbsensiHarian;
+export default AbsensiMapel;
