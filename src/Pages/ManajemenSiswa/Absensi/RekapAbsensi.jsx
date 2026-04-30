@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
-const AbsensiMapel = () => {
-    const [AbsensiMapel, setAbsensiMapel] = useState([]);
+const RekapAbsensi = () => {
+    const [RekapAbsensi, setRekapAbsensi] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
         tahun_ajaran: "",
@@ -21,7 +21,7 @@ const AbsensiMapel = () => {
         try {
             const res = await fetch("");
             const data = await res.json();
-            setAbsensiMapel(data.data);
+            setRekapAbsensi(data.data);
         } catch (err) {
             console.error(err);
         }
@@ -119,7 +119,7 @@ const AbsensiMapel = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Absensi Mapel
+                        Rekap Absensi
                     </h1>
                 </div>
 
@@ -183,67 +183,23 @@ const AbsensiMapel = () => {
 
                 {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
-                    <div>Statistik Total Sesi Mengajar per Siswa</div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
                                     <th className="p-2">NIS</th>
-                                    <th className="p-2">Nama Siswa</th>
-                                    <th className="p-2">Total Sesi</th>
+                                    <th className="p-2">Nama Lengkap</th>
+                                    <th className="p-2">Kelas</th>
+                                    <th className="p-2">Hadir</th>
+                                    <th className="p-2">Izin</th>
+                                    <th className="p-2">Sakit</th>
+                                    <th className="p-2">Alfa</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {AbsensiMapel.map((w, i) => (
-                                    <tr key={w.id} className="text-center border-t">
-                                        <td></td>
-                                        <td></td>
-                                        <td className="p-2 flex justify-center gap-2">
-                                            <button
-                                                onClick={() => handleEdit(w)}
-                                                className="p-2 bg-sky-100 text-sky-600 rounded"
-                                            >
-                                                <i className="ri-edit-2-line"></i>
-                                            </button>
-
-                                            <button
-                                                onClick={() => handleDelete(w.id)}
-                                                className="p-2 bg-red-100 text-red-600 rounded"
-                                            >
-                                                <i className="ri-delete-bin-6-line"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
-                {/* tabel */}
-                <div className="bg-white rounded-lg shadow p-4 mt-10">
-                    <div>Riwayat Kehadiran Mengajar Tahun Ajaran: 2024/2025</div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-                            <thead className="bg-violet-600 text-white text-center">
-                                <tr>
-                                    <th className="p-2">No</th>
-                                    <th className="p-2">Tanggal</th>
-                                    <th className="p-2">Jam ke-</th>
-                                    <th className="p-2">Mapel</th>
-                                    <th className="p-2">Guru</th>
-                                    <th className="p-2">Siswa</th>
-                                    <th className="p-2">Status</th>
-                                    <th className="p-2">Keterangan</th>
-                                    <th className="p-2">Waktu Absen</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {AbsensiMapel.map((w, i) => (
+                                {RekapAbsensi.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
                                         <td></td>
                                         <td></td>
@@ -274,4 +230,4 @@ const AbsensiMapel = () => {
     );
 };
 
-export default AbsensiMapel;
+export default RekapAbsensi;

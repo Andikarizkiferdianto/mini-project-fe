@@ -1,54 +1,58 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
-const JenisSemester = () => {
-    const [JenisSemester, setJenisSemester] = useState([]);
+const DataJurusan = () => {
+    const [jurusan, setJurusan] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        nama: ""
+        kode_jurusan: "",
+        nama_jurusan: ""
     });
+
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
-    const fetchData = async () => {
+    // ================= FETCH DATA =================
+    const fetchJurusan = async () => {
         try {
-            const res = await fetch("http://localhost:8000/api/jenis-semester");
+            const res = await fetch("http://localhost:8000/api/jurusan");
             const data = await res.json();
-            setJenisSemester(data.data);
+            setJurusan(data.data);
         } catch (err) {
             console.error(err);
         }
     };
 
     useEffect(() => {
-        fetchData();
+        fetchJurusan();
     }, []);
 
+    // ================= TAMBAH =================
     const openTambah = () => {
         setForm({
-            tahun_ajaran: "",
-            tahun: ""
+            kode_jurusan: "",
+            nama_jurusan: ""
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.nama) {
-            Swal.fire("Error", "Nama semester wajib diisi!", "error");
+        if (!form.kode_jurusan || !form.nama_jurusan) {
+            Swal.fire("Error", "Field tidak boleh kosong!", "error");
             return;
         }
 
         try {
             const url = isEdit
-                ? `http://localhost:8000/api/jenis-semester/${selectedId}`
-                : "http://localhost:8000/api/jenis-semester";
+                ? `http://localhost:8000/api/jurusan/${selectedId}`
+                : "http://localhost:8000/api/jurusan";
 
             const method = isEdit ? "PUT" : "POST";
 
             const res = await fetch(url, {
-                method,
+                method: method,
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -58,46 +62,48 @@ const JenisSemester = () => {
             const result = await res.json();
 
             if (!res.ok) {
-                Swal.fire("Error", result.message || result.error, "error");
+                Swal.fire("Error", result.message, "error");
                 return;
             }
 
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
-            setForm({ nama: "" });
             setIsEdit(false);
             setSelectedId(null);
 
-            fetchData();
+            fetchJurusan();
 
         } catch (err) {
             console.error(err);
         }
     };
-    const handleDelete = (id) => {
+    // ================= DELETE =================
+    const handleDelete = (id, nama) => {
         Swal.fire({
             title: "Yakin hapus?",
-            text: "Data jenis semester akan dihapus",
+            text: `Jurusan ${nama} akan dihapus`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(`http://localhost:8000/api/jenis-semester/${id}`, {
+                const res = await fetch(`http://localhost:8000/api/jurusan/${id}`, {
                     method: "DELETE"
                 });
 
                 const data = await res.json();
+
                 Swal.fire("Sukses", data.message, "success");
-                fetchData();
+                fetchJurusan();
             }
         });
     };
 
     const handleEdit = (data) => {
         setForm({
-            nama: data.nama
+            kode_jurusan: data.kode_jurusan,
+            nama_jurusan: data.nama_jurusan
         });
 
         setSelectedId(data.id);
@@ -113,7 +119,7 @@ const JenisSemester = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Daftar Jenis Semester
+                        Data Jurusan
                     </h1>
 
                     <button
@@ -124,14 +130,13 @@ const JenisSemester = () => {
                     </button>
                 </div>
 
-                {/* tambah data tahun ajaran */}
                 {showModal && (
                     <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
                         <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">
-                                    {isEdit ? "✏️ Edit Jenis Semester" : "+ Tambah Jenis Semester"}
+                                    {isEdit ? "✏️ Edit Jurusan" : "+ Tambah Jurusan"}
                                 </h2>
                                 <button
                                     onClick={() => setShowModal(false)}
@@ -141,12 +146,25 @@ const JenisSemester = () => {
                                 </button>
                             </div>
 
+                            {/* Tambah data jurusan */}
                             <div className="p-5 space-y-4">
                                 <input
                                     type="text"
-                                    placeholder="Nama Semester"
-                                    value={form.nama}
-                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
+                                    placeholder="Kode Jurusan"
+                                    value={form.kode_jurusan}
+                                    onChange={(e) =>
+                                        setForm({ ...form, kode_jurusan: e.target.value })
+                                    }
+                                    className="w-full border p-2 rounded"
+                                />
+
+                                <input
+                                    type="text"
+                                    placeholder="Nama Jurusan"
+                                    value={form.nama_jurusan}
+                                    onChange={(e) =>
+                                        setForm({ ...form, nama_jurusan: e.target.value })
+                                    }
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -169,7 +187,6 @@ const JenisSemester = () => {
                         </div>
                     </div>
                 )}
-
                 {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
                     <div className="overflow-x-auto">
@@ -177,28 +194,27 @@ const JenisSemester = () => {
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
-                                    <th className="p-2">Nama Semester</th>
+                                    <th className="p-2">Kode Jurusan</th>
+                                    <th className="p-2">Nama Jurusan</th>
                                     <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                {JenisSemester.map((w, i) => (
-                                    <tr key={w.id} className="text-center border-t">
-                                        <td>{i + 1}</td>
-                                        <td>{w.nama}</td>
+                                {jurusan.map((j, i) => (
+                                    <tr key={j.id} className="text-center border-t">
+                                        <td className="p-2">{i + 1}</td>
+                                        <td className="p-2">{j.kode_jurusan}</td>
+                                        <td className="p-2">{j.nama_jurusan}</td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
-                                                onClick={() => handleEdit(w)}
-                                                className="p-2 bg-sky-100 text-sky-600 rounded"
-                                            >
+                                                onClick={() => handleEdit(j)}
+                                                className="p-2 bg-sky-100 text-sky-600 hover:bg-sky-200 rounded-md transition"                                            >
                                                 <i className="ri-edit-2-line"></i>
                                             </button>
 
                                             <button
-                                                onClick={() => handleDelete(w.id)}
-                                                className="p-2 bg-red-100 text-red-600 rounded"
-                                            >
+                                                onClick={() => handleDelete(j.id, j.nama_jurusan)}
+                                                className="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md transition"                                            >
                                                 <i className="ri-delete-bin-6-line"></i>
                                             </button>
                                         </td>
@@ -214,4 +230,4 @@ const JenisSemester = () => {
     );
 };
 
-export default JenisSemester;
+export default DataJurusan;

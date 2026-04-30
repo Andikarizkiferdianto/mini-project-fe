@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
 
-const API = "http://localhost:8000/api/tahun-ajaran"; 
-
-
-const TahunAjaran = () => {
-    const [TahunAjaran, setTahunAjaran] = useState([]);
+const Semester = () => {
+    const [tahunAjaranList, setTahunAjaranList] = useState([]);
+    const [jenisSemesterList, setJenisSemesterList] = useState([]);
+    const [Semester, setSemester] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
-        tahun: "",
-        nama: "",
-        is_active: false
+        id_tahun_ajaran: "",
+        jenis_semester: "",
+        nama_semester: ""
     });
+
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
         try {
-            const res = await fetch(API);
+            const res = await fetch("http://localhost:8000/api/semester");
             const data = await res.json();
-            setTahunAjaran(data.data);
+            setSemester(data.data);
         } catch (err) {
             console.error(err);
         }
@@ -29,35 +29,42 @@ const TahunAjaran = () => {
 
     useEffect(() => {
         fetchData();
+
+        fetch("http://localhost:8000/api/tahun-ajaran/active")
+            .then(res => res.json())
+            .then(data => {
+                // LANGSUNG set data, jangan di-filter lagi 
+                // karena backend sudah memfilter is_active = True
+                setTahunAjaranList(data.data || []);
+            })
+            .catch(err => console.error("Gagal load tahun ajaran:", err));
+
+        fetch("http://localhost:8000/api/jenis-semester")
+            .then(res => res.json())
+            .then(data => setJenisSemesterList(data.data || []));
+
     }, []);
 
     const openTambah = () => {
         setForm({
-            nama: "",
-            tahun: "",
-            is_active: false
-        });
-        console.log("KIRIM:", {
-            nama: form.nama,
-            tahun: form.tahun,
-            is_active: form.is_active
+            id_tahun_ajaran: "",
+            jenis_semester: "",
+            nama_semester: ""
         });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.tahun?.trim() || !form.nama?.trim()) {
+        if (!form.id_tahun_ajaran || !form.jenis_semester || !form.nama_semester) {
             Swal.fire("Error", "Semua field wajib diisi!", "error");
             return;
         }
 
         try {
-            const API = "http://localhost:8000/api/tahun-ajaran";
-
             const url = isEdit
-                ? `${API}/${selectedId}`
-                : API;
+                ? `http://localhost:8000/api/semester/${selectedId}`
+                : "http://localhost:8000/api/semester";
 
             const method = isEdit ? "PUT" : "POST";
 
@@ -66,35 +73,14 @@ const TahunAjaran = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    nama: form.nama?.trim(),
-                    tahun: form.tahun.toString(),
-                    is_active: form.is_active ?? false
-                })
+                body: JSON.stringify(form)
             });
-            let result = {};
-            try {
-                result = await res.json();
-            } catch {
-                result = { message: "Server tidak kirim response" };
-            }
 
-            if (!res.ok) {
-                Swal.fire("Error", result.message || "Gagal", "error");
-                return;
-            }
+            const result = await res.json();
 
             Swal.fire("Sukses", result.message, "success");
 
             setShowModal(false);
-            setForm({
-                nama: "",
-                tahun: "",
-                is_active: false
-            });
-            setIsEdit(false);
-            setSelectedId(null);
-
             fetchData();
 
         } catch (err) {
@@ -102,53 +88,27 @@ const TahunAjaran = () => {
         }
     };
 
-    const handleDelete = (id, nama) => {
-        Swal.fire({
-            title: "Yakin hapus?",
-            text: `Data tahun ajaran akan dihapus`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Ya, hapus!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const res = await fetch(`${API}/${id}`, {
-                    method: "DELETE"
-                });
-
-                const data = await res.json();
-                Swal.fire("Sukses", data.message, "success");
-                fetchData();
-            }
+    const handleDelete = async (id) => {
+        const res = await fetch(`http://localhost:8000/api/semester/${id}`, {
+            method: "DELETE"
         });
+
+        const data = await res.json();
+        Swal.fire("Sukses", data.message, "success");
+        fetchData();
     };
 
     const handleEdit = (data) => {
         setForm({
-            nama: data.nama,
-            tahun: data.tahun,
-            is_active: data.is_active
+            id_tahun_ajaran: data.id_tahun_ajaran || "",
+            jenis_semester: data.jenis_semester || "",
+            nama_semester: data.nama_semester || ""
         });
 
         setSelectedId(data.id);
         setIsEdit(true);
         setShowModal(true);
     };
-
-
-    const handleToggle = async (id, currentStatus) => {
-        await fetch(`${API}/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                is_active: !currentStatus
-            })
-        });
-
-        fetchData();
-    };
-
     return (
         <div className="flex">
             <Sidebar />
@@ -157,7 +117,7 @@ const TahunAjaran = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Tahun Ajaran
+                        Daftar Semester
                     </h1>
 
                     <button
@@ -175,7 +135,7 @@ const TahunAjaran = () => {
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
                                 <h2 className="font-semibold text-lg">
-                                    {isEdit ? "✏️ Edit Tahun Ajaran" : "+ Tambah Tahun Ajaran"}
+                                    {isEdit ? "✏️ Edit Semester" : "+ Tambah Semester"}
                                 </h2>
                                 <button
                                     onClick={() => setShowModal(false)}
@@ -185,20 +145,39 @@ const TahunAjaran = () => {
                                 </button>
                             </div>
 
+                            {/* tambah data */}
                             <div className="p-5 space-y-4">
+                                <select
+                                    value={form.id_tahun_ajaran || ""}
+                                    onChange={(e) => setForm({ ...form, id_tahun_ajaran: e.target.value })}
+                                    className="w-full border p-2 rounded"
+                                >
+                                    <option value="">-- Pilih Tahun Ajaran --</option>
+                                    {tahunAjaranList.map((ta) => (
+                                        <option key={ta.id} value={ta.id}>
+                                            {/* Tampilkan ta.nama saja karena isinya sudah mencakup tahun (misal: 2024/2025) */}
+                                            {ta.nama}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                <select
+                                    value={form.jenis_semester || ""}
+                                    onChange={(e) => setForm({ ...form, jenis_semester: e.target.value })}
+                                    className="w-full border p-2 rounded"
+                                >
+                                    <option value="">-- Pilih Jenis Semester --</option>
+                                    {jenisSemesterList.map((js) => (
+                                        <option key={js.id} value={js.nama}>
+                                            {js.nama}
+                                        </option>
+                                    ))}
+                                </select>
                                 <input
                                     type="text"
-                                    placeholder="2024/2025"
-                                    value={form.nama}
-                                    onChange={(e) => setForm({ ...form, nama: e.target.value })}
-                                    className="w-full border p-2 rounded"
-                                />
-
-                                <input
-                                    type="number"
-                                    placeholder="2024"
-                                    value={form.tahun}
-                                    onChange={(e) => setForm({ ...form, tahun: e.target.value })}
+                                    placeholder="Nama Semester (contoh: Semester 1)"
+                                    value={form.nama_semester || ""}
+                                    onChange={(e) => setForm({ ...form, nama_semester: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -230,32 +209,19 @@ const TahunAjaran = () => {
                                 <tr>
                                     <th className="p-2">No</th>
                                     <th className="p-2">Tahun Ajaran</th>
-                                    <th className="p-2">Tahun</th>
-                                    <th className="p-2">Status</th>
+                                    <th className="p-2">Jenis Semester</th>
+                                    <th className="p-2">Nama Semester</th>
                                     <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {TahunAjaran.map((w, i) => (
+                                {Semester.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
-                                        <td className="p-2">{i + 1}</td>
-                                        <td>{w.nama}</td>
-                                        <td>{w.tahun}</td>
-                                        <td>
-                                            <label className="inline-flex items-center cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={w.is_active}
-                                                    onChange={() => handleToggle(w.id, w.is_active)}
-                                                    className="sr-only peer"
-                                                />
-                                                <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 relative transition-all duration-300">
-                                                    <div className="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5">
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </td>
+                                        <td>{i + 1}</td>
+                                        <td>{w.tahun_ajaran}</td>
+                                        <td>{w.jenis_semester}</td>
+                                        <td>{w.nama_semester}</td>
                                         <td className="p-2 flex justify-center gap-2">
                                             <button
                                                 onClick={() => handleEdit(w)}
@@ -283,4 +249,4 @@ const TahunAjaran = () => {
     );
 };
 
-export default TahunAjaran;
+export default Semester;

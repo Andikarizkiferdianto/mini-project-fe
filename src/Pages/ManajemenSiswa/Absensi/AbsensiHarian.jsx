@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 
-const RekapAbsensi = () => {
-    const [RekapAbsensi, setRekapAbsensi] = useState([]);
+const AbsensiHarian = () => {
+    const [AbsensiHarian, setAbsensiHarian] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [form, setForm] = useState({
         tahun_ajaran: "",
         tahun: ""
     });
+
     const [filter, setFilter] = useState({
         kelas: "",
         tanggal_awal: "",
         tanggal_akhir: ""
     });
+
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
@@ -21,7 +23,7 @@ const RekapAbsensi = () => {
         try {
             const res = await fetch("");
             const data = await res.json();
-            setRekapAbsensi(data.data);
+            setAbsensiHarian(data.data);
         } catch (err) {
             console.error(err);
         }
@@ -119,11 +121,10 @@ const RekapAbsensi = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-xl font-bold text-violet-700 flex items-center gap-2">
                         <i className="ri-building-4-fill"></i>
-                        Rekap Absensi
+                        Absensi Harian
                     </h1>
                 </div>
 
-                {/* filter */}
                 <div className="bg-white rounded-lg shadow p-4 mb-4">
                     <div className="flex items-center gap-2 mb-3 font-semibold text-gray-700">
                         <i className="ri-filter-3-line"></i>
@@ -134,7 +135,7 @@ const RekapAbsensi = () => {
 
                         {/* Kelas */}
                         <div>
-                            <label className="text-sm">Filter Kelas</label>
+                            <label className="text-sm">Kelas</label>
                             <select
                                 className="w-full border p-2 rounded mt-1"
                                 value={filter.kelas}
@@ -172,7 +173,12 @@ const RekapAbsensi = () => {
                             />
                         </div>
 
+                        {/* Button */}
                         <div className="flex items-end gap-2">
+                            <button className="bg-violet-500 text-white px-4 py-2 rounded">
+                                <i className="ri-filter-3-line"></i>
+                                Filter
+                            </button>
                             <button className="bg-gray-400 text-white px-4 py-2 rounded">
                                 Reset
                             </button>
@@ -188,18 +194,21 @@ const RekapAbsensi = () => {
                             <thead className="bg-violet-600 text-white text-center">
                                 <tr>
                                     <th className="p-2">No</th>
+                                    <th>Tanggal</th>
                                     <th className="p-2">NIS</th>
-                                    <th className="p-2">Nama Lengkap</th>
+                                    <th className="p-2">Nama</th>
                                     <th className="p-2">Kelas</th>
-                                    <th className="p-2">Hadir</th>
-                                    <th className="p-2">Izin</th>
-                                    <th className="p-2">Sakit</th>
-                                    <th className="p-2">Alfa</th>
+                                    <th className="p-2">Jam Masuk</th>
+                                    <th className="p-2">Status Masuk</th>
+                                    <th className="p-2">Jam Pulang</th>
+                                    <th className="p-2">Status Pulang</th>
+                                    <th className="p-2">Keterangan</th>
+                                    <th className="p-2">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {RekapAbsensi.map((w, i) => (
+                                {AbsensiHarian.map((w, i) => (
                                     <tr key={w.id} className="text-center border-t">
                                         <td></td>
                                         <td></td>
@@ -230,4 +239,4 @@ const RekapAbsensi = () => {
     );
 };
 
-export default RekapAbsensi;
+export default AbsensiHarian;

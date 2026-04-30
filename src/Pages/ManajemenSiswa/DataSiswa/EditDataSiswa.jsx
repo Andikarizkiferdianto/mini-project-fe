@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
+
 
 const EditDataSiswa = () => {
     const { id } = useParams();

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
+
 
 const TambahDataSiswa = () => {
     const navigate = useNavigate();
