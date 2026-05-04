@@ -48,7 +48,7 @@ const JadwalMengajar = () => {
                             onChange={(e) => setSelectedTahun(e.target.value)}
                             className="border rounded-lg px-3 py-2 w-64"
                         >
- 
+
                             {tahunAjaran.map((t) => (
                                 <option key={t.id} value={t.id}>
                                     {t.nama}

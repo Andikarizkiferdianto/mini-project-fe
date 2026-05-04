@@ -26,7 +26,8 @@ import MataPelajaran from './Pages/ManajemenGuru/Mapel/MataPelajaran';
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
 import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
 import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
-
+import DistribusiJam from './Pages/ManajemenGuru/DistribusiJam';
+import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
 
 
 function App() {
@@ -75,6 +76,12 @@ function App() {
 
         {/* Mata Pelajaran */}
         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
+        
+        {/* distribusi jam mengajar */}
+        <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
+        
+        {/* riwayat mengajar */}
+        <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
 
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />

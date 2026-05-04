@@ -7,17 +7,29 @@ const API = "http://localhost:8000/api/mata-pelajaran";
 const MataPelajaran = () => {
     const [mataPelajaran, setMataPelajaran] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [form, setForm] = useState({ 
-        nama: ""
-     });
+    const [form, setForm] = useState({
+        nama_mapel: ""
+    });
 
     const [isEdit, setIsEdit] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
 
     const fetchData = async () => {
-        const res = await fetch(API);
-        const data = await res.json();
-        setMataPelajaran(data.data);
+        try {
+            const res = await fetch(API);
+            const data = await res.json();
+
+            if (Array.isArray(data)) {
+                setMataPelajaran(data);
+            } else if (Array.isArray(data.data)) {
+                setMataPelajaran(data.data);
+            } else {
+                setMataPelajaran([]); // fallback biar ga crash
+            }
+        } catch (err) {
+            console.error(err);
+            setMataPelajaran([]);
+        }
     };
 
     useEffect(() => {
@@ -25,17 +37,16 @@ const MataPelajaran = () => {
     }, []);
 
     const openTambah = () => {
-        setForm({ nama: "" });
+        setForm({ nama_mapel: "" });
         setIsEdit(false);
         setShowModal(true);
     };
 
     const handleSubmit = async () => {
-        if (!form.nama.trim()) {
+        if (!form.nama_mapel.trim()) {
             Swal.fire("Error", "Nama mapel wajib diisi", "error");
             return;
         }
-
         const url = isEdit ? `${API}/${selectedId}` : API;
         const method = isEdit ? "PUT" : "POST";
 
@@ -58,7 +69,7 @@ const MataPelajaran = () => {
     };
 
     const handleEdit = (data) => {
-        setForm({ nama: data.nama });
+        setForm({ nama_mapel: data.nama_mapel });
         setSelectedId(data.id);
         setIsEdit(true);
         setShowModal(true);
@@ -96,9 +107,9 @@ const MataPelajaran = () => {
                     </button>
                 </div>
 
-                {/* MODAL */}
+                {/* modal */}
                 {showModal && (
-                   <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
+                    <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
                         <div className="bg-white w-[500px] rounded-lg shadow-lg overflow-hidden">
 
                             <div className="bg-violet-600 text-white flex justify-between items-center px-4 py-3">
@@ -117,8 +128,8 @@ const MataPelajaran = () => {
                                 <input
                                     type="text"
                                     placeholder="Nama Mata Pelajaran"
-                                    value={form.mapel}
-                                    onChange={(e) => setForm({ ...form, mapel: e.target.value })}
+                                    value={form.nama_mapel}
+                                    onChange={(e) => setForm({ ...form, nama_mapel: e.target.value })}
                                     className="w-full border p-2 rounded"
                                 />
                             </div>
@@ -142,25 +153,39 @@ const MataPelajaran = () => {
                     </div>
                 )}
 
-                {/* TABLE */}
+                {/* tabel */}
                 <div className="bg-white rounded-lg shadow p-4">
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-                            <thead className="bg-violet-600 text-white text-center">
+                            <thead className="bg-violet-600 text-white">
                                 <tr>
                                     <th className="p-3">No</th>
-                                    <th className="p-3">Nama Mata Pelajaran</th>
+                                    <th className="p-3 text-left">Nama Mata Pelajaran</th>
                                     <th className="p-3">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-
-                                <tr className="text-center">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                {mataPelajaran.map((item, index) => (
+                                    <tr key={item.id} className="border-t">
+                                        <td className="p-2 text-center">{index + 1}</td>
+                                        <td className="p-2">{item.nama_mapel}</td>
+                                        <td className="p-2 flex justify-center gap-2">
+                                            <button
+                                                onClick={() => handleEdit(item)}
+                                                className="bg-yellow-400 px-2 py-1 rounded"
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(item.id)}
+                                                className="bg-red-500 text-white px-2 py-1 rounded"
+                                            >
+                                                Hapus
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

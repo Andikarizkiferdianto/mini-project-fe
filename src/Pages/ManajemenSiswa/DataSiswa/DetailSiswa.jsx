@@ -16,7 +16,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
 
             <div className="bg-white w-[950px] rounded-lg shadow-lg overflow-hidden">
 
-                 <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
+                 <div className="bg-violet-600 text-white px-4 py-3 flex justify-between items-center">
                     <h2 className="font-semibold flex items-center gap-2">
                         <i className="ri-file-user-line"></i>
                         Detail Lengkap Siswa
@@ -37,7 +37,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
                         </div>
 
                          <div className="flex-1">
-                            <h3 className="text-blue-600 font-semibold border-b pb-1 mb-2">
+                            <h3 className="text-violet-600 font-semibold border-b pb-1 mb-2">
                                 Data Pribadi
                             </h3>
 
@@ -66,7 +66,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
                      <div className="flex justify-center mt-6 grid grid-cols-3 gap-6 text-sm">
 
                         <div>
-                            <h3 className="text-blue-600 font-semibold border-b pb-1 mb-2">
+                            <h3 className="text-violet-600 font-semibold border-b pb-1 mb-2">
                                 Data Ayah
                             </h3>
                             <Item label="Nama" value={data.nama_ayah} />
@@ -75,7 +75,7 @@ const DetailSiswa = ({ isOpen, onClose, data }) => {
                         </div>
 
                         <div>
-                            <h3 className="text-blue-600 font-semibold border-b pb-1 mb-2">
+                            <h3 className="text-violet-600 font-semibold border-b pb-1 mb-2">
                                 Data Ibu
                             </h3>
                             <Item label="Nama" value={data.nama_ibu} />
