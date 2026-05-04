@@ -103,11 +103,11 @@ const DataBuku = () => {
             
             <div className="flex-1 p-6 bg-gray-50 min-h-screen mt-16">
                 <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold text-blue-600">Data Buku</h1>
+                    <h1 className="text-2xl font-bold text-violet-600">Data Buku</h1>
                     <div className="flex gap-2">
                         <button 
                             onClick={() => setIsModalOpen(true)}
-                            className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700 transition"
+                            className="bg-violet-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-violet-700 transition"
                         >
                             <Plus size={18} /> Tambah Buku
                         </button>
@@ -115,7 +115,7 @@ const DataBuku = () => {
                 </div>
 
                 <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-                    <div className="bg-blue-600 p-3 text-white font-semibold">
+                    <div className="bg-violet-600 p-3 text-white font-semibold">
                         Daftar Buku
                     </div>
                     
@@ -130,7 +130,7 @@ const DataBuku = () => {
                             <input 
                                 type="text" 
                                 placeholder="Cari judul atau barcode..." 
-                                className="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400 outline-none w-64"
+                                className="pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-gray-400 outline-none w-64"
                                 value={searchTerm}
                                 onChange={handleSearch}
                             />
@@ -157,7 +157,7 @@ const DataBuku = () => {
                                 {books.length > 0 ? books.map((book, index) => (
                                     <tr key={book.id} className="border-b hover:bg-gray-50">
                                         <td className="p-3 text-center">{index + 1}</td>
-                                        <td className="p-3 font-medium text-blue-600">{book.judul_buku}</td>
+                                        <td className="p-3 font-medium text--600">{book.judul_buku}</td>
                                         <td className="p-3">{book.penulis}</td>
                                         <td className="p-3 text-center">{book.tahun}</td>
                                         <td className="p-3 font-mono text-xs">{book.barcode}</td>
@@ -233,7 +233,7 @@ const DataBuku = () => {
                                 </div>
                                 <div className="flex justify-end gap-2 mt-6">
                                     <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-100 transition">Batal</button>
-                                    <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-semibold">Simpan Data</button>
+                                    <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition font-semibold">Simpan Data</button>
                                 </div>
                             </form>
                         </div>

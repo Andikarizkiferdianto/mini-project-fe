@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/Landingpage';
 import Login from './LoginAdmin/Login';
 import DashboardAdmin from './Pages/DashboardAdmin';
+
+// manajemen siswa
 import ManajemenSiswa from './Pages/ManajemenSiswa/ManajemenSiswa';
 import DataSiswa from './Pages/ManajemenSiswa/DataSiswa/DataSiswa';
 import TambahDataSiswa from './Pages/ManajemenSiswa/DataSiswa/TambahDataSiswa';
@@ -20,14 +22,25 @@ import JenisSemester from './Pages/ManajemenSiswa/Raport/JenisSemester';
 import AbsensiHarian from './Pages/ManajemenSiswa/Absensi/AbsensiHarian';
 import RekapAbsensi from './Pages/ManajemenSiswa/Absensi/RekapAbsensi';
 import AbsensiMapel from './Pages/ManajemenSiswa/Absensi/AbsensiMapel';
+
+// manajemen guru
 import DashboardGuru from './Pages/ManajemenGuru/DashboardGuru';
 import JadwalMengajar from './Pages/ManajemenGuru/JadwalMengajar/JadwalMengajar';
 import MataPelajaran from './Pages/ManajemenGuru/Mapel/MataPelajaran';
+import DistribusiJam from './Pages/ManajemenGuru/DistribusiJam';
+import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
+
+// manajemen keuangan
+import DashboardKeuangan from './Pages/ManajemenKeuangan/DashboardKeuangan';
+import BayarTagihan from './Pages/ManajemenKeuangan/PembayaranSiswa/BayarTagihan';
+
+
+// perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
 import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
 import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
-import DistribusiJam from './Pages/ManajemenGuru/DistribusiJam';
-import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
+
+
 
 
 function App() {
@@ -79,14 +92,23 @@ function App() {
         
         {/* distribusi jam mengajar */}
         <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
-        
+      
         {/* riwayat mengajar */}
         <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
 
+      {/* manajemen keuangan */}
+        <Route path="/manajemen-keuangan/dashboard" element={<DashboardKeuangan />} />
+        {/* pembayaran siswa */}
+        <Route path="/manajemen-keuangan/bayar-tagihan" element={<BayarTagihan />} />
+        
+        
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
         <Route path="/perpustakaan/data-buku" element={<DataBuku />} />
         <Route path="/perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
+        
+        
+        
 
 
 

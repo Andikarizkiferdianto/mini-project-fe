@@ -13,7 +13,7 @@ const DashboardAdmin = () => {
   const menus = [
     { title: "Manajemen Siswa", icon: <Users size={40} />, path: "/manajemen-siswa/dashboard" },
     { title: "Manajemen Guru", icon: <GraduationCap size={40} />, path: "/manajemen-guru/dashboard" },
-    { title: "Keuangan", icon: <Wallet size={40} /> },
+    { title: "Keuangan", icon: <Wallet size={40} />, path: "/manajemen-keuangan/dashboard" },
     { title: "Perpustakaan", icon: <BookOpen size={40} />, path: "/perpustakaan/dashboardperpus" },
     { title: "Aplikasi", icon: <Layout size={40} /> },
     { title: "PPDB", icon: <FileText size={40} /> },
