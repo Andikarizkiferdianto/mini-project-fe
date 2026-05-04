@@ -84,7 +84,7 @@ function Sidebar() {
             label: "Mata Pelajaran",
         },
         {
-            path: "/manajemen-guru/distribusi-jam",
+            path: "/manajemen-guru/Distribusi-jam-mengajar",
             icon: "ri-time-fill",
             label: "Distribusi Jam",
         },

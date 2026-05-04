@@ -23,6 +23,8 @@ import AbsensiMapel from './Pages/ManajemenSiswa/Absensi/AbsensiMapel';
 import DashboardGuru from './Pages/ManajemenGuru/DashboardGuru';
 import JadwalMengajar from './Pages/ManajemenGuru/JadwalMengajar/JadwalMengajar';
 import MataPelajaran from './Pages/ManajemenGuru/Mapel/MataPelajaran';
+import DistribusiJam from './Pages/ManajemenGuru/DistribusiJam';
+import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
 
 
 
@@ -72,6 +74,12 @@ function App() {
 
         {/* Mata Pelajaran */}
         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
+        
+        {/* distribusi jam mengajar */}
+        <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
+        
+        {/* riwayat mengajar */}
+        <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
 
 
 
