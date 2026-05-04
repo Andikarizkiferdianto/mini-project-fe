@@ -23,6 +23,9 @@ import AbsensiMapel from './Pages/ManajemenSiswa/Absensi/AbsensiMapel';
 import DashboardGuru from './Pages/ManajemenGuru/DashboardGuru';
 import JadwalMengajar from './Pages/ManajemenGuru/JadwalMengajar/JadwalMengajar';
 import MataPelajaran from './Pages/ManajemenGuru/Mapel/MataPelajaran';
+import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
+import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
+import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
 
 
 
@@ -73,6 +76,10 @@ function App() {
         {/* Mata Pelajaran */}
         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
 
+        {/* perpus */}
+        <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
+        <Route path="/perpustakaan/data-buku" element={<DataBuku />} />
+        <Route path="/perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
 
 
 

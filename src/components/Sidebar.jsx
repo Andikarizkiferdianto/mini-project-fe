@@ -12,6 +12,7 @@ function Sidebar() {
     // api
     const isSiswa = location.pathname.startsWith("/manajemen-siswa");
     const isGuru = location.pathname.startsWith("/manajemen-guru");
+    const isPerpus = location.pathname.startsWith("/perpustakaan");
 
     const handleLogout = () => {
         setTimeout(() => nav("/dashboard-admin"), 100);
@@ -95,9 +96,34 @@ function Sidebar() {
         },
     ];
 
+    // manajemen perpustakaan
+const menuPerpus = [
+    { path: "/perpustakaan/dashboardperpus", icon: "ri-dashboard-fill", label: "Dashboard" },
+
+    { isSection: true, label: "MANAJEMEN DATA" },
+
+    { path: "/perpustakaan/data-buku", icon: "ri-book-3-fill", label: "Data Buku" },
+    { path: "/perpustakaan/peminjaman-buku", icon: "ri-book-read-fill", label: "Peminjaman Buku" },
+    { path: "/perpustakaan/pengembalian-buku", icon: "ri-history-fill", label: "Pengembalian Buku" },
+    { path: "/perpustakaan/setting-denda", icon: "ri-settings-4-fill", label: "Setting Denda" },
+
+    { isSection: true, label: "LAPORAN" },
+
+    {
+        icon: "ri-file-list-3-fill",
+        label: "Laporan",
+        children: [
+            { path: "/perpustakaan/laporan-buku", label: "Laporan Buku" },
+            { path: "/perpustakaan/laporan-peminjaman", label: "Laporan Peminjaman" },
+            { path: "/perpustakaan/laporan-pengembalian", label: "Laporan Pengembalian" },
+            { path: "/perpustakaan/laporan-denda", label: "Laporan Denda" },
+        ],
+    },
+];
+
 
     // menu
-    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : [];
+    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : [];
 
     // auto buka parent kalau ada child aktif
     useEffect(() => {
@@ -117,8 +143,8 @@ function Sidebar() {
                 {/* kiri */}
                 <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
                     <i className="ri-folder-3-fill"></i>
-                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : "Dashboard"}
-                </button>
+                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : "Dashboard"}
+                    </button>
 
                 {/* kanan */}
                 <div className="flex items-center gap-2 text-violet-600 font-medium">
