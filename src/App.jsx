@@ -34,14 +34,14 @@ import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
 import DashboardKeuangan from './Pages/ManajemenKeuangan/DashboardKeuangan';
 import BayarTagihan from './Pages/ManajemenKeuangan/PembayaranSiswa/BayarTagihan';
 
-
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
 import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
 import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
 
-
-
+// menu aplikasi
+import DashboardAplikasi from './Pages/MenuAplikasi/DashboardAplikasi';
+import InformasiLembaga from './Pages/MenuAplikasi/InformasiLembaga';
 
 function App() {
   return (
@@ -101,19 +101,18 @@ function App() {
         {/* pembayaran siswa */}
         <Route path="/manajemen-keuangan/bayar-tagihan" element={<BayarTagihan />} />
         
-        
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
         <Route path="/perpustakaan/data-buku" element={<DataBuku />} />
         <Route path="/perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
         
-        
-        
-
-
+        {/* Menu Aplikasi */}
+        <Route path="/manajemen-aplikasi" element={<DashboardAplikasi />} />
+        <Route path="/manajemen-aplikasi/informasi-lembaga" element={<InformasiLembaga />} />
 
       </Routes>
     </Router>
   );
 }
+
 export default App;

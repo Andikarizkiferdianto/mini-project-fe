@@ -97,7 +97,8 @@ const EditDataSiswa = () => {
                 {
                     ...form,
                     id_kelas: Number(form.id_kelas),
-                    id_jurusan: Number(form.id_jurusan)
+                    id_jurusan: Number(form.id_jurusan),
+                    status_aktif: form.status_aktif ? String(form.status_aktif) : "Aktif" 
                 }
             );
 

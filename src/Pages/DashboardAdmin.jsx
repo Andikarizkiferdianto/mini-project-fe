@@ -7,15 +7,17 @@ import {
 } from 'lucide-react';
 import LogoSap from '../assets/LogoSap.png';
 import Swal from "sweetalert2";
+
 const DashboardAdmin = () => {
   const navigate = useNavigate();
   const nav = useNavigate();
+  
   const menus = [
     { title: "Manajemen Siswa", icon: <Users size={40} />, path: "/manajemen-siswa/dashboard" },
     { title: "Manajemen Guru", icon: <GraduationCap size={40} />, path: "/manajemen-guru/dashboard" },
     { title: "Keuangan", icon: <Wallet size={40} />, path: "/manajemen-keuangan/dashboard" },
     { title: "Perpustakaan", icon: <BookOpen size={40} />, path: "/perpustakaan/dashboardperpus" },
-    { title: "Aplikasi", icon: <Layout size={40} /> },
+    { title: "Aplikasi", icon: <Layout size={40} />, path: "/manajemen-aplikasi" }, // <-- Ini yang ditambahin bos
     { title: "PPDB", icon: <FileText size={40} /> },
     { title: "Manajemen Sekolah", icon: <School size={40} /> },
     { title: "Kepegawaian", icon: <Contact2 size={40} /> },

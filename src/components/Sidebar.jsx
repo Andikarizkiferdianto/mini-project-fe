@@ -14,6 +14,7 @@ function Sidebar() {
     const isGuru = location.pathname.startsWith("/manajemen-guru");
     const isPerpus = location.pathname.startsWith("/perpustakaan");
     const isKeuangan = location.pathname.startsWith("/manajemen-keuangan");
+    const isAplikasi = location.pathname.startsWith("/manajemen-aplikasi");
 
     const handleLogout = () => {
         setTimeout(() => nav("/dashboard-admin"), 100);
@@ -152,9 +153,19 @@ function Sidebar() {
         },
     ];
 
+    const menuAplikasi = [
+        { path: "/manajemen-aplikasi", icon: "ri-home-9-fill", label: "Dashboard" },
+        { isSection: true, label: "MENU" },
+        { path: "/manajemen-aplikasi/informasi-lembaga", icon: "ri-information-fill", label: "Informasi Lembaga" },
+        { path: "/manajemen-aplikasi/banner-aplikasi", icon: "ri-image-fill", label: "Banner Aplikasi" },
+        { path: "/manajemen-aplikasi/setting-user", icon: "ri-user-settings-fill", label: "Setting User" },
+        { path: "/manajemen-aplikasi/backup-data", icon: "ri-database-2-fill", label: "Backup Data" },
+        { path: "/manajemen-aplikasi/setting-absensi-gps", icon: "ri-map-pin-fill", label: "Setting Absensi GPS" },
+    ];
+
 
     // menu
-    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : [];
+    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : isAplikasi ? menuAplikasi : [];
 
     // auto buka parent kalau ada child aktif
     useEffect(() => {
@@ -174,7 +185,7 @@ function Sidebar() {
                 {/* kiri */}
                 <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
                     <i className="ri-folder-3-fill"></i>
-                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : "Dashboard"}
+                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : isAplikasi ? "Manajemen Aplikasi" : "Dashboard"}
                 </button>
 
                 {/* kanan */}
