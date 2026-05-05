@@ -6,7 +6,7 @@ const KenaikanKelas = () => {
     const [tahunAjaran, setTahunAjaran] = useState("");
     const [kelas, setKelas] = useState("");
     const [kelasTujuan, setKelasTujuan] = useState("");
-
+    const [listTahun, setListTahun] = useState([]);
     const [listKelas, setListKelas] = useState([]);
     const [siswaAsal, setSiswaAsal] = useState([]);
     const [selectedSiswa, setSelectedSiswa] = useState([]);
@@ -16,6 +16,11 @@ const KenaikanKelas = () => {
         fetch("http://localhost:8000/api/kelas")
             .then(res => res.json())
             .then(data => setListKelas(data.data))
+            .catch(err => console.error(err));
+
+        fetch("http://localhost:8000/api/tahun-ajaran")
+            .then(res => res.json())
+            .then(data => setListTahun(data.data))
             .catch(err => console.error(err));
     }, []);
 
@@ -54,7 +59,27 @@ const KenaikanKelas = () => {
         setSelectedSiswa([]);
     };
 
-
+    const handleProses = () => {
+        fetch("http://localhost:8000/api/kenaikan-kelas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tahun_ajaran: tahunAjaran,
+                kelas_asal: kelas,
+                kelas_tujuan: kelasTujuan,
+                siswa: kelasBaru
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                Swal.fire("Success", res.message, "success");
+            })
+            .catch(() => {
+                Swal.fire("Error", "Gagal!", "error");
+            });
+    };
 
 
     return (
@@ -78,24 +103,30 @@ const KenaikanKelas = () => {
 
                         <div className="p-4">
                             <div className="flex gap-2 mb-3">
+
                                 <select
                                     className="w-1/2 border rounded px-3 py-2"
                                     value={tahunAjaran}
                                     onChange={(e) => setTahunAjaran(e.target.value)}
                                 >
                                     <option value="">Pilih Tahun</option>
-                                    <option>2024/2025</option>
-                                    <option>2025/2026</option>
+                                    {listTahun.map((t) => (
+                                        <option key={t.id} value={t.tahun}>
+                                            {t.nama}
+                                        </option>
+                                    ))}
                                 </select>
-
                                 <select
                                     className="w-1/2 border rounded px-3 py-2"
                                     value={kelas}
                                     onChange={(e) => setKelas(e.target.value)}
                                 >
                                     <option value="">Pilih Kelas</option>
-                                    <option>X</option>
-                                    <option>XI</option>
+                                    {listKelas.map((k) => (
+                                        <option key={k.id} value={k.id}>
+                                            {k.nama_kelas}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
 
@@ -115,6 +146,27 @@ const KenaikanKelas = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {siswaAsal.map((s) => (
+                                        <tr key={s.id} className="text-center border-t">
+                                            <td>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedSiswa.some(sel => sel.id === s.id)}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            setSelectedSiswa([...selectedSiswa, s]);
+                                                        } else {
+                                                            setSelectedSiswa(
+                                                                selectedSiswa.filter(sel => sel.id !== s.id)
+                                                            );
+                                                        }
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>{s.nama}</td>
+                                            <td>{s.nis}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
 
@@ -142,7 +194,22 @@ const KenaikanKelas = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    {kelasBaru.map((s) => (
+                                        <tr key={s.id} className="text-center border-t">
+                                            <td>{s.nama}</td>
+                                            <td>{s.nis}</td>
+                                            <td>
+                                                <button
+                                                    onClick={() =>
+                                                        setKelasBaru(kelasBaru.filter(x => x.id !== s.id))
+                                                    }
+                                                    className="text-red-500"
+                                                >
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
 

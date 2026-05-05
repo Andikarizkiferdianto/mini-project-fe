@@ -52,7 +52,7 @@ const DashboardKeuangan = () => {
                     ].map((item, i) => (
                         <div
                             key={i}
-                            className="bg-white p-4 rounded shadow border relative"
+                            className="bg-white p-4 rounded shadow border border-gray-200 relative"
                         >
                             <p className="text-sm text-gray-500">
                                 {item.title}
@@ -74,7 +74,7 @@ const DashboardKeuangan = () => {
                 <div className="grid grid-cols-4 gap-4">
 
                     {/* tabel ringkasan pembayaran */}
-                    <div className="col-span-3 bg-white rounded shadow border">
+                    <div className="col-span-3 bg-white rounded shadow border border-gray-200">
                         <div className="bg-violet-600 text-white px-4 py-2 font-semibold">
                             Ringkasan Pembayaran TA. 2025/2026
                         </div>
@@ -106,7 +106,7 @@ const DashboardKeuangan = () => {
                     </div>
 
                     {/* PIE CHART */}
-                    <div className="bg-white rounded shadow border p-4 flex flex-col items-center justify-center">
+                    <div className="bg-white rounded shadow border border-gray-200 p-4 flex flex-col items-center justify-center">
                         <h2 className="text-sm font-semibold mb-2">
                             Presentase Realisasi
                         </h2>
@@ -134,7 +134,7 @@ const DashboardKeuangan = () => {
                 </div>
 
                 {/* tabel realisasi */}
-                <div className="bg-white rounded shadow border">
+                <div className="bg-white rounded shadow border border-gray-200">
                     <div className="bg-gray-700 text-white px-4 py-2 font-semibold">
                         Realisasi Pembayaran TA. 2025/2026
                     </div>
@@ -169,7 +169,7 @@ const DashboardKeuangan = () => {
                 </div>
 
                 {/* tabel grafik */}
-                <div className="bg-white rounded shadow border">
+                <div className="bg-white rounded shadow border border-gray-200">
                     <div className="bg-gray-800 text-white px-4 py-2 font-semibold">
                         Grafik Pembayaran TA. 2025/2026
                     </div>
