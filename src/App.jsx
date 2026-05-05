@@ -32,7 +32,16 @@ import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
 
 // manajemen keuangan
 import DashboardKeuangan from './Pages/ManajemenKeuangan/DashboardKeuangan';
+// pembayaran siswa
 import BayarTagihan from './Pages/ManajemenKeuangan/PembayaranSiswa/BayarTagihan';
+import TunggakanSiswa from './Pages/ManajemenKeuangan/PembayaranSiswa/TunggakanSiswa';
+import JenisPembayaran from './Pages/ManajemenKeuangan/PembayaranSiswa/JenisPembayaran';
+import TarifPembayaran from './Pages/ManajemenKeuangan/PembayaranSiswa/TarifPembayaran';
+import RekapPembayaran from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapPembayaran';
+import DataTransaksi from './Pages/ManajemenKeuangan/PembayaranSiswa/DataTransaksi';
+import RekapPerSiswa from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapPerSiswa';
+import RekapTagihan from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapTagihan';
+import RekapPerTanggal from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapPerTanggal';
 
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
@@ -54,58 +63,60 @@ function App() {
 
         {/* Manajemen siswa */}
         <Route path="/manajemen-siswa/dashboard" element={<ManajemenSiswa />} />
-        
+
+        {/* kesiswaan */}
+
         {/* data siswa */}
         <Route path="/manajemen-siswa/data-siswa" element={<DataSiswa />} />
         <Route path="/manajemen-siswa/tambah-siswa" element={<TambahDataSiswa />} />
-        <Route path="/manajemen-siswa/edit-siswa/:id" element={<EditDataSiswa />} /> 
-        
-        {/* kesiswaan */}
+        <Route path="/manajemen-siswa/edit-siswa/:id" element={<EditDataSiswa />} />
+
         <Route path="/manajemen-siswa/data-kelas" element={<DataKelas />} />
         <Route path="/manajemen-siswa/kenaikan-kelas" element={<KenaikanKelas />} />
         <Route path="/manajemen-siswa/data-jurusan" element={<DataJurusan />} />
         <Route path="/manajemen-siswa/wali-kelas" element={<WaliKelas />} />
         <Route path="/manajemen-siswa/tahun-ajaran" element={<TahunAjaran />} />
-
-        {/* kegiatan */}
         <Route path="/manajemen-siswa/page-ekstrakurikuler" element={<Ekstrakurikuler />} />
-       
-       {/* raport */}
+
+        {/* raport */}
         <Route path="/manajemen-siswa/data-raport" element={<DataRaport />} />
         <Route path="/manajemen-siswa/aspek-penilaian" element={<AspekPenilaian />} />
         <Route path="/manajemen-siswa/semester" element={<Semester />} />
         <Route path="/manajemen-siswa/jenis-semester" element={<JenisSemester />} />
-       
-       {/* absensi */}
+
+        {/* absensi */}
         <Route path="/manajemen-siswa/absensi-harian" element={<AbsensiHarian />} />
         <Route path="/manajemen-siswa/rekap-absensi" element={<RekapAbsensi />} />
         <Route path="/manajemen-siswa/absensi-mapel" element={<AbsensiMapel />} />
-        
+
         {/* manajemen guru */}
         <Route path="/manajemen-guru/dashboard" element={<DashboardGuru />} />
+         <Route path="/manajemen-guru/jadwal-mengajar" element={<JadwalMengajar />} />
+         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
+         <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
+         <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
 
-        {/* jadwal mengajar */}
-        <Route path="/manajemen-guru/jadwal-mengajar" element={<JadwalMengajar />} />
-
-        {/* Mata Pelajaran */}
-        <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
-        
-        {/* distribusi jam mengajar */}
-        <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
-      
-        {/* riwayat mengajar */}
-        <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
-
-      {/* manajemen keuangan */}
+        {/* manajemen keuangan */}
         <Route path="/manajemen-keuangan/dashboard" element={<DashboardKeuangan />} />
+        
         {/* pembayaran siswa */}
         <Route path="/manajemen-keuangan/bayar-tagihan" element={<BayarTagihan />} />
-        
+        <Route path="/manajemen-keuangan/tunggakan-siswa" element={<TunggakanSiswa />} />
+        <Route path="/manajemen-keuangan/jenis-pembayaran" element={<JenisPembayaran />} />
+        <Route path="/manajemen-keuangan/tarif-pembayaran" element={<TarifPembayaran />} />
+        <Route path="/manajemen-keuangan/rekap-pembayaran" element={<RekapPembayaran />} />
+        <Route path="/manajemen-keuangan/data-transaksi" element={<DataTransaksi />} />
+        <Route path="/manajemen-keuangan/rekap-per_siswa" element={<RekapPerSiswa />} />
+        <Route path="/manajemen-keuangan/rekap-tagihan" element={<RekapTagihan />} />
+        <Route path="/manajemen-keuangan/rekap-per_tanggal" element={<RekapPerTanggal />} />
+
+
+
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
         <Route path="/perpustakaan/data-buku" element={<DataBuku />} />
         <Route path="/perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
-        
+
         {/* Menu Aplikasi */}
         <Route path="/manajemen-aplikasi" element={<DashboardAplikasi />} />
         <Route path="/manajemen-aplikasi/informasi-lembaga" element={<InformasiLembaga />} />

@@ -114,8 +114,15 @@ function Sidebar() {
             icon: "ri-wallet-fill",
             label: "Pembayaran Siswa",
             children: [
-                { path: "/manajemen-keuangan/bayar-tagihan", label: "Bayar Keuangan" },
-                { path: "/manajemen-keuangan/", label: "Tunggakan Siswa" },
+                { path: "/manajemen-keuangan/bayar-tagihan", label: "Bayar Tagihan" },
+                { path: "/manajemen-keuangan/tunggakan-siswa", label: "Tunggakan Siswa" },
+                { path: "/manajemen-keuangan/jenis-pembayaran", label: "Jenis Pembayaran" },
+                { path: "/manajemen-keuangan/tarif-pembayaran", label: "Tarif Pembayaran" },
+                { path: "/manajemen-keuangan/rekap-pembayaran", label: "Rekap Pembayaran Bulanan" },
+                { path: "/manajemen-keuangan/data-transaksi", label: "Data Transaksi" },
+                { path: "/manajemen-keuangan/rekap-per_siswa", label: "Rekap Per Siswa" },
+                { path: "/manajemen-keuangan/rekap-per_tanggal", label: "Rekap Per Tanggal" },
+                { path: "/manajemen-keuangan/rekap-tagihan", label: "Rekap Tagihan" },
             ],
         },
         {
@@ -153,6 +160,7 @@ function Sidebar() {
         },
     ];
 
+    // manajemen aplikasi
     const menuAplikasi = [
         { path: "/manajemen-aplikasi", icon: "ri-home-9-fill", label: "Dashboard" },
         { isSection: true, label: "MENU" },
