@@ -42,6 +42,22 @@ import DataTransaksi from './Pages/ManajemenKeuangan/PembayaranSiswa/DataTransak
 import RekapPerSiswa from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapPerSiswa';
 import RekapTagihan from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapTagihan';
 import RekapPerTanggal from './Pages/ManajemenKeuangan/PembayaranSiswa/RekapPerTanggal';
+// Tabungan siswa
+import Teller from './Pages/ManajemenKeuangan/TabunganSiswa/Teller';
+import RiwayatTabunganSiswa from './Pages/ManajemenKeuangan/TabunganSiswa/RiwayatTabunganSiswa';
+import RiwayatTransaksi from './Pages/ManajemenKeuangan/TabunganSiswa/RiwayatTransaksi';
+// penerimaan
+import TransaksiPenerimaan from './Pages/ManajemenKeuangan/Penerimaan/TransaksiPenerimaan';
+import JenisPenerimaan from './Pages/ManajemenKeuangan/Penerimaan/JenisPenerimaan';
+import LaporanPenerimaan from './Pages/ManajemenKeuangan/Penerimaan/LaporanPenerimaan';
+// belanja
+import TransaksiBelanja from './Pages/ManajemenKeuangan/Belanja/TransaksiBelanja';
+import JenisBelanja from './Pages/ManajemenKeuangan/Belanja/JenisBelanja';
+import LaporanBelanja from './Pages/ManajemenKeuangan/Belanja/LaporanBelanja';
+// jurnal
+import TransaksiJurnal from './Pages/ManajemenKeuangan/Jurnal/TransaksiJurnal';
+import LaporanJurnal from './Pages/ManajemenKeuangan/Jurnal/LaporanJurnal';
+
 
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
@@ -91,14 +107,14 @@ function App() {
 
         {/* manajemen guru */}
         <Route path="/manajemen-guru/dashboard" element={<DashboardGuru />} />
-         <Route path="/manajemen-guru/jadwal-mengajar" element={<JadwalMengajar />} />
-         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
-         <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
-         <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
+        <Route path="/manajemen-guru/jadwal-mengajar" element={<JadwalMengajar />} />
+        <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
+        <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
+        <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
 
         {/* manajemen keuangan */}
         <Route path="/manajemen-keuangan/dashboard" element={<DashboardKeuangan />} />
-        
+
         {/* pembayaran siswa */}
         <Route path="/manajemen-keuangan/bayar-tagihan" element={<BayarTagihan />} />
         <Route path="/manajemen-keuangan/tunggakan-siswa" element={<TunggakanSiswa />} />
@@ -109,8 +125,21 @@ function App() {
         <Route path="/manajemen-keuangan/rekap-per_siswa" element={<RekapPerSiswa />} />
         <Route path="/manajemen-keuangan/rekap-tagihan" element={<RekapTagihan />} />
         <Route path="/manajemen-keuangan/rekap-per_tanggal" element={<RekapPerTanggal />} />
-
-
+        {/* tabungan siswa */}
+        <Route path="/manajemen-keuangan/Teller" element={<Teller />} />
+        <Route path="/manajemen-keuangan/riwayat-tabungan" element={<RiwayatTabunganSiswa />} />
+        <Route path="/manajemen-keuangan/riwayat-transaksi" element={<RiwayatTransaksi />} />
+        {/* penerimaan */}
+        <Route path="/manajemen-keuangan/transaksi-penerimaan" element={<TransaksiPenerimaan />} />
+        <Route path="/manajemen-keuangan/jenis-penerimaan" element={<JenisPenerimaan />} />
+        <Route path="/manajemen-keuangan/laporan-penerimaan" element={<LaporanPenerimaan />} />
+        {/* belanja */}
+        <Route path="/manajemen-keuangan/transaksi-belanja" element={<TransaksiBelanja />} />
+        <Route path="/manajemen-keuangan/jenis-belanja" element={<JenisBelanja />} />
+        <Route path="/manajemen-keuangan/laporan-belanja" element={<LaporanBelanja />} />
+        {/* jurnal  */}
+        <Route path="/manajemen-keuangan/transaksi-jurnal" element={<TransaksiJurnal />} />
+        <Route path="/manajemen-keuangan/laporan-jurnal" element={<LaporanJurnal />} />
 
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
