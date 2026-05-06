@@ -129,7 +129,42 @@ function Sidebar() {
             icon: "ri-coin-fill",
             label: "Tabungan Siswa",
             children: [
-                { path: "", label: "Teller" },
+                { path: "/manajemen-keuangan/Teller", label: "Teller" },
+                { path: "/manajemen-keuangan/riwayat-tabungan", label: "Riwayat Tabungan Siswa" },
+                { path: "/manajemen-keuangan/riwayat-transaksi", label: "Riwayat Transaksi" },
+            ],
+        },
+        {
+            icon: "ri-bank-card-fill",
+            label: "Penerimaan",
+            children: [
+                { path: "/manajemen-keuangan/transaksi-penerimaan", label: "Transaksi Penerimaan" },
+                { path: "/manajemen-keuangan/jenis-penerimaan", label: "Jenis Penerimaan" },
+                { path: "/manajemen-keuangan/laporan-penerimaan", label: "Laporan Penerimaan" },
+            ],
+        },
+        {
+            icon: "ri-shopping-cart-2-fill",
+            label: "Belanja",
+            children: [
+                { path: "/manajemen-keuangan/transaksi-belanja", label: "Transaksi Belanja" },
+                { path: "/manajemen-keuangan/jenis-belanja", label: "Jenis Belanja" },
+                { path: "/manajemen-keuangan/laporan-belanja", label: "Laporan Belanja" },
+            ],
+        },
+        {
+            icon: "ri-book-2-fill",
+            label: "Jurnal",
+            children: [
+                { path: "/manajemen-keuangan/transaksi-jurnal", label: "Transaksi Jurnal" },
+                 { path: "/manajemen-keuangan/laporan-jurnal", label: "Laporan Jurnal" },
+            ],
+        },
+        {
+            icon: "ri-book-open-fill",
+            label: "Buku Besar",
+            children: [
+                  { path: "/manajemen-keuangan/laporan-buku", label: "Laporan Buku Besar" },
             ],
         },
         
