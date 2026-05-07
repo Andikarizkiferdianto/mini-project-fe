@@ -36,7 +36,7 @@ const JenisPenerimaan = () => {
                             <div>
                                 <label className="text-sm">Akun Pendapatan</label>
                                 <select className="w-full border border-gray-200 rounded px-3 py-2 text-sm">
-                                    <option>4.0.4 - Not Found</option>
+                                    <option>4.0.4 - Pendapatan BOS</option>
                                 </select>
                             </div>
 

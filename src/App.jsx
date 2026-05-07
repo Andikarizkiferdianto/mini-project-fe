@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 import LandingPage from './components/Landingpage';
 import Login from './LoginAdmin/Login';
 import DashboardAdmin from './Pages/DashboardAdmin';
+
 
 // manajemen siswa
 import ManajemenSiswa from './Pages/ManajemenSiswa/ManajemenSiswa';
@@ -23,12 +26,14 @@ import AbsensiHarian from './Pages/ManajemenSiswa/Absensi/AbsensiHarian';
 import RekapAbsensi from './Pages/ManajemenSiswa/Absensi/RekapAbsensi';
 import AbsensiMapel from './Pages/ManajemenSiswa/Absensi/AbsensiMapel';
 
+
 // manajemen guru
 import DashboardGuru from './Pages/ManajemenGuru/DashboardGuru';
 import JadwalMengajar from './Pages/ManajemenGuru/JadwalMengajar/JadwalMengajar';
 import MataPelajaran from './Pages/ManajemenGuru/Mapel/MataPelajaran';
 import DistribusiJam from './Pages/ManajemenGuru/DistribusiJam';
 import RiwayatMengajar from './Pages/ManajemenGuru/RiwayatMengajar';
+
 
 // manajemen keuangan
 import DashboardKeuangan from './Pages/ManajemenKeuangan/DashboardKeuangan';
@@ -57,12 +62,22 @@ import LaporanBelanja from './Pages/ManajemenKeuangan/Belanja/LaporanBelanja';
 // jurnal
 import TransaksiJurnal from './Pages/ManajemenKeuangan/Jurnal/TransaksiJurnal';
 import LaporanJurnal from './Pages/ManajemenKeuangan/Jurnal/LaporanJurnal';
+// buku besar
+import LaporanBukuBesar from './Pages/ManajemenKeuangan/BukuBesar/LaporanBukuBesar';
+import NeracaSaldo from './Pages/ManajemenKeuangan/BukuBesar/NeracaSaldo';
+import JurnalUmum from './Pages/ManajemenKeuangan/BukuBesar/JurnalUmum';
+//laporan keuangan
+import PenghasilanKomprehensif from './Pages/ManajemenKeuangan/LaporanKeuangan/PenghasilanKomprehensif';
+import PosisiKeuangan from './Pages/ManajemenKeuangan/LaporanKeuangan/PosisiKeuangan';
+import ArusKas from './Pages/ManajemenKeuangan/LaporanKeuangan/ArusKas';
+import PerubahanAsetNeto from './Pages/ManajemenKeuangan/LaporanKeuangan/PerubahanAsetNeto';
 
 
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
 import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
 import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
+
 
 // menu aplikasi
 import DashboardAplikasi from './Pages/MenuAplikasi/DashboardAplikasi';
@@ -105,12 +120,14 @@ function App() {
         <Route path="/manajemen-siswa/rekap-absensi" element={<RekapAbsensi />} />
         <Route path="/manajemen-siswa/absensi-mapel" element={<AbsensiMapel />} />
 
+
         {/* manajemen guru */}
         <Route path="/manajemen-guru/dashboard" element={<DashboardGuru />} />
         <Route path="/manajemen-guru/jadwal-mengajar" element={<JadwalMengajar />} />
         <Route path="/manajemen-guru/mata-pelajaran" element={<MataPelajaran />} />
         <Route path="/manajemen-guru/Distribusi-jam-mengajar" element={<DistribusiJam />} />
         <Route path="/manajemen-guru/riwayat-mengajar" element={<RiwayatMengajar />} />
+
 
         {/* manajemen keuangan */}
         <Route path="/manajemen-keuangan/dashboard" element={<DashboardKeuangan />} />
@@ -140,6 +157,17 @@ function App() {
         {/* jurnal  */}
         <Route path="/manajemen-keuangan/transaksi-jurnal" element={<TransaksiJurnal />} />
         <Route path="/manajemen-keuangan/laporan-jurnal" element={<LaporanJurnal />} />
+        {/* buku besar */}
+        <Route path="/manajemen-keuangan/laporan-buku-besar" element={<LaporanBukuBesar />} />
+        <Route path="/manajemen-keuangan/neraca-saldo" element={<NeracaSaldo />} />
+        <Route path="/manajemen-keuangan/jurnal-umum" element={<JurnalUmum />} />
+        {/* laporan keuangan */}
+        <Route path="/manajemen-keuangan/penghasilan-komperehensif" element={<PenghasilanKomprehensif />} />
+        <Route path="/manajemen-keuangan/posisi-keuangan" element={<PosisiKeuangan />} />
+        <Route path="/manajemen-keuangan/arus-kas" element={<ArusKas />} />
+        <Route path="/manajemen-keuangan/perubahan-aset-neto" element={<PerubahanAsetNeto />} />
+
+
 
         {/* perpus */}
         <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
