@@ -20,11 +20,12 @@ function Sidebar() {
         setTimeout(() => nav("/dashboard-admin"), 100);
     };
 
-    // manajemen siswa
+    // MANAJEMEN SISWA
     const menuSiswa = [
-        { path: "/manajemen-siswa/dashboard", 
-            icon: "ri-home-9-fill", 
-            label: "Dashboard" 
+        {
+            path: "/manajemen-siswa/dashboard",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
         },
 
         { isSection: true, label: "MENU" },
@@ -41,13 +42,18 @@ function Sidebar() {
                 { path: "/manajemen-siswa/wali-kelas", label: "Wali Kelas" },
             ],
         },
+
         {
             icon: "ri-list-check-2",
             label: "Kegiatan",
             children: [
-                { path: "/manajemen-siswa/page-ekstrakurikuler", label: "Ekstrakurikuler" },
+                {
+                    path: "/manajemen-siswa/page-ekstrakurikuler",
+                    label: "Ekstrakurikuler",
+                },
             ],
         },
+
         {
             icon: "ri-file-text-fill",
             label: "E-Raport",
@@ -58,6 +64,7 @@ function Sidebar() {
                 { path: "/manajemen-siswa/jenis-semester", label: "Jenis Semester" },
             ],
         },
+
         {
             icon: "ri-user-follow-fill",
             label: "Absensi",
@@ -69,7 +76,7 @@ function Sidebar() {
         },
     ];
 
-    // manajemen guru
+    // MANAJEMEN GURU
     const menuGuru = [
         {
             path: "/manajemen-guru/dashboard",
@@ -84,16 +91,19 @@ function Sidebar() {
             icon: "ri-calendar-2-fill",
             label: "Jadwal Mengajar",
         },
+
         {
             path: "/manajemen-guru/mata-pelajaran",
             icon: "ri-book-open-fill",
             label: "Mata Pelajaran",
         },
+
         {
             path: "/manajemen-guru/Distribusi-jam-mengajar",
             icon: "ri-time-fill",
             label: "Distribusi Jam",
         },
+
         {
             path: "/manajemen-guru/riwayat-mengajar",
             icon: "ri-history-line",
@@ -101,11 +111,12 @@ function Sidebar() {
         },
     ];
 
-    // manajemen Keuangan
+    // MANAJEMEN KEUANGAN
     const menuKeuangan = [
-        { path: "/manajemen-keuangan/dashboard", 
-            icon: "ri-home-9-fill", 
-            label: "Dashboard" 
+        {
+            path: "/manajemen-keuangan/dashboard",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
         },
 
         { isSection: true, label: "MENU KEUANGAN" },
@@ -118,22 +129,21 @@ function Sidebar() {
                 { path: "/manajemen-keuangan/tunggakan-siswa", label: "Tunggakan Siswa" },
                 { path: "/manajemen-keuangan/jenis-pembayaran", label: "Jenis Pembayaran" },
                 { path: "/manajemen-keuangan/tarif-pembayaran", label: "Tarif Pembayaran" },
-                { path: "/manajemen-keuangan/rekap-pembayaran", label: "Rekap Pembayaran Bulanan" },
+                { path: "/manajemen-keuangan/rekap-pembayaran", label: "Rekap Pembayaran" },
                 { path: "/manajemen-keuangan/data-transaksi", label: "Data Transaksi" },
-                { path: "/manajemen-keuangan/rekap-per_siswa", label: "Rekap Per Siswa" },
-                { path: "/manajemen-keuangan/rekap-per_tanggal", label: "Rekap Per Tanggal" },
-                { path: "/manajemen-keuangan/rekap-tagihan", label: "Rekap Tagihan" },
             ],
         },
+
         {
             icon: "ri-coin-fill",
             label: "Tabungan Siswa",
             children: [
                 { path: "/manajemen-keuangan/Teller", label: "Teller" },
-                { path: "/manajemen-keuangan/riwayat-tabungan", label: "Riwayat Tabungan Siswa" },
+                { path: "/manajemen-keuangan/riwayat-tabungan", label: "Riwayat Tabungan" },
                 { path: "/manajemen-keuangan/riwayat-transaksi", label: "Riwayat Transaksi" },
             ],
         },
+
         {
             icon: "ri-bank-card-fill",
             label: "Penerimaan",
@@ -143,6 +153,7 @@ function Sidebar() {
                 { path: "/manajemen-keuangan/laporan-penerimaan", label: "Laporan Penerimaan" },
             ],
         },
+
         {
             icon: "ri-shopping-cart-2-fill",
             label: "Belanja",
@@ -152,58 +163,159 @@ function Sidebar() {
                 { path: "/manajemen-keuangan/laporan-belanja", label: "Laporan Belanja" },
             ],
         },
+
         {
             icon: "ri-book-2-fill",
             label: "Jurnal",
             children: [
                 { path: "/manajemen-keuangan/transaksi-jurnal", label: "Transaksi Jurnal" },
-                 { path: "/manajemen-keuangan/laporan-jurnal", label: "Laporan Jurnal" },
+                { path: "/manajemen-keuangan/laporan-jurnal", label: "Laporan Jurnal" },
             ],
         },
+
         {
             icon: "ri-book-open-fill",
             label: "Buku Besar",
             children: [
-                  { path: "/manajemen-keuangan/laporan-buku", label: "Laporan Buku Besar" },
+                { path: "/manajemen-keuangan/laporan-buku-besar", label: "Laporan Buku Besar" },
+                { path: "/manajemen-keuangan/neraca-saldo", label: "Neraca Saldo" },
+                { path: "/manajemen-keuangan/jurnal-umum", label: "Jurnal Umum" },
             ],
         },
-        
+        {
+            icon: "ri-file-text-fill",
+            label: "Laporan Keuangan",
+            children: [
+                { path: "/manajemen-keuangan/penghasilan-komperehensif", label: "Penghasilan Komprehensif" },
+                { path: "/manajemen-keuangan/posisi-keuangan", label: "Posisi Keuangan" },
+                { path: "/manajemen-keuangan/arus-kas", label: "Arus Kas" },
+                { path: "/manajemen-keuangan/perubahan-aset-neto", label: "Perubahan Aset Neto" },
+            ],
+        },
+
+        { isSection: true, label: "MENU APBS" },
+
+        {
+            icon: "ri-edit-2-line",
+            label: "Rencana Anggaran",
+            children: [
+                { path: "/manajemen-keuangan/realisasi-penerimaan", label: "Realisasi Penerimaan" },
+            ],
+        },
+        { path: "/manajemen-keuangan/realisasi-anggaran", icon: "ri-line-chart-line", label: "Realisasi Anggaran" },
+        { path: "/manajemen-keuangan/evaluasi-anggaran", icon: "ri-clipboard-line", label: "Evaluasi Anggaran" },
+
+        { isSection: true, label: "PENGATURAN" },
+
+        {
+            icon: "ri-settings-3-fill",
+            label: "Pengaturan Akun",
+            children: [
+                { path: "/manajemen-keuangan/pengaturan-akun", label: "Pengaturan Akun" },
+            ],
+        },
     ];
 
-    // manajemen perpustakaan
+    // MANAJEMEN PERPUSTAKAAN
     const menuPerpus = [
-        { path: "/perpustakaan/dashboardperpus", icon: "ri-dashboard-fill", label: "Dashboard" },
+        {
+            path: "/perpustakaan/dashboardperpus",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
+        },
 
         { isSection: true, label: "MANAJEMEN DATA" },
 
-        { path: "/perpustakaan/data-buku", icon: "ri-book-3-fill", label: "Data Buku" },
-        { path: "/perpustakaan/peminjaman-buku", icon: "ri-book-read-fill", label: "Peminjaman Buku" },
-        { path: "/perpustakaan/pengembalian-buku", icon: "ri-history-fill", label: "Pengembalian Buku" },
-        { path: "/perpustakaan/setting-denda", icon: "ri-settings-4-fill", label: "Setting Denda" },
+        {
+            path: "/perpustakaan/data-buku",
+            icon: "ri-book-3-fill",
+            label: "Data Buku",
+        },
+
+        {
+            path: "/perpustakaan/peminjaman-buku",
+            icon: "ri-book-read-fill",
+            label: "Peminjaman Buku",
+        },
+
+        {
+            path: "/perpustakaan/pengembalian-buku",
+            icon: "ri-history-fill",
+            label: "Pengembalian Buku",
+        },
+
+        {
+            path: "/perpustakaan/setting-denda",
+            icon: "ri-settings-4-fill",
+            label: "Setting Denda",
+        },
 
         { isSection: true, label: "LAPORAN" },
 
         {
-            icon: "ri-file-list-3-fill",
-            label: "Laporan",
-            children: [
-                { path: "/perpustakaan/laporan-buku", label: "Laporan Buku" },
-                { path: "/perpustakaan/laporan-peminjaman", label: "Laporan Peminjaman" },
-                { path: "/perpustakaan/laporan-pengembalian", label: "Laporan Pengembalian" },
-                { path: "/perpustakaan/laporan-denda", label: "Laporan Denda" },
-            ],
+            path: "/perpustakaan/laporan-buku",
+            icon: "ri-file-text-line",
+            label: "Laporan Buku",
+        },
+
+        {
+            path: "/perpustakaan/laporan-peminjaman",
+            icon: "ri-file-list-3-line",
+            label: "Laporan Peminjaman",
+        },
+
+        {
+            path: "/perpustakaan/laporan-pengembalian",
+            icon: "ri-file-transfer-line",
+            label: "Laporan Pengembalian",
+        },
+
+        {
+            path: "/perpustakaan/laporan-denda",
+            icon: "ri-file-chart-line",
+            label: "Laporan Denda",
         },
     ];
 
-    // manajemen aplikasi
+    // MANAJEMEN APLIKASI
     const menuAplikasi = [
-        { path: "/manajemen-aplikasi", icon: "ri-home-9-fill", label: "Dashboard" },
+        {
+            path: "/manajemen-aplikasi",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
+        },
+
         { isSection: true, label: "MENU" },
-        { path: "/manajemen-aplikasi/informasi-lembaga", icon: "ri-information-fill", label: "Informasi Lembaga" },
-        { path: "/manajemen-aplikasi/banner-aplikasi", icon: "ri-image-fill", label: "Banner Aplikasi" },
-        { path: "/manajemen-aplikasi/setting-user", icon: "ri-user-settings-fill", label: "Setting User" },
-        { path: "/manajemen-aplikasi/backup-data", icon: "ri-database-2-fill", label: "Backup Data" },
-        { path: "/manajemen-aplikasi/setting-absensi-gps", icon: "ri-map-pin-fill", label: "Setting Absensi GPS" },
+
+        {
+            path: "/manajemen-aplikasi/informasi-lembaga",
+            icon: "ri-information-fill",
+            label: "Informasi Lembaga",
+        },
+
+        {
+            path: "/manajemen-aplikasi/banner-aplikasi",
+            icon: "ri-image-fill",
+            label: "Banner Aplikasi",
+        },
+
+        {
+            path: "/manajemen-aplikasi/setting-user",
+            icon: "ri-user-settings-fill",
+            label: "Setting User",
+        },
+
+        {
+            path: "/manajemen-aplikasi/backup-data",
+            icon: "ri-database-2-fill",
+            label: "Backup Data",
+        },
+
+        {
+            path: "/manajemen-aplikasi/setting-absensi-gps",
+            icon: "ri-map-pin-fill",
+            label: "Setting Absensi GPS",
+        },
     ];
 
 
@@ -223,7 +335,6 @@ function Sidebar() {
         <div className="w-60 min-h-screen pt-16">
 
             {/* topbar */}
-
             <div className="fixed top-0 left-60 right-0 h-16 bg-gray-100 flex items-center justify-between px-6 shadow z-50">
                 {/* kiri */}
                 <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
@@ -238,15 +349,14 @@ function Sidebar() {
                 </div>
             </div>
 
-            <div className="fixed overflow-y-auto top-0 left-0 h-full w-60 bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 text-white shadow-lg flex flex-col">
-
+            <div className="fixed top-0 left-0 h-full w-60 bg-gradient-to-b from-indigo-900 via-violet-800 to-indigo-900 text-white shadow-lg flex flex-col">
                 {/* LOGO SAP */}
                 <div className="bg-white text-violet-700 rounded-xl p-3 flex items-center mt-5 gap-3 mb-6 mx-3">
                     <img src={LogoSAP} alt="logo" className="h-8 w-auto" />
                     <h1 className="font-bold text-lg">SAP</h1>
                 </div>
 
-                <nav className="flex-1 px-3 text-sm">
+                <nav className="flex-1 px-3 text-sm overflow-y-auto">
                     {menuItems.map((item, index) => {
                         const isActiveParent = item.children?.some(
                             (child) => child.path === location.pathname
@@ -318,10 +428,10 @@ function Sidebar() {
                 </nav>
 
                 {/* kembali */}
-                <div className="p-3 border-t border-indigo-700">
+                <div className="p-2 border-t border-indigo-700">
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r hover:bg-violet-600 font-bold transition"
+                        className="w-full flex items-center gap-2 py-2 px-2 rounded-md bg-gradient-to-r hover:bg-violet-600 font-bold transition"
                     >
                         <i className="ri-arrow-left-line"></i>
                         Kembali
