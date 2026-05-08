@@ -200,6 +200,10 @@ function Sidebar() {
             label: "Rencana Anggaran",
             children: [
                 { path: "/manajemen-keuangan/realisasi-penerimaan", label: "Realisasi Penerimaan" },
+                { path: "/manajemen-keuangan/realisasi-belanja", label: "Realisasi Belanja" },
+                { path: "/manajemen-keuangan/setting-pagu", label: "SettingPagu" },
+                { path: "/manajemen-keuangan/apbs-induk", label: "APBS Induk" },
+                { path: "/manajemen-keuangan/apbs-detail", label: "APBS Detail" },
             ],
         },
         { path: "/manajemen-keuangan/realisasi-anggaran", icon: "ri-line-chart-line", label: "Realisasi Anggaran" },

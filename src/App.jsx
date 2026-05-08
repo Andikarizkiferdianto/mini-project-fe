@@ -71,7 +71,12 @@ import PenghasilanKomprehensif from './Pages/ManajemenKeuangan/LaporanKeuangan/P
 import PosisiKeuangan from './Pages/ManajemenKeuangan/LaporanKeuangan/PosisiKeuangan';
 import ArusKas from './Pages/ManajemenKeuangan/LaporanKeuangan/ArusKas';
 import PerubahanAsetNeto from './Pages/ManajemenKeuangan/LaporanKeuangan/PerubahanAsetNeto';
-
+// rencana anggaran
+import RealisasiPenerimaan from './Pages/ManajemenKeuangan/RencanaAnggaran/RealisasiPenerimaan';
+import RealisasiBelanja from './Pages/ManajemenKeuangan/RencanaAnggaran/RealisasiBelanja';
+import SettingPagu from './Pages/ManajemenKeuangan/RencanaAnggaran/SettingPagu';
+import APBSInduk from './Pages/ManajemenKeuangan/RencanaAnggaran/APBSInduk';
+import APBSDetail from './Pages/ManajemenKeuangan/RencanaAnggaran/APBSDetail';
 
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
@@ -166,7 +171,12 @@ function App() {
         <Route path="/manajemen-keuangan/posisi-keuangan" element={<PosisiKeuangan />} />
         <Route path="/manajemen-keuangan/arus-kas" element={<ArusKas />} />
         <Route path="/manajemen-keuangan/perubahan-aset-neto" element={<PerubahanAsetNeto />} />
-
+        {/* rencana anggaran */}
+        <Route path="/manajemen-keuangan/realisasi-penerimaan" element={<RealisasiPenerimaan />} />
+        <Route path="/manajemen-keuangan/realisasi-belanja" element={<RealisasiBelanja />} />
+        <Route path="/manajemen-keuangan/setting-pagu" element={<SettingPagu  />} />
+        <Route path="/manajemen-keuangan/apbs-induk" element={<APBSInduk  />} />
+        <Route path="/manajemen-keuangan/apbs-detail" element={< APBSDetail  />} />
 
 
         {/* perpus */}
