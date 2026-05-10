@@ -54,22 +54,22 @@ const DataTransaksi = () => {
                             </div>
 
                             {/* TABLE */}
-                            <div className="overflow-x-auto">
-                                <table className="min-w-full border text-sm">
-                                    <thead className="bg-gray-100">
+                            <div className="overflow-x-auto rounded-lg ">
+                                <table className="min-w-full border border-gray-200 text-sm">
+                                    <thead className="bg-violet-600 text-white">
                                         <tr>
-                                            <th className="border px-3 py-2">No</th>
-                                            <th className="border px-3 py-2">Tanggal</th>
-                                            <th className="border px-3 py-2">Status</th>
-                                            <th className="border px-3 py-2">NIS</th>
-                                            <th className="border px-3 py-2">Nama Lengkap</th>
-                                            <th className="border px-3 py-2">Kelas</th>
-                                            <th className="border px-3 py-2">Kwitansi</th>
-                                            <th className="border px-3 py-2">Jenis</th>
-                                            <th className="border px-3 py-2">Nominal</th>
-                                            <th className="border px-3 py-2">Keterangan</th>
-                                            <th className="border px-3 py-2">Petugas</th>
-                                            <th className="border px-3 py-2">Metode</th>
+                                            <th className="px-3 py-2">No</th>
+                                            <th className="px-3 py-2">Tanggal</th>
+                                            <th className="px-3 py-2">Status</th>
+                                            <th className="px-3 py-2">NIS</th>
+                                            <th className="px-3 py-2">Nama Lengkap</th>
+                                            <th className="px-3 py-2">Kelas</th>
+                                            <th className="px-3 py-2">Kwitansi</th>
+                                            <th className="px-3 py-2">Jenis</th>
+                                            <th className="px-3 py-2">Nominal</th>
+                                            <th className="px-3 py-2">Keterangan</th>
+                                            <th className="px-3 py-2">Petugas</th>
+                                            <th className="px-3 py-2">Metode</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -99,6 +99,7 @@ const PerubahanAsetNeto = () => {
                     </div>
 
                 </div>
+                
             </div>
         </div>
     );
