@@ -12,7 +12,7 @@ function Sidebar() {
     // api
     const isSiswa = location.pathname.startsWith("/manajemen-siswa");
     const isGuru = location.pathname.startsWith("/manajemen-guru");
-    const isPerpus = location.pathname.startsWith("/perpustakaan");
+    const isPerpus = location.pathname.startsWith("/manajemen-perpustakaan");
     const isKeuangan = location.pathname.startsWith("/manajemen-keuangan");
     const isAplikasi = location.pathname.startsWith("/manajemen-aplikasi");
 
@@ -87,27 +87,19 @@ function Sidebar() {
         { isSection: true, label: "MENU" },
 
         {
-            path: "/manajemen-guru/jadwal-mengajar",
-            icon: "ri-calendar-2-fill",
-            label: "Jadwal Mengajar",
+            path: "/manajemen-guru/jadwal-mengajar", icon: "ri-calendar-2-fill", label: "Jadwal Mengajar",
         },
 
         {
-            path: "/manajemen-guru/mata-pelajaran",
-            icon: "ri-book-open-fill",
-            label: "Mata Pelajaran",
+            path: "/manajemen-guru/mata-pelajaran", icon: "ri-book-open-fill", label: "Mata Pelajaran",
         },
 
         {
-            path: "/manajemen-guru/Distribusi-jam-mengajar",
-            icon: "ri-time-fill",
-            label: "Distribusi Jam",
+            path: "/manajemen-guru/Distribusi-jam-mengajar", icon: "ri-time-fill", label: "Distribusi Jam",
         },
 
         {
-            path: "/manajemen-guru/riwayat-mengajar",
-            icon: "ri-history-line",
-            label: "Riwayat Mengajar",
+            path: "/manajemen-guru/riwayat-mengajar", icon: "ri-history-line", label: "Riwayat Mengajar",
         },
     ];
 
@@ -215,7 +207,8 @@ function Sidebar() {
             icon: "ri-settings-3-fill",
             label: "Pengaturan Akun",
             children: [
-                { path: "/manajemen-keuangan/pengaturan-akun", label: "Pengaturan Akun" },
+                { path: "/manajemen-keuangan/akun-budgeting", label: "Akun Budgeting" },
+                { path: "/manajemen-keuangan/akun-keuangan", label: "Akun Keuangan" },
             ],
         },
     ];
@@ -223,7 +216,7 @@ function Sidebar() {
     // MANAJEMEN PERPUSTAKAAN
     const menuPerpus = [
         {
-            path: "/perpustakaan/dashboardperpus",
+            path: "/manajemen-perpustakaan/dashboardperpus",
             icon: "ri-home-9-fill",
             label: "Dashboard",
         },
@@ -231,53 +224,37 @@ function Sidebar() {
         { isSection: true, label: "MANAJEMEN DATA" },
 
         {
-            path: "/perpustakaan/data-buku",
-            icon: "ri-book-3-fill",
-            label: "Data Buku",
+            path: "/manajemen-perpustakaan/data-buku", icon: "ri-book-3-fill", label: "Data Buku",
         },
 
         {
-            path: "/perpustakaan/peminjaman-buku",
-            icon: "ri-book-read-fill",
-            label: "Peminjaman Buku",
+            path: "/manajemen-perpustakaan/peminjaman-buku", icon: "ri-book-read-fill", label: "Peminjaman Buku",
         },
 
         {
-            path: "/perpustakaan/pengembalian-buku",
-            icon: "ri-history-fill",
-            label: "Pengembalian Buku",
+            path: "/manajemen-perpustakaan/pengembalian-buku", icon: "ri-history-fill", label: "Pengembalian Buku",
         },
 
         {
-            path: "/perpustakaan/setting-denda",
-            icon: "ri-settings-4-fill",
-            label: "Setting Denda",
+            path: "/manajemen-perpustakaan/setting-denda", icon: "ri-settings-4-fill", label: "Setting Denda",
         },
 
         { isSection: true, label: "LAPORAN" },
 
         {
-            path: "/perpustakaan/laporan-buku",
-            icon: "ri-file-text-line",
-            label: "Laporan Buku",
+            path: "/manajemen-perpustakaan/laporan-buku", icon: "ri-file-text-line", label: "Laporan Buku",
         },
 
         {
-            path: "/perpustakaan/laporan-peminjaman",
-            icon: "ri-file-list-3-line",
-            label: "Laporan Peminjaman",
+            path: "/manajemen-perpustakaan/laporan-peminjaman", icon: "ri-file-list-3-line", label: "Laporan Peminjaman",
         },
 
         {
-            path: "/perpustakaan/laporan-pengembalian",
-            icon: "ri-file-transfer-line",
-            label: "Laporan Pengembalian",
+            path: "/manajemen-perpustakaan/laporan-pengembalian", icon: "ri-file-transfer-line", label: "Laporan Pengembalian",
         },
 
         {
-            path: "/perpustakaan/laporan-denda",
-            icon: "ri-file-chart-line",
-            label: "Laporan Denda",
+            path: "/manajemen-perpustakaan/laporan-denda", icon: "ri-file-chart-line", label: "Laporan Denda",
         },
     ];
 
@@ -292,33 +269,23 @@ function Sidebar() {
         { isSection: true, label: "MENU" },
 
         {
-            path: "/manajemen-aplikasi/informasi-lembaga",
-            icon: "ri-information-fill",
-            label: "Informasi Lembaga",
+            path: "/manajemen-aplikasi/informasi-lembaga", icon: "ri-information-fill", label: "Informasi Lembaga",
         },
 
         {
-            path: "/manajemen-aplikasi/banner-aplikasi",
-            icon: "ri-image-fill",
-            label: "Banner Aplikasi",
+            path: "/manajemen-aplikasi/banner-aplikasi", icon: "ri-image-fill", label: "Banner Aplikasi",
         },
 
         {
-            path: "/manajemen-aplikasi/setting-user",
-            icon: "ri-user-settings-fill",
-            label: "Setting User",
+            path: "/manajemen-aplikasi/setting-user", icon: "ri-user-settings-fill", label: "Setting User",
         },
 
         {
-            path: "/manajemen-aplikasi/backup-data",
-            icon: "ri-database-2-fill",
-            label: "Backup Data",
+            path: "/manajemen-aplikasi/backup-data", icon: "ri-database-2-fill", label: "Backup Data",
         },
 
         {
-            path: "/manajemen-aplikasi/setting-absensi-gps",
-            icon: "ri-map-pin-fill",
-            label: "Setting Absensi GPS",
+            path: "/manajemen-aplikasi/setting-absensi-gps", icon: "ri-map-pin-fill", label: "Setting Absensi GPS",
         },
     ];
 
