@@ -27,7 +27,7 @@ const APBSInduk = () => {
                                 <thead className="bg-violet-600 text-white">
                                     <tr>
                                         <th className="border border-gray-300 px-3 py-3 w-12">
-                                            #
+                                            No
                                         </th>
                                         <th className="border border-gray-300 px-3 py-3 text-left">
                                             Kode Akun

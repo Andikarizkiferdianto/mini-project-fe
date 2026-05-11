@@ -77,16 +77,32 @@ import RealisasiBelanja from './Pages/ManajemenKeuangan/RencanaAnggaran/Realisas
 import SettingPagu from './Pages/ManajemenKeuangan/RencanaAnggaran/SettingPagu';
 import APBSInduk from './Pages/ManajemenKeuangan/RencanaAnggaran/APBSInduk';
 import APBSDetail from './Pages/ManajemenKeuangan/RencanaAnggaran/APBSDetail';
+// anggaran
+import RealisasiAnggaran from './Pages/ManajemenKeuangan/RealisasiAnggaran';
+import EvaluasiAnggaran from './Pages/ManajemenKeuangan/EvaluasiAnggaran';
+ //pengaturan akun
+import AkunBudgeting from './Pages/ManajemenKeuangan/PengaturanAkun/AkunBudgeting';
+import AkunKeuangan from './Pages/ManajemenKeuangan/PengaturanAkun/AkunKeuangan';
 
 // perpus
 import DashboardPerpus from './Pages/Perpustakaan/DashboardPerpus';
 import DataBuku from './Pages/Perpustakaan/Manajementdata/DataBuku';
 import PeminjamanBuku from './Pages/Perpustakaan/Manajementdata/PeminjamanBuku';
-
+// laporan perpus
+import LaporanBuku from './Pages/Perpustakaan/Laporan/LaporanBuku';
+import LaporanPeminjaman from './Pages/Perpustakaan/Laporan/LaporanPeminjaman';
+import LaporanPengembalian from './Pages/Perpustakaan/Laporan/LaporanPengembalian';
+import LaporanDenda from './Pages/Perpustakaan/Laporan/LaporanDenda';
 
 // menu aplikasi
 import DashboardAplikasi from './Pages/MenuAplikasi/DashboardAplikasi';
 import InformasiLembaga from './Pages/MenuAplikasi/InformasiLembaga';
+import BannerAplikasi from './Pages/MenuAplikasi/BannerAplikasi';
+import SettingUser from './Pages/MenuAplikasi/SettingUser';
+import BackupData from './Pages/MenuAplikasi/BackupData';
+import SettingAbsensiGPS from './Pages/MenuAplikasi/SettingAbsensiGPS';
+import PengembalianBuku from './Pages/Perpustakaan/Manajementdata/PengembalianBuku';
+import SettingDenda from './Pages/Perpustakaan/Manajementdata/SettingDenda';
 
 function App() {
   return (
@@ -174,19 +190,36 @@ function App() {
         {/* rencana anggaran */}
         <Route path="/manajemen-keuangan/realisasi-penerimaan" element={<RealisasiPenerimaan />} />
         <Route path="/manajemen-keuangan/realisasi-belanja" element={<RealisasiBelanja />} />
-        <Route path="/manajemen-keuangan/setting-pagu" element={<SettingPagu  />} />
-        <Route path="/manajemen-keuangan/apbs-induk" element={<APBSInduk  />} />
-        <Route path="/manajemen-keuangan/apbs-detail" element={< APBSDetail  />} />
+        <Route path="/manajemen-keuangan/setting-pagu" element={<SettingPagu />} />
+        <Route path="/manajemen-keuangan/apbs-induk" element={<APBSInduk />} />
+        <Route path="/manajemen-keuangan/apbs-detail" element={< APBSDetail />} />
+        {/* anggaran */}
+        <Route path="/manajemen-keuangan/realisasi-anggaran" element={< RealisasiAnggaran />} />
+        <Route path="/manajemen-keuangan/evaluasi-anggaran" element={< EvaluasiAnggaran />} />
+        {/* pengaturan akun */}
+        <Route path="/manajemen-keuangan/akun-keuangan" element={<AkunKeuangan />} />
+        <Route path="/manajemen-keuangan/akun-budgeting" element={<AkunBudgeting />} />
 
 
         {/* perpus */}
-        <Route path="/perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
-        <Route path="/perpustakaan/data-buku" element={<DataBuku />} />
-        <Route path="/perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
+        <Route path="/manajemen-perpustakaan/dashboardperpus" element={<DashboardPerpus />} />
+        <Route path="/manajemen-perpustakaan/data-buku" element={<DataBuku />} />
+        <Route path="/manajemen-perpustakaan/peminjaman-buku" element={<PeminjamanBuku />} />
+        <Route path="/manajemen-perpustakaan/pengembalian-buku" element={<PengembalianBuku />} />
+        <Route path="/manajemen-perpustakaan/setting-denda" element={<SettingDenda />} />
+        {/* laporan */}
+        <Route path="/manajemen-perpustakaan/laporan-buku" element={<LaporanBuku />} />
+        <Route path="/manajemen-perpustakaan/laporan-peminjaman" element={<LaporanPeminjaman />} />
+        <Route path="/manajemen-perpustakaan/laporan-pengembalian" element={<LaporanPengembalian />} />
+        <Route path="/manajemen-perpustakaan/laporan-denda" element={<LaporanDenda />} />
 
         {/* Menu Aplikasi */}
         <Route path="/manajemen-aplikasi" element={<DashboardAplikasi />} />
         <Route path="/manajemen-aplikasi/informasi-lembaga" element={<InformasiLembaga />} />
+        <Route path="/manajemen-aplikasi/banner-aplikasi" element={<BannerAplikasi />} />
+        <Route path="/manajemen-aplikasi/setting-user" element={<SettingUser />} />
+        <Route path="/manajemen-aplikasi/backup-data" element={<BackupData />} />
+        <Route path="/manajemen-aplikasi/setting-absensi-gps" element={<SettingAbsensiGPS />} />
 
       </Routes>
     </Router>
