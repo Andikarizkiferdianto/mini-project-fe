@@ -80,7 +80,7 @@ import APBSDetail from './Pages/ManajemenKeuangan/RencanaAnggaran/APBSDetail';
 // anggaran
 import RealisasiAnggaran from './Pages/ManajemenKeuangan/RealisasiAnggaran';
 import EvaluasiAnggaran from './Pages/ManajemenKeuangan/EvaluasiAnggaran';
- //pengaturan akun
+//pengaturan akun
 import AkunBudgeting from './Pages/ManajemenKeuangan/PengaturanAkun/AkunBudgeting';
 import AkunKeuangan from './Pages/ManajemenKeuangan/PengaturanAkun/AkunKeuangan';
 
@@ -103,6 +103,9 @@ import BackupData from './Pages/MenuAplikasi/BackupData';
 import SettingAbsensiGPS from './Pages/MenuAplikasi/SettingAbsensiGPS';
 import PengembalianBuku from './Pages/Perpustakaan/Manajementdata/PengembalianBuku';
 import SettingDenda from './Pages/Perpustakaan/Manajementdata/SettingDenda';
+
+// Manajemen sekolah
+import DashboardSekolah from './Pages/ManajemenSekolah/DashboardSekolah';
 
 function App() {
   return (
@@ -220,6 +223,9 @@ function App() {
         <Route path="/manajemen-aplikasi/setting-user" element={<SettingUser />} />
         <Route path="/manajemen-aplikasi/backup-data" element={<BackupData />} />
         <Route path="/manajemen-aplikasi/setting-absensi-gps" element={<SettingAbsensiGPS />} />
+
+        {/* menu sekolah */}
+        <Route path="/manajemen-sekolah/dashboard" element={<DashboardSekolah />} />
 
       </Routes>
     </Router>

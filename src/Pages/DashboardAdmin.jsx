@@ -19,7 +19,7 @@ const DashboardAdmin = () => {
     { title: "Perpustakaan", icon: <BookOpen size={40} />, path: "/manajemen-perpustakaan/dashboardperpus" },
     { title: "Aplikasi", icon: <Layout size={40} />, path: "/manajemen-aplikasi" }, // <-- Ini yang ditambahin bos
     { title: "PPDB", icon: <FileText size={40} /> },
-    { title: "Manajemen Sekolah", icon: <School size={40} /> },
+    { title: "Manajemen Sekolah", icon: <School size={40} />, path: "/manajemen-sekolah/dashboard" },
     { title: "Kepegawaian", icon: <Contact2 size={40} /> },
   ];
 
