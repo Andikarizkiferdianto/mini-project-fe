@@ -16,6 +16,8 @@ function Sidebar() {
     const isKeuangan = location.pathname.startsWith("/manajemen-keuangan");
     const isAplikasi = location.pathname.startsWith("/manajemen-aplikasi");
     const isSekolah = location.pathname.startsWith("/manajemen-sekolah");
+    const isKepegawaian = location.pathname.startsWith("/manajemen-kepegawaian");
+
 
     const handleLogout = () => {
         setTimeout(() => nav("/dashboard-admin"), 100);
@@ -299,50 +301,86 @@ function Sidebar() {
         },
 
         { isSection: true, label: "MENU" },
-
         {
-            icon: "ri-team-fill",
+            icon: "ri-bank-line",
             label: "Data Sekolah",
             children: [
                 { path: "/manajemen-sekolah/profil-sekolah", label: "Profil Sekolah" },
-                
             ],
         },
         {
-            icon: "ri-team-fill",
+            icon: "ri-settings-4-line",
             label: "Inventaris",
             children: [
-                { path: "/manajemen-sekolah/data-siswa", label: "Aset" },
-                { path: "/manajemen-sekolah/data-siswa", label: "Riwayat Aset" },
-                { path: "/manajemen-sekolah/data-siswa", label: "Setting Lokasi" },
-                { path: "/manajemen-sekolah/data-siswa", label: "Setting Kategori" },
-
+                { path: "/manajemen-sekolah/aset", label: "Aset" },
+                { path: "/manajemen-sekolah/riwayat-aset", label: "Riwayat Aset" },
+                { path: "/manajemen-sekolah/setting-lokasi", label: "Setting Lokasi" },
+                { path: "/manajemen-sekolah/setting-kategori", label: "Setting Kategori" },
             ],
         },
         {
-            icon: "ri-team-fill",
+            icon: "ri-file-list-3-line",
             label: "Administrasi",
             children: [
-                { path: "/manajemen-sekolah/data-siswa", label: "Surat-menyurat" },
-                { path: "/manajemen-sekolah/data-siswa", label: "Dokumen Sekolah" },
-
+                { path: "/manajemen-sekolah/surat-menyurat", label: "Surat-menyurat" },
+                { path: "/manajemen-sekolah/dokumen-sekolah", label: "Dokumen Sekolah" },
             ],
         },
         {
-            icon: "ri-team-fill",
+            icon: "ri-group-line",
             label: "Kegiatan",
             children: [
-                { path: "/manajemen-sekolah/data-siswa", label: "Kegiatan Sekolah" },
-
+                { path: "/manajemen-sekolah/kegiatan-sekolah", label: "Kegiatan Sekolah" },
             ],
         },
 
-        
+    ];
+
+    // manajemen kepegawaian
+    const menuKepegawaian = [
+        {
+            path: "/manajemen-kepegawaian/dashboard",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
+        },
+
+        { isSection: true, label: "MENU" },
+        {
+            icon: "ri-bank-line",
+            label: "Data Guru & Pegawai",
+            paths: [
+                "/manajemen-kepegawaian/data-guru",
+                "/manajemen-kepegawaian/data-pegawai"
+            ],
+            path: "/manajemen-kepegawaian/data-guru"
+        },
+        {
+            icon: "ri-settings-4-line",
+            label: "Kinerja Guru & Pegawai",
+            children: [
+                { path: "/manajemen-kepegawaian/kelola-indikator", label: "Kelola Indikator" },
+                { path: "/manajemen-kepegawaian/input-nilai-kerja", label: "Input Nilai Kinerja" },
+                { path: "/manajemen-kepegawaian/rekap-kinerja", label: "Rekap Kinerja" },
+            ],
+        },
+        {
+            icon: "ri-bill-line",
+            label: "Manajemen Cuti/Izin/Lembur",
+            children: [
+                { path: "/manajemen-kepegawaian/cuti", label: "Cuti" },
+                { path: "/manajemen-kepegawaian/izin", label: "Izin" },
+                { path: "/manajemen-kepegawaian/lembur", label: "Lembur" },
+            ],
+        },
+        {
+            icon: "ri-user-follow-line", label: "Rekap Absensi", path: "/manajemen-kepegawaian/rekap-absensi-guru",
+        },
+
     ];
 
 
     // menu
-    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : isAplikasi ? menuAplikasi : isSekolah ? menuSekolah : [];
+    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : isAplikasi ? menuAplikasi : isSekolah ? menuSekolah : isKepegawaian ? menuKepegawaian : [];
 
     // auto buka parent kalau ada child aktif
     useEffect(() => {
@@ -361,7 +399,7 @@ function Sidebar() {
                 {/* kiri */}
                 <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
                     <i className="ri-folder-3-fill"></i>
-                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : isAplikasi ? "Manajemen Aplikasi" : isSekolah ? "Manajemen Sekolah" : "Dashboard"}
+                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : isAplikasi ? "Manajemen Aplikasi" : isSekolah ? "Manajemen Sekolah" : isKepegawaian ? "Manajemen Kepegawaian" : "Dashboard"}
                 </button>
 
                 {/* kanan */}
@@ -437,9 +475,13 @@ function Sidebar() {
                             <Link
                                 key={index}
                                 to={item.path}
-                                className={`flex items-center gap-3 py-2 px-3 rounded-md transition ${location.pathname === item.path
-                                    ? "bg-violet-600 font-semibold"
-                                    : "hover:bg-violet-700"
+                                className={`flex items-center gap-3 py-2 px-3 rounded-md transition ${item.paths
+                                    ? item.paths.includes(location.pathname)
+                                        ? "bg-violet-600 font-semibold"
+                                        : "hover:bg-violet-700"
+                                    : location.pathname === item.path
+                                        ? "bg-violet-600 font-semibold"
+                                        : "hover:bg-violet-700"
                                     }`}
                             >
                                 <i className={`${item.icon} text-lg`}></i>
