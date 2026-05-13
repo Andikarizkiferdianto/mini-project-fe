@@ -15,6 +15,7 @@ function Sidebar() {
     const isPerpus = location.pathname.startsWith("/manajemen-perpustakaan");
     const isKeuangan = location.pathname.startsWith("/manajemen-keuangan");
     const isAplikasi = location.pathname.startsWith("/manajemen-aplikasi");
+    const isSekolah = location.pathname.startsWith("/manajemen-sekolah");
 
     const handleLogout = () => {
         setTimeout(() => nav("/dashboard-admin"), 100);
@@ -289,9 +290,59 @@ function Sidebar() {
         },
     ];
 
+    // Manajemen Sekolah
+    const menuSekolah = [
+        {
+            path: "/manajemen-sekolah/dashboard",
+            icon: "ri-home-9-fill",
+            label: "Dashboard",
+        },
+
+        { isSection: true, label: "MENU" },
+
+        {
+            icon: "ri-team-fill",
+            label: "Data Sekolah",
+            children: [
+                { path: "/manajemen-sekolah/profil-sekolah", label: "Profil Sekolah" },
+                
+            ],
+        },
+        {
+            icon: "ri-team-fill",
+            label: "Inventaris",
+            children: [
+                { path: "/manajemen-sekolah/data-siswa", label: "Aset" },
+                { path: "/manajemen-sekolah/data-siswa", label: "Riwayat Aset" },
+                { path: "/manajemen-sekolah/data-siswa", label: "Setting Lokasi" },
+                { path: "/manajemen-sekolah/data-siswa", label: "Setting Kategori" },
+
+            ],
+        },
+        {
+            icon: "ri-team-fill",
+            label: "Administrasi",
+            children: [
+                { path: "/manajemen-sekolah/data-siswa", label: "Surat-menyurat" },
+                { path: "/manajemen-sekolah/data-siswa", label: "Dokumen Sekolah" },
+
+            ],
+        },
+        {
+            icon: "ri-team-fill",
+            label: "Kegiatan",
+            children: [
+                { path: "/manajemen-sekolah/data-siswa", label: "Kegiatan Sekolah" },
+
+            ],
+        },
+
+        
+    ];
+
 
     // menu
-    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : isAplikasi ? menuAplikasi : [];
+    const menuItems = isSiswa ? menuSiswa : isGuru ? menuGuru : isPerpus ? menuPerpus : isKeuangan ? menuKeuangan : isAplikasi ? menuAplikasi : isSekolah ? menuSekolah : [];
 
     // auto buka parent kalau ada child aktif
     useEffect(() => {
@@ -310,7 +361,7 @@ function Sidebar() {
                 {/* kiri */}
                 <button className="bg-violet-600 text-white px-4 py-2 rounded-md flex items-center gap-2">
                     <i className="ri-folder-3-fill"></i>
-                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : isAplikasi ? "Manajemen Aplikasi" : "Dashboard"}
+                    {isSiswa ? "Manajemen Siswa" : isGuru ? "Manajemen Guru" : isPerpus ? "Manajemen Perpustakaan" : isKeuangan ? "Manajemen Keuangan" : isAplikasi ? "Manajemen Aplikasi" : isSekolah ? "Manajemen Sekolah" : "Dashboard"}
                 </button>
 
                 {/* kanan */}
