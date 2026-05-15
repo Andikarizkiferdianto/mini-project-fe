@@ -106,6 +106,34 @@ import SettingDenda from './Pages/Perpustakaan/Manajementdata/SettingDenda';
 
 // Manajemen sekolah
 import DashboardSekolah from './Pages/ManajemenSekolah/DashboardSekolah';
+// data sekolah
+import ProfilSekolah from './Pages/ManajemenSekolah/DataSekolah/ProfilSekolah';
+// inventaris
+import Aset from './Pages/ManajemenSekolah/Inventaris/Aset';
+import RiwayatAset from './Pages/ManajemenSekolah/Inventaris/RiwayatAset';
+import SettingLokasi from './Pages/ManajemenSekolah/Inventaris/SettingLokasi';
+import SettingKategori from './Pages/ManajemenSekolah/Inventaris/SettingKategori';
+// administrasi
+import SuratMenyurat from './Pages/ManajemenSekolah/Administrasi/SuratMenyurat';
+import DokumenSekolah from './Pages/ManajemenSekolah/Administrasi/DokumenSekolah';
+import KegiatanSekolah from './Pages/ManajemenSekolah/Kegiatan/KegiatanSekolah';
+
+// manajemen kepegawaian
+import DashboardKepegawaian from './Pages/ManajemenKepegawaian/DashboardKepegawaian';
+
+// data guru dan pegawai
+import DataJenisGuru from './Pages/ManajemenKepegawaian/DataGuruDanPegawai/DataJenisGuru';
+import DataJenisPegawai from './Pages/ManajemenKepegawaian/DataGuruDanPegawai/DataJenisPegawai';
+// kinerja
+import KelolaIndikator from './Pages/ManajemenKepegawaian/Kinerja/KelolaIndikator';
+import InputNilaiKerja from './Pages/ManajemenKepegawaian/Kinerja/InputNilaiKerja';
+import RekapKinerja from './Pages/ManajemenKepegawaian/Kinerja/RekapKinerja';
+// Cuti,izin,lembur
+import Cuti from './Pages/ManajemenKepegawaian/Cuti,Izin,Lembur/Cuti';
+import Izin from './Pages/ManajemenKepegawaian/Cuti,Izin,Lembur/Izin';
+import Lembur from './Pages/ManajemenKepegawaian/Cuti,Izin,Lembur/Lembur';
+// absensi guru
+import RekapAbsensiGuru from './Pages/ManajemenKepegawaian/RekapAbsensi/RekapAbsensiGuru';
 
 function App() {
   return (
@@ -226,7 +254,35 @@ function App() {
 
         {/* menu sekolah */}
         <Route path="/manajemen-sekolah/dashboard" element={<DashboardSekolah />} />
+        {/* data sekolah */}
+        <Route path="/manajemen-sekolah/profil-sekolah" element={<ProfilSekolah />} />
+        {/* inventaris */}
+        <Route path="/manajemen-sekolah/aset" element={<Aset />} />
+        <Route path="/manajemen-sekolah/riwayat-aset" element={<RiwayatAset />} />
+        <Route path="/manajemen-sekolah/setting-lokasi" element={<SettingLokasi />} />
+        <Route path="/manajemen-sekolah/setting-kategori" element={<SettingKategori />} />
+        {/* administrasi */}
+        <Route path="/manajemen-sekolah/surat-menyurat" element={<SuratMenyurat />} />
+        <Route path="/manajemen-sekolah/dokumen-sekolah" element={<DokumenSekolah />} />
+        <Route path="/manajemen-sekolah/kegiatan-sekolah" element={<KegiatanSekolah />} />
 
+        {/* Manajemen kepegawaian */}
+        <Route path="/manajemen-kepegawaian/dashboard" element={<DashboardKepegawaian />} />
+        {/* data guru dan pegawai */}
+        <Route path="/manajemen-kepegawaian/data-guru" element={<DataJenisGuru />} />
+        <Route path="/manajemen-kepegawaian/data-pegawai" element={<DataJenisPegawai />} />
+        {/* kinerja */}
+        <Route path="/manajemen-kepegawaian/kelola-indikator" element={<KelolaIndikator />} />
+        <Route path="/manajemen-kepegawaian/input-nilai-kerja" element={<InputNilaiKerja />} />
+        <Route path="/manajemen-kepegawaian/rekap-kinerja" element={<RekapKinerja />} />
+        {/* cuti,izin,lembur */}
+        <Route path="/manajemen-kepegawaian/cuti" element={<Cuti />} />
+        <Route path="/manajemen-kepegawaian/izin" element={<Izin />} />
+        <Route path="/manajemen-kepegawaian/lembur" element={<Lembur />} />
+        {/* rekap absensi */}
+        <Route path="/manajemen-kepegawaian/rekap-absensi-guru" element={<RekapAbsensiGuru />} />
+        
+        
       </Routes>
     </Router>
   );
