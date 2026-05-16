@@ -11,17 +11,36 @@ import Swal from "sweetalert2";
 const DashboardAdmin = () => {
   const navigate = useNavigate();
   const nav = useNavigate();
-  
+
   const menus = [
     { title: "Manajemen Siswa", icon: <Users size={40} />, path: "/manajemen-siswa/dashboard" },
     { title: "Manajemen Guru", icon: <GraduationCap size={40} />, path: "/manajemen-guru/dashboard" },
     { title: "Keuangan", icon: <Wallet size={40} />, path: "/manajemen-keuangan/dashboard" },
     { title: "Perpustakaan", icon: <BookOpen size={40} />, path: "/manajemen-perpustakaan/dashboardperpus" },
-    { title: "Aplikasi", icon: <Layout size={40} />, path: "/manajemen-aplikasi" }, // <-- Ini yang ditambahin bos
-    { title: "PPDB", icon: <FileText size={40} /> },
+    { title: "Aplikasi", icon: <Layout size={40} />, path: "/manajemen-aplikasi" },
+     { title: "PPDB", icon: <FileText size={40} /> },
     { title: "Manajemen Sekolah", icon: <School size={40} />, path: "/manajemen-sekolah/dashboard" },
     { title: "Kepegawaian", icon: <Contact2 size={40} />, path: "/manajemen-kepegawaian/dashboard" },
   ];
+
+  const handleMenuClick = (menu) => {
+    
+    if (menu.title === "PPDB") {
+      Swal.fire({
+        title: "Akses Ditolak",
+        text: "Anda tidak diizinkan mengakses PPDB.",
+        icon: "warning",
+        confirmButtonText: "Tutup",
+        confirmButtonColor: "#6b7280",
+      });
+
+      return;
+    }
+
+    if (menu.path) {
+      navigate(menu.path);
+    }
+  };
 
   const handleLogout = (e) => {
     e?.preventDefault();
@@ -59,16 +78,16 @@ const DashboardAdmin = () => {
           </div>
           <div>
             <h1 className="font-extrabold text-xl tracking-tight leading-tight">SAP</h1>
-            <p className="text-[10px] font-medium opacity-80 mt-0.5 uppercase tracking-widest">Sistem Akademik Pintar</p>
+            <p className="text-[10px] font-medium opacity-80 mt-0.5 uppercase tracking-widest">
+              Sistem Akademik Pintar
+            </p>
           </div>
         </div>
 
         <div className="flex items-center gap-5">
           <motion.div
             className="bg-white/10 p-2 rounded-2xl border border-white/20 shadow-xl cursor-pointer"
-            animate={{
-              y: [0, -8, 0],
-            }}
+            animate={{ y: [0, -8, 0] }}
             transition={{
               duration: 3,
               ease: "easeInOut",
@@ -90,13 +109,14 @@ const DashboardAdmin = () => {
           {menus.map((menu, index) => (
             <motion.div
               key={index}
-              onClick={() => menu.path && navigate(menu.path)}
+              onClick={() => handleMenuClick(menu)}
               className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200/60 hover:shadow-2xl hover:shadow-violet-200 transition-all duration-500 flex flex-col items-center justify-center gap-5 cursor-pointer group"
               whileHover={{ y: -10 }}
             >
               <div className="text-violet-600 group-hover:scale-110 transition-transform duration-300">
                 {menu.icon}
               </div>
+
               <span className="font-bold text-slate-700 text-center tracking-tight group-hover:text-violet-700 transition-colors">
                 {menu.title}
               </span>
@@ -107,9 +127,11 @@ const DashboardAdmin = () => {
 
       <footer className="bg-slate-900 text-white flex justify-between items-center px-10 py-4 text-[11px] font-medium tracking-wide border-t border-white/5 relative z-10">
         <div className="hidden md:block w-32"></div>
+
         <div className="absolute left-1/2 -translate-x-1/2 opacity-60 italic text-center">
           © 2026 SAP Sistem Akademik Pintar. All rights reserved.
         </div>
+
         <button
           onClick={handleLogout}
           className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-red-500/20 uppercase font-bold text-[10px]"

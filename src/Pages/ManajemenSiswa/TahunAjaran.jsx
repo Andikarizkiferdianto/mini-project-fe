@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Sidebar from "../../components/Sidebar";
 
-const API = "http://localhost:8000/api/tahun-ajaran"; 
+const API = "http://localhost:8000/api/tahun-ajaran";
 
 
 const TahunAjaran = () => {
@@ -249,8 +249,10 @@ const TahunAjaran = () => {
                                                     onChange={() => handleToggle(w.id, w.is_active)}
                                                     className="sr-only peer"
                                                 />
-                                                <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-blue-500 relative transition-all duration-300">
-                                                    <div className="absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition-all duration-300 peer-checked:translate-x-5">
+
+                                                <div className="relative w-11 h-6 bg-gray-300 rounded-full transition-all duration-300 peer-checked:bg-blue-500">
+                                                    <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform duration-300 ${w.is_active ? "translate-x-5" : "translate-x-0"
+                                                        }`}>
                                                     </div>
                                                 </div>
                                             </label>
