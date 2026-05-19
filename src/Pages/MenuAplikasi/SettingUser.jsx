@@ -10,19 +10,19 @@ const SettingUser = () => {
 
     const [dataUser, setDataUser] = useState([]);
     const [loading, setLoading] = useState(false);
-    
-useEffect(() => {
-    fetch("http://localhost:8000/api/setting-user")
-        .then(res => res.json())
-        .then(res => {
-            setKelas(res?.options?.kelas || []);
-            setJenisUser(res?.options?.jenis_user || []);
-        })
-        .catch(() => {
-            setKelas([]);
-            setJenisUser([]);
-        });
-}, []);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/setting-user")
+            .then(res => res.json())
+            .then(res => {
+                setKelas(res?.options?.kelas || []);
+                setJenisUser(res?.options?.jenis_user || []);
+            })
+            .catch(() => {
+                setKelas([]);
+                setJenisUser([]);
+            });
+    }, []);
 
     const handleTampil = () => {
         setLoading(true);
@@ -54,7 +54,7 @@ useEffect(() => {
                 </h1>
 
                 {/* FILTER */}
-                <div className="bg-white border rounded-lg shadow">
+                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
 
                     <div className="bg-violet-600 text-white px-4 py-3">
                         Filter User
@@ -64,7 +64,7 @@ useEffect(() => {
 
                         {/* JENIS USER */}
                         <select
-                            className="border rounded px-3 py-2 w-60"
+                            className="border border-gray-200 rounded px-3 py-2 w-60"
                             value={selectedJenis}
                             onChange={(e) => setSelectedJenis(e.target.value)}
                         >
@@ -76,7 +76,7 @@ useEffect(() => {
 
                         {/* KELAS */}
                         <select
-                            className="border rounded px-3 py-2 w-60"
+                            className="border border-gray-200 rounded px-3 py-2 w-60"
                             value={selectedKelas}
                             onChange={(e) => setSelectedKelas(e.target.value)}
                         >
@@ -98,11 +98,9 @@ useEffect(() => {
                     </div>
                 </div>
 
-                {/* TABLE */}
-                <div className="bg-white border rounded-lg overflow-hidden">
-
-                    <table className="w-full text-sm">
-                        <thead className="bg-gray-100">
+                <div className="overflow-x-auto">
+                        <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+                            <thead className="bg-violet-600 text-white text-center">
                             <tr>
                                 <th className="p-3 text-left">ID</th>
                                 <th className="p-3 text-left">NIS/NIP</th>
@@ -121,7 +119,7 @@ useEffect(() => {
                             ) : (
                                 dataUser.map((u, i) => (
                                     <tr key={i} className="border-t">
-                                        <td className="p-3">{u.id}</td>
+                                        <td className="p-3">{i + 1}</td>
                                         <td className="p-3">{u.nis_id}</td>
                                         <td className="p-3">{u.nama}</td>
                                         <td className="p-3">{u.username}</td>

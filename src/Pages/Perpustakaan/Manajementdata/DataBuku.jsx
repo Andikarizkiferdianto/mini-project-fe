@@ -114,7 +114,7 @@ const DataBuku = () => {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-300 overflow-hidden">
                     <div className="bg-violet-600 p-3 text-white font-semibold">
                         Daftar Buku
                     </div>
