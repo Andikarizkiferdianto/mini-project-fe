@@ -500,7 +500,7 @@ const InformasiLembaga = () => {
 
                             <button
                                 onClick={isEdit ? handleUpdate : handleTambah}
-                                className="bg-blue-600 text-white px-4 py-2 rounded"
+                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
                             >
                                 {isEdit ? 'Update' : 'Simpan'}
                             </button>

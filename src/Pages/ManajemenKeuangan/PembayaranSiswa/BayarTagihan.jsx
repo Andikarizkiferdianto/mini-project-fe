@@ -54,10 +54,10 @@ const BayarTagihan = () => {
 
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
-            );
+        </div>
+    );
 };
 
-            export default BayarTagihan;
+export default BayarTagihan;
