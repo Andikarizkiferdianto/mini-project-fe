@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Sidebar from '../../components/Sidebar';
 import 'remixicon/fonts/remixicon.css';
 
 const DashboardKepegawaian = () => {
-    const [stats] = useState({
-        totalGuru: 0,
-        totalPegawai: 0,
-        guruBelumInput: 0,
-        pegawaiBelumInput: 0
+    // Menggunakan state agar data dari API bisa masuk ke sini
+    const [stats, setStats] = useState({
+        total_guru: 0,
+        total_pegawai: 0,
+        guru_belum_input: 0,
+        pegawai_belum_input: 0
     });
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get("http://localhost:8000/api/dashboard-kepegawaian");
+            setStats(res.data.data.summary);
+        } catch (err) {
+            console.error("Gagal memuat data", err);
+        }
+    };
+
+    useEffect(() => { fetchData(); }, []);
 
     return (
         <div className="flex bg-gray-100 min-h-screen">
@@ -19,44 +32,40 @@ const DashboardKepegawaian = () => {
 
                 {/* STATS CARDS GRID */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    {/* Total Guru */}
                     <div className="bg-blue-600 p-6 rounded-xl shadow-lg flex items-center gap-4 text-white">
                         <i className="ri-presentation-fill text-5xl opacity-80"></i>
                         <div>
                             <p className="text-sm font-medium opacity-90">Total Guru</p>
-                            <h3 className="text-3xl font-bold">{stats.totalGuru}</h3>
+                            <h3 className="text-3xl font-bold">{stats.total_guru}</h3>
                         </div>
                     </div>
 
-                    {/* Total Pegawai */}
                     <div className="bg-emerald-600 p-6 rounded-xl shadow-lg flex items-center gap-4 text-white">
                         <i className="ri-user-settings-fill text-5xl opacity-80"></i>
                         <div>
                             <p className="text-sm font-medium opacity-90">Total Pegawai</p>
-                            <h3 className="text-3xl font-bold">{stats.totalPegawai}</h3>
+                            <h3 className="text-3xl font-bold">{stats.total_pegawai}</h3>
                         </div>
                     </div>
 
-                    {/* Guru Belum Input */}
                     <div className="bg-amber-400 p-6 rounded-xl shadow-lg flex items-center gap-4 text-white">
                         <i className="ri-error-warning-fill text-5xl opacity-80"></i>
                         <div>
                             <p className="text-sm font-medium opacity-90 leading-tight">Guru Belum Input Kinerja</p>
-                            <h3 className="text-3xl font-bold">{stats.guruBelumInput}</h3>
+                            <h3 className="text-3xl font-bold">{stats.guru_belum_input}</h3>
                         </div>
                     </div>
 
-                    {/* Pegawai Belum Input */}
                     <div className="bg-rose-500 p-6 rounded-xl shadow-lg flex items-center gap-4 text-white">
                         <i className="ri-alert-fill text-5xl opacity-80"></i>
                         <div>
                             <p className="text-sm font-medium opacity-90 leading-tight">Pegawai Belum Input Kinerja</p>
-                            <h3 className="text-3xl font-bold">{stats.pegawaiBelumInput}</h3>
+                            <h3 className="text-3xl font-bold">{stats.pegawai_belum_input}</h3>
                         </div>
                     </div>
                 </div>
 
-                {/* RATA-RATA NILAI SECTION */}
+                {/* Sisanya tetap sama persis sesuai kode Anda sebelumnya */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 min-h-[100px] flex items-center">
                         <h4 className="font-bold text-slate-800">Rata-rata Nilai Indikator Guru</h4>
@@ -66,36 +75,14 @@ const DashboardKepegawaian = () => {
                     </div>
                 </div>
 
-                {/* TOP 3 KINERJA SECTION */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                         <h4 className="font-bold text-slate-800 mb-4">Top 3 Guru Berdasarkan Kinerja Bulan Ini</h4>
-                        <div className="bg-gray-50 border border-gray-200 rounded p-3 text-center text-gray-500 text-sm">
-                            Tidak ada data
-                        </div>
+                        <div className="bg-gray-50 border border-gray-200 rounded p-3 text-center text-gray-500 text-sm">Tidak ada data</div>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                         <h4 className="font-bold text-slate-800 mb-4">Top 3 Pegawai Berdasarkan Kinerja Bulan Ini</h4>
-                        <div className="bg-gray-50 border border-gray-200 rounded p-3 text-center text-gray-500 text-sm">
-                            Tidak ada data
-                        </div>
-                    </div>
-                </div>
-
-                {/* ALERT MESSAGES */}
-                <div className="space-y-4">
-                    <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded shadow-sm flex items-center gap-3">
-                        <i className="ri-error-warning-fill text-orange-600 text-xl"></i>
-                        <p className="text-sm text-orange-800">
-                            <span className="font-bold text-orange-900 italic">Perhatian:</span> Pastikan semua guru dan pegawai mengisi nilai kinerja bulanan tepat waktu.
-                        </p>
-                    </div>
-
-                    <div className="bg-sky-50 border-l-4 border-sky-400 p-4 rounded shadow-sm flex items-center gap-3">
-                        <i className="ri-information-fill text-sky-600 text-xl"></i>
-                        <p className="text-sm text-sky-800">
-                            <span className="font-medium text-sky-900">Info:</span> Sistem ini mengupdate data kinerja secara real-time setiap bulan.
-                        </p>
+                        <div className="bg-gray-50 border border-gray-200 rounded p-3 text-center text-gray-500 text-sm">Tidak ada data</div>
                     </div>
                 </div>
             </div>
